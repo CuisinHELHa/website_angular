@@ -7,6 +7,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import {FormsModule} from '@angular/forms';
 import { RecipeSearchBarComponent } from './components/recipe-search-bar/recipe-search-bar.component';
+import { RecipeResultsListComponent } from './components/recipe-results-list/recipe-results-list.component';
+import { RecipeResultComponent } from './components/recipe-result/recipe-result.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { RecipeSearchBarComponent } from './components/recipe-search-bar/recipe-
     AppComponent,
     HeaderComponent,
     LoginFormComponent,
-    RecipeSearchBarComponent
+    RecipeSearchBarComponent,
+    RecipeResultsListComponent,
+    RecipeResultComponent
   ],
   imports: [
     BrowserModule,
