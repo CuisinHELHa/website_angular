@@ -1,0 +1,28 @@
+<div class="main-color shadow pt-2 pb-1">
+  <div class="container-fluid">
+    <div class="row">
+  <!--      Logo and login button for mobile-->
+      <div class="col-md-2 d-flex justify-content-center">
+        <a href="" class="">
+          <img [src]="LOGO_PATH" alt="logo"/>
+        </a>
+        <div class="d-flex ml-3" *ngIf="_mobile">
+          <fa name="user-circle" size="2x" class="my-auto" (click)="clickedLoginIcon = !clickedLoginIcon"></fa>
+        </div>
+      </div>
+
+<!--      Login form-->
+      <div class="col-md-4 offset-md-6 pb-1">
+        <app-login-form *ngIf="!_mobile"></app-login-form>
+        <app-login-form *ngIf="_mobile && !clickedLoginIcon"></app-login-form>
+      </div>
+
+<!--      Recipe search bar-->
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <app-recipe-search-bar></app-recipe-search-bar>
+        </div>
+      </div>
+  </div>
+</div>
