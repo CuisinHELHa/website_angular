@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import { RecipeSearchBarComponent } from './components/recipe-search-bar/recipe-search-bar.component';
 import { RecipeResultsListComponent } from './components/recipe-results-list/recipe-results-list.component';
 import { RecipeResultComponent } from './components/recipe-result/recipe-result.component';
+import { RecipePipe } from './pipes/recipe-pipe.pipe';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { RecipeResultComponent } from './components/recipe-result/recipe-result.
     LoginFormComponent,
     RecipeSearchBarComponent,
     RecipeResultsListComponent,
-    RecipeResultComponent
+    RecipeResultComponent,
+    RecipePipe
   ],
   imports: [
     BrowserModule,
