@@ -1,26 +1,28 @@
 <div class="main-color shadow pt-2 pb-1">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-2">
   <!--      Logo and login button for mobile-->
-      <div class="col-md-2 d-flex justify-content-center">
+      <div class="col-7 offset-1 d-flex justify-content-start">
         <a href="" class="">
           <img [src]="LOGO_PATH" alt="logo"/>
         </a>
-        <div class="d-flex ml-3" *ngIf="_mobile">
-          <fa name="user-circle" size="2x" class="my-auto" (click)="clickedLoginIcon = !clickedLoginIcon"></fa>
+      </div>
+      <div class="col-4 d-flex justify-content-end pr-4">
+        <div class="d-flex ml-3">
+          <fa name="user-circle" size="2x" class="my-auto" (click)="onLoginIconClick()"></fa>
         </div>
       </div>
 
 <!--      Login form-->
-      <div class="col-md-4 offset-md-6 pb-1">
-        <app-login-form *ngIf="!_mobile"></app-login-form>
-        <app-login-form *ngIf="_mobile && !clickedLoginIcon"></app-login-form>
-      </div>
+<!--      <div class="col-md-4 offset-md-6 pb-1">-->
+<!--        <app-login-form *ngIf="!mobile"></app-login-form>-->
+<!--        <app-login-form *ngIf="mobile && clickedLoginIcon"></app-login-form>-->
+<!--      </div>-->
 
 <!--      Recipe search bar-->
       </div>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-12 col-sm-7 col-md-5 col-lg-4 col-xl-3">
           <app-recipe-search-bar></app-recipe-search-bar>
         </div>
       </div>

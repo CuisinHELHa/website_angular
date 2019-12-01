@@ -1,3 +1,4 @@
+<app-account-modal></app-account-modal>
 <app-header></app-header>
-<app-recipe-results-list *ngIf="currentState == 0" (recipeSelected)="selectedRecipe = $event"></app-recipe-results-list>
-<app-recipe-details *ngIf="currentState == 1" [recipe]="selectedRecipe"></app-recipe-details>
+<app-recipe-results-list></app-recipe-results-list>
+<router-outlet></router-outlet>

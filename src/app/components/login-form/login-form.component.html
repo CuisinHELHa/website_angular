@@ -1,27 +1,49 @@
-<form class="pb-2 mb-1 mb-sm-0 border-bottom border-dark" #formElement="ngForm" (ngSubmit)="testLogin()">
-  <div class="row text-dark font-weight-bold">
-    <span class="col-5">
-      <label for="login">
-          Login:
-      </label>
-    </span>
-    <span class="col-4">
-      <label for="password">
-          Password:
-      </label>
-    </span>
-  </div>
+<form class="pb-2 mb-1 mb-sm-0 text-dark font-weight-bold" #formElement="ngForm" (ngSubmit)="testLogin()">
   <div class="row">
-    <span class="col-5">
-      <input type="text" id="login" name="login" class="form-control form-control-sm" [(ngModel)]="login" minlength="3" required #loginElement="ngModel">
-    </span>
-    <span class="col-4">
-      <input type="password" id="password" name="password" class="form-control form-control-sm" [(ngModel)]="password" minlength="3" required #passwordElement="ngModel">
-    </span>
-    <span class="col-2 offset-1">
-      <button type="submit" [disabled]="formElement.invalid" class="btn btn-sm btn-light">
-        <fa name="check"></fa>
-      </button>
-    </span>
+<!--    LEFT SIDE OF THE LOGIN-->
+    <div [class]="leftColClasses">
+      <div class="row">
+        <span class="col col-sm-3">
+          <label for="login">
+              Login:
+          </label>
+        </span>
+      </div>
+
+      <div class="row">
+        <span class="col">
+          <input type="text" id="login" name="login" class="form-control form-control-sm" [(ngModel)]="login" minlength="3" required #loginElement="ngModel">
+        </span>
+      </div>
+
+      <div class="row mt-3">
+        <span class="col">
+          <label for="password">
+              Password:
+          </label>
+        </span>
+      </div>
+
+      <div class="row mb-3">
+        <span class="col">
+          <input type="password" id="password" name="password" class="form-control form-control-sm" [(ngModel)]="password" minlength="3" required #passwordElement="ngModel">
+        </span>
+      </div>
+
+      <div class="row">
+        <div class="col d-flex justify-content-between">
+          <div>
+            <button type="submit" class="btn btn-sm btn-dark ml-1">
+              <h6 class="d-inline font-weight-bold">Sign-up</h6>
+            </button>
+          </div>
+          <div>
+            <button type="submit" [disabled]="formElement.invalid" class="btn btn-sm btn-dark mr-2">
+              <h6 class="d-inline font-weight-bold">Login</h6>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </form>
