@@ -4,8 +4,8 @@
         (change)="updateFilteredRecipes()" [value]="filter.value">
 </div>
 
-<ul>
-    <li *ngFor="let recipe of recipes">
-        <app-recipe-result></app-recipe-result>
-    </li>
-</ul>
+<div>
+    <div *ngFor="let recipe of filteredRecipes">
+        <app-recipe-result [recipe]="recipe" (click)="loadRecipe(recipe)"></app-recipe-result>
+    </div>
+</div>

@@ -10,4 +10,5 @@ export interface RecipeDTO {
     prepTime: number;
     spiceRate: number;
     recipeType: string;
+    pseudo?: string;
 }

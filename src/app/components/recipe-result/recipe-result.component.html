@@ -1,1 +1,6 @@
-<p>recipe-result works!</p>
+<div>
+    <h2>{{recipe.nameRecipe}}</h2><h3 *ngFor="let s of spices">*</h3>
+    <h4>{{recipe.recipeType}} pour {{recipe.persons}} personnes ({{recipe.prepTime}} min)</h4>
+    {{recipe.summary}}<br>
+    <i>postée le {{recipe.postDate}} par {{recipe.pseudo}}</i>
+</div>

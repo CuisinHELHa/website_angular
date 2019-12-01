@@ -10,6 +10,7 @@ import { RecipeSearchBarComponent } from './components/recipe-search-bar/recipe-
 import { RecipeResultsListComponent } from './components/recipe-results-list/recipe-results-list.component';
 import { RecipeResultComponent } from './components/recipe-result/recipe-result.component';
 import { RecipePipe } from './pipes/recipe-pipe.pipe';
+import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RecipePipe } from './pipes/recipe-pipe.pipe';
     RecipeSearchBarComponent,
     RecipeResultsListComponent,
     RecipeResultComponent,
-    RecipePipe
+    RecipePipe,
+    RecipeDetailsComponent
   ],
   imports: [
     BrowserModule,
