@@ -1,4 +1,8 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {GlobalsService} from '../../services/globals.service';
+
+declare var $: any;
+
 
 @Component({
   selector: 'app-header',
@@ -6,30 +10,21 @@ import {Component, HostListener, OnInit} from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  LOGO_PATH: string = "assets/img/cuisinHELHa_logo.png";
-  public static _mobile:boolean;
-  private _clickedLoginIcon:boolean;
+  readonly LOGO_PATH: string = 'assets/img/cuisinHELHa_logo.png';
 
-  constructor() { }
+  constructor(public globals: GlobalsService) {
+  }
+
+  /// MOBILE
+  get mobile(): boolean {
+    return this.globals.mobile;
+  }
 
   ngOnInit() {
-    this.updateMobile();
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.updateMobile();
-  }
-
-  updateMobile():void {
-      HeaderComponent._mobile = window.screen.width <= 420;
-  }
-
-  get clickedLoginIcon():boolean {
-    return this._clickedLoginIcon;
-  }
-
-  set clickedLoginIcon(clickedLoginIcon:boolean) {
-    this._clickedLoginIcon = clickedLoginIcon;
+  /// CLICKED LOGIN ICON
+  onLoginIconClick() {
+    $('#accountModal').modal('show');
   }
 }

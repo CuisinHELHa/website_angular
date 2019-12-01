@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+body{
+  font-family: 'Lato', sans-serif;
+}
 
 .main-color {
   background-color: #f9a335;
@@ -7,4 +12,8 @@
 
 #recipe-search-bar{
   background-color: #f9a335;
+}
+
+.align-y-center{
+  margin-top: 50%;
 }

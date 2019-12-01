@@ -1,0 +1,6 @@
+diff a/src/app/app.component.html b/src/app/app.component.html	(rejected hunks)
+@@ -2,2 +3,7 @@
+ <app-account-modal></app-account-modal>
+  <app-header></app-header>
+ <app-recipe-results-list></app-recipe-results-list>
+ <router-outlet></router-outlet>
