@@ -11,6 +11,7 @@ import { RecipeResultsListComponent } from './components/recipe-results-list/rec
 import { RecipeResultComponent } from './components/recipe-result/recipe-result.component';
 import { RecipePipe } from './pipes/recipe-pipe.pipe';
 import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
+import { RecipeCreateComponent } from './components/pages/recipe-create/recipe-create.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { RecipeDetailsComponent } from './components/recipe-details/recipe-detai
     RecipeResultsListComponent,
     RecipeResultComponent,
     RecipePipe,
-    RecipeDetailsComponent
+    RecipeDetailsComponent,
+    RecipeCreateComponent
   ],
   imports: [
     BrowserModule,
