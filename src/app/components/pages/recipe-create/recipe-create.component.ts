@@ -12,4 +12,7 @@ export class RecipeCreateComponent implements OnInit {
   ngOnInit() {
   }
 
+  addRecipe() {
+
+  }
 }
