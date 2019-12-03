@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {IngredientList} from "../../../DTOs/ingredient-dto";
+import {IngredientService} from "../../../services/ingredient.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-recipe-create',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipeCreateComponent implements OnInit {
 
-  constructor() { }
+  private ingredients: IngredientList = [];
+  private  subscriptions: Subscription[] = [];
+  constructor(public ingredientService:IngredientService) { }
 
   ngOnInit() {
+    this.loadIngredients();
+  }
+
+  private loadIngredients():void{
+    const sub: Subscription=this.ingredientService
+      .query()
+      .subscribe(ingredients => this.ingredients = ingredients);
+
+    this.subscriptions.push(sub);
+
   }
 
   addRecipe() {

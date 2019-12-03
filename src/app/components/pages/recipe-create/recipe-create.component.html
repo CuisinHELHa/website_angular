@@ -1,12 +1,16 @@
+<div class="container-fluid col-lg-12 imgBack">
 
-<div class="container-fluid col-lg-3"></div>
-<div class="container-fluid border col-lg-7 col-sm-12 mt-3 text-center">
+
+<div class="container-fluid col-lg-3">
+
+</div>
+<div class="container-fluid border col-lg-7 col-sm-12 text-center " style="background-color: white">
   <h3 class="text-center font-weight-bold p-3">Create recipe</h3>
   <form #formElement="ngForm" (ngSubmit)=addRecipe()>
     <div class="form-row">
       <div class="col-md-12 mb-3">
         <label for="recipeName">Recipe Name</label>
-        <input type="text" class="form-control" id="recipeName" [(ngModel)]="recipeName" minlength="5" required>
+        <input type="text" class="form-control" id="recipeName" minlength="5" required>
       </div>
     </div>
     <div class="form-row">
@@ -53,8 +57,10 @@
     <div class="form-row">
       <div class="col-md-5 mb-3">
         <label for="ingredients">ingredients</label>
-        <select class="custom-select" id="ingredients">
-          <option>ingredients</option>
+        <select class="custom-select" id="ingredients" *ngFor="let ingredient of ingredients; index as i">
+          <option>
+            {{ingredient.nameIngredient}}
+          </option>
         </select>
 
       </div>
@@ -91,3 +97,4 @@
   </form>
 </div>
 <div class="container-fluid col-lg-3"></div>
+</div>
