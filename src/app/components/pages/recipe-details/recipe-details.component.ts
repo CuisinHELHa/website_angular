@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RecipeDTO} from "../../DTOs/recipe-dto";
-import {StepDTO} from "../../DTOs/step-dto";
-import {IngredientDTO} from "../../DTOs/ingredient-dto";
+import {RecipeDTO} from "../../../DTOs/recipe-dto";
+import {StepDTO, StepList} from "../../../DTOs/step-dto";
+import {IngredientDTO, IngredientList} from "../../../DTOs/ingredient-dto";
 
 @Component({
   selector: 'app-recipe-details',
@@ -9,11 +9,12 @@ import {IngredientDTO} from "../../DTOs/ingredient-dto";
   styleUrls: ['./recipe-details.component.css']
 })
 export class RecipeDetailsComponent implements OnInit {
-
   private _recipe: RecipeDTO;
   private _spices:number[];
+  private _ingredients: IngredientList;
+  private _steps: StepList;
 
-  private MOCK_STEPS: StepDTO[] = [{
+  private MOCK_STEPS: StepList = [{
     idRecipe: 1,
     stepNb: 1,
     step: "Couper 300 cubes de beurre"
@@ -31,7 +32,7 @@ export class RecipeDetailsComponent implements OnInit {
     step: "étape ne devant pas apparaitre"
   }];
 
-  private MOCK_INGREDIENT: IngredientDTO[] = [{
+  private MOCK_INGREDIENT: IngredientList = [{
     nameIngredient: "Beurre",
 
   }];
@@ -39,6 +40,8 @@ export class RecipeDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.ingredients=this.MOCK_INGREDIENT;
+    this.steps = this.MOCK_STEPS;
   }
 
   get recipe(): RecipeDTO {
@@ -57,6 +60,21 @@ export class RecipeDetailsComponent implements OnInit {
 
   set spices(value: number[]) {
     this._spices = value;
+  }
+
+  get steps(): StepDTO[] {
+    return this._steps;
+  }
+
+  set steps(value: StepDTO[]) {
+    this._steps = value;
+  }
+  get ingredients(): IngredientDTO[] {
+    return this._ingredients;
+  }
+
+  set ingredients(value: IngredientDTO[]) {
+    this._ingredients = value;
   }
 
   updateSpice(nb:number){
