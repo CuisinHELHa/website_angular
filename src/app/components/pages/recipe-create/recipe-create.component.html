@@ -1,0 +1,93 @@
+
+<div class="container-fluid col-lg-3"></div>
+<div class="container-fluid border col-lg-7 col-sm-12 mt-3 text-center">
+  <h3 class="text-center font-weight-bold p-3">Create recipe</h3>
+  <form #formElement="ngForm" (ngSubmit)=addRecipe()>
+    <div class="form-row">
+      <div class="col-md-12 mb-3">
+        <label for="recipeName">Recipe Name</label>
+        <input type="text" class="form-control" id="recipeName" [(ngModel)]="recipeName" minlength="5" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-12 mb-3">
+        <label for="recipeSummary">Summary of your recipe</label>
+        <input type="text" class="form-control" id="recipeSummary" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-3 mb-3">
+        <label for="recipeType">Recipe Type</label>
+        <div class="input-group">
+          <select class="custom-select" id="recipeType" required>
+            <option selected disabled value="">Choose...</option>
+            <option>Starter</option>
+            <option>Main course</option>
+            <option>Dessert</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="prepTimeRecipe">Preparation time</label>
+        <input type="number" class="form-control" id="prepTimeRecipe" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="persons">Persons</label>
+        <input type="number" class="form-control" id="persons" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="">Spice Rate</label>
+        <select class="custom-select" id="" required>
+          <option selected disabled value="">Choose...</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Ingredients -->
+    <div class="form-row">
+      <div class="col-md-5 mb-3">
+        <label for="ingredients">ingredients</label>
+        <select class="custom-select" id="ingredients">
+          <option>ingredients</option>
+        </select>
+
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="ingredientQuantity">quantity</label>
+        <input type="number" class="form-control" id="ingredientQuantity" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="mesureIngredient">Mesure</label>
+        <select class="custom-select" id="mesureIngredient" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Gr</option>
+          <option>Ml</option>
+          <option>piece(s)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-sm btn-dark mr-2" style="height:30px">Add ingredient</button>
+
+    </div>
+    <div class="form-row">
+      <div class="col-md-12 mb-3">
+        <label for="steps">Step(s)</label>
+        <textarea class="form-control" id="steps"></textarea>
+      </div>
+      <div class="">
+        <button class="btn btn-sm btn-dark" style="height:30px" >Add step</button>
+      </div>
+    </div>
+
+    <button [disabled]="!formElement.valid" class="btn btn-md btn-warning mr-2 col-12 mt-2" type="submit">
+      <h6 class="d-inline font-weight-bold">Submit recipe</h6>
+    </button>
+  </form>
+</div>
+<div class="container-fluid col-lg-3"></div>
