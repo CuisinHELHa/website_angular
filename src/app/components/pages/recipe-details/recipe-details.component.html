@@ -3,3 +3,15 @@
 <h4>{{recipe.recipeType}} pour {{recipe.persons}} personnes ({{recipe.prepTime}} min)</h4>
 {{recipe.summary}}<br>
 <i>postée le {{recipe.postDate}} par {{recipe.pseudo}}</i>
+ingrédients :
+<ul>
+    <li *ngFor="let ingredient of ingredients">
+        {{ingredient.nameIngredient}}
+    </li>
+</ul>
+préparation :
+<ul>
+    <li *ngFor="let step of steps">
+        {{step.stepNb}} : {{step.step}}
+    </li>
+</ul>
