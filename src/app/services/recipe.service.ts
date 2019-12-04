@@ -7,8 +7,8 @@ import {RecipeDTO, RecipeList} from "../DTOs/recipe-dto";
   providedIn: 'root'
 })
 export class RecipeService {
-
-  private static URL: string = "/api/recipes";
+  private static search:string = "";
+  private static URL:string = "/api/recipes/";
 
   constructor(public http: HttpClient) {
   }
@@ -17,7 +17,20 @@ export class RecipeService {
     return this.http.get<RecipeList>(RecipeService.URL);
   }
 
-  post(ingredient: RecipeDTO): Observable<RecipeDTO> {
+  queryPseudo(): Observable<RecipeList>{
+    return this.http.get<RecipeList>(RecipeService.URL + "pseudo");
+  }
+
+  queryText(text:string): Observable<RecipeList>{
+    text.replace(" ", "_");
+    return this.http.get<RecipeList>(RecipeService.URL + "text=" + text);
+  }
+
+  queryId(id:number): Observable<RecipeList>{
+    return this.http.get<RecipeList>(RecipeService.URL + "id=" +id);
+  }
+
+  post(ingredient: RecipeDTO): Observable<RecipeDTO>{
     return this.http.post<RecipeDTO>(RecipeService.URL, ingredient);
   }
 

@@ -1,0 +1,24 @@
+<h1>{{recipe.nameRecipe}}</h1>
+<h3 *ngFor="let s of spices">*</h3>
+<h4>{{recipe.recipeType}} pour {{recipe.persons}} personnes ({{recipe.prepTime}} min)</h4>
+{{recipe.summary}}<br>
+<i>postée le {{recipe.postDate}} par {{recipe.pseudo}}</i>
+ingrédients :
+<ul>
+    <li *ngFor="let ingredient of ingredients">
+        {{ingredient.quantity}}{{ingredient.unit}} {{ingredient.nameIngredient}}
+    </li>
+</ul>
+préparation :
+<ul>
+    <li *ngFor="let step of steps">
+        {{step.stepNb}} : {{step.step}}
+    </li>
+</ul>
+
+<h5>Formulaire de commentaires</h5>
+
+<div *ngFor="let review of reviews">
+    <h6>{{review.pseudo}}</h6> ({{review.rate}}/5)
+    <p>{{review.reviewMessage}}</p>
+</div>

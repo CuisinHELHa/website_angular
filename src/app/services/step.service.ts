@@ -7,8 +7,7 @@ import {StepDTO, StepList} from "../DTOs/step-dto";
   providedIn: 'root'
 })
 export class StepService {
-
-  private static URL: string = "/api/steps";
+  private static URL:string = "/api/steps/";
 
   constructor(public http: HttpClient) {
   }
@@ -17,7 +16,11 @@ export class StepService {
     return this.http.get<StepList>(StepService.URL);
   }
 
-  post(ingredient: StepDTO): Observable<StepDTO> {
+  queryByRecipe(id: number) : Observable<StepList>{
+    return this.http.get<StepList>(StepService.URL + id);
+  }
+
+  post(ingredient: StepDTO): Observable<StepDTO>{
     return this.http.post<StepDTO>(StepService.URL, ingredient);
   }
 

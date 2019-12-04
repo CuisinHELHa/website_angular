@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RecipeDTO, RecipeList} from "../../DTOs/recipe-dto";
-import {RecipeType} from "../../enumerations/recipe-type.enum";
+import {RECIPE_TYPE_FILTER, RecipeType} from "../../enumerations/recipe-type.enum";
 import {RecipePipe} from "../../pipes/recipe-pipe.pipe";
 
 @Component({
@@ -12,9 +12,7 @@ import {RecipePipe} from "../../pipes/recipe-pipe.pipe";
 
 export class RecipeResultsListComponent implements OnInit {
 
-  filterSelected: RecipeType = RecipeType.ALL;
   @Output()
-  recipeSelected: EventEmitter<RecipeDTO> = new EventEmitter<RecipeDTO>();
   readonly FILTERS: any[] = [{
     id: "All",
     value: RecipeType.ALL
@@ -44,10 +42,14 @@ export class RecipeResultsListComponent implements OnInit {
     pseudo: "niborobin"
   }];
 
-  constructor() {
-  }
-
+  filterSelected: RecipeType = RecipeType.ALL;
   private _recipes: RecipeList;
+  private _filteredRecipes: RecipeList;
+  @Output()
+  recipeSelected: EventEmitter<RecipeDTO> = new EventEmitter<RecipeDTO>();
+  private filters:any[] = RECIPE_TYPE_FILTER;
+
+  constructor() { }
 
   @Input()
   get recipes(): RecipeDTO[] {
@@ -58,8 +60,6 @@ export class RecipeResultsListComponent implements OnInit {
     this._recipes = value;
     this.updateFilteredRecipes();
   }
-
-  private _filteredRecipes: RecipeList;
 
   get filteredRecipes(): RecipeDTO[] {
     return this._filteredRecipes;
