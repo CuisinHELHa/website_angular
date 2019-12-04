@@ -10,9 +10,27 @@ import {RecipePipe} from "../../pipes/recipe-pipe.pipe";
 })
 
 
-
 export class RecipeResultsListComponent implements OnInit {
 
+  filterSelected: RecipeType = RecipeType.ALL;
+  @Output()
+  recipeSelected: EventEmitter<RecipeDTO> = new EventEmitter<RecipeDTO>();
+  readonly FILTERS: any[] = [{
+    id: "All",
+    value: RecipeType.ALL
+  },
+    {
+      id: "Entrée",
+      value: RecipeType.ENTREE
+    },
+    {
+      id: "Plat",
+      value: RecipeType.PLAT
+    },
+    {
+      id: "Dessert",
+      value: RecipeType.DESSERT
+    }];
   private MOCK_RECIPE: RecipeList = [{
     idRecipe: 1,
     idUser: 1,
@@ -26,35 +44,10 @@ export class RecipeResultsListComponent implements OnInit {
     pseudo: "niborobin"
   }];
 
-  filterSelected: RecipeType = RecipeType.ALL;
-  private _recipes: RecipeList;
-  private _filteredRecipes: RecipeList;
-  @Output()
-  recipeSelected: EventEmitter<RecipeDTO> = new EventEmitter<RecipeDTO>();
-
-  readonly FILTERS: any[]=[{
-  id:"All",
-  value: RecipeType.ALL
-},
-{
-  id:"Entrée",
-  value: RecipeType.ENTREE
-},
-{
-  id:"Plat",
-  value: RecipeType.PLAT
-},
-{
-  id:"Dessert",
-  value: RecipeType.DESSERT
-}];
-
-
-  constructor() { }
-
-  ngOnInit() {
-    this.recipes = this.MOCK_RECIPE;
+  constructor() {
   }
+
+  private _recipes: RecipeList;
 
   @Input()
   get recipes(): RecipeDTO[] {
@@ -66,6 +59,8 @@ export class RecipeResultsListComponent implements OnInit {
     this.updateFilteredRecipes();
   }
 
+  private _filteredRecipes: RecipeList;
+
   get filteredRecipes(): RecipeDTO[] {
     return this._filteredRecipes;
   }
@@ -74,9 +69,13 @@ export class RecipeResultsListComponent implements OnInit {
     this._filteredRecipes = value;
   }
 
+  ngOnInit() {
+    this.recipes = this.MOCK_RECIPE;
+  }
+
   updateFilteredRecipes() {
     this._filteredRecipes = new RecipePipe()
-        .transform(this._recipes, this.filterSelected);
+      .transform(this._recipes, this.filterSelected);
   }
 
   loadRecipe(recipe: RecipeDTO) {

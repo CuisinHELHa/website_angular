@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RecipeSearchBarComponent } from './recipe-search-bar.component';
+import {RecipeSearchBarComponent} from './recipe-search-bar.component';
 
 describe('RecipeSearchBarComponent', () => {
   let component: RecipeSearchBarComponent;
@@ -8,9 +8,9 @@ describe('RecipeSearchBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecipeSearchBarComponent ]
+      declarations: [RecipeSearchBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

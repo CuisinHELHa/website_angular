@@ -2,7 +2,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
-body{
+body {
   font-family: 'Lato', sans-serif;
 }
 
@@ -10,10 +10,10 @@ body{
   background-color: #f9a335;
 }
 
-#recipe-search-bar{
+#recipe-search-bar {
   background-color: #f9a335;
 }
 
-.align-y-center{
+.align-y-center {
   margin-top: 50%;
 }

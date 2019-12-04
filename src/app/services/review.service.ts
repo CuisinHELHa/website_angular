@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ReviewDTO, ReviewList} from "../DTOs/review-dto";
@@ -8,23 +8,24 @@ import {ReviewDTO, ReviewList} from "../DTOs/review-dto";
 })
 export class ReviewService {
 
-  private static URL:string = "/api/reviews";
+  private static URL: string = "/api/reviews";
 
-  constructor(public http:HttpClient) { }
+  constructor(public http: HttpClient) {
+  }
 
-  query() : Observable<ReviewList>{
+  query(): Observable<ReviewList> {
     return this.http.get<ReviewList>(ReviewService.URL);
   }
 
-  post(ingredient: ReviewDTO): Observable<ReviewDTO>{
+  post(ingredient: ReviewDTO): Observable<ReviewDTO> {
     return this.http.post<ReviewDTO>(ReviewService.URL, ingredient);
   }
 
-  put(ingredient: ReviewDTO): Observable<any>{
+  put(ingredient: ReviewDTO): Observable<any> {
     return this.http.put(ReviewService.URL, ingredient);
   }
 
-  delete(id: number): Observable<any>{
+  delete(id: number): Observable<any> {
     return this.http.delete(`${ReviewService.URL}/${id}`);
   }
 }

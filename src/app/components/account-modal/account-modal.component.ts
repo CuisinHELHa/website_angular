@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-declare var $ : any;
+import {Component, OnInit} from '@angular/core';
+
+declare var $: any;
 
 @Component({
   selector: 'app-account-modal',
@@ -8,17 +9,18 @@ declare var $ : any;
 })
 export class AccountModalComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-
+  constructor() {
   }
 
-  showModal():void {
+  ngOnInit() {
+    this.showModal();
+  }
+
+  showModal(): void {
     $("#accountModal").modal('show');
   }
 
-  hideModal():void{
+  hideModal(): void {
     $("#accountModal").modal('hide');
   }
 }

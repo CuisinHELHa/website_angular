@@ -1,8 +1,8 @@
-
 import {Component, HostListener, OnInit} from '@angular/core';
 import {GlobalsService} from './services/globals.service';
-import {BehaviorSubject, Subject} from 'rxjs';
 import {RecipeDTO} from "./DTOs/recipe-dto";
+import {Router} from "@angular/router";
+import {AuthenticationService} from "@app/services/authentication.service";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import {RecipeDTO} from "./DTOs/recipe-dto";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'pCuisinHELHa';
   private nullRecipe: RecipeDTO = {
     idRecipe: -1,
@@ -23,10 +23,18 @@ export class AppComponent implements OnInit{
     spiceRate: 0,
     recipeType: ""
   };
-  constructor(public globals:GlobalsService){}
+
+  constructor(private globals: GlobalsService,
+              private router: Router,
+              private authenticationService: AuthenticationService) {
+  }
 
   ngOnInit(): void {
     this.globals.updateMobile();
+  }
+
+  logout():void {
+
   }
 
   /**

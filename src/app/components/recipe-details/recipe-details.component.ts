@@ -10,36 +10,32 @@ import {IngredientDTO} from "../../DTOs/ingredient-dto";
 })
 export class RecipeDetailsComponent implements OnInit {
 
-  private _recipe: RecipeDTO;
-  private _spices:number[];
-
   private MOCK_STEPS: StepDTO[] = [{
     idRecipe: 1,
     stepNb: 1,
     step: "Couper 300 cubes de beurre"
-  },{
+  }, {
     idRecipe: 1,
     stepNb: 2,
     step: "faire fondre le beurre"
-  },{
+  }, {
     idRecipe: 1,
     stepNb: 3,
     step: "étaler le beurre sur la tartine"
-  },{
+  }, {
     idRecipe: 2,
     stepNb: 1,
     step: "étape ne devant pas apparaitre"
   }];
-
   private MOCK_INGREDIENT: IngredientDTO[] = [{
     nameIngredient: "Beurre",
 
   }];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
+
+  private _recipe: RecipeDTO;
 
   get recipe(): RecipeDTO {
     return this._recipe;
@@ -51,6 +47,8 @@ export class RecipeDetailsComponent implements OnInit {
     this.updateSpice(value.spiceRate);
   }
 
+  private _spices: number[];
+
   get spices(): number[] {
     return this._spices;
   }
@@ -59,7 +57,10 @@ export class RecipeDetailsComponent implements OnInit {
     this._spices = value;
   }
 
-  updateSpice(nb:number){
+  ngOnInit() {
+  }
+
+  updateSpice(nb: number) {
     this._spices = Array(nb).fill(0);
   }
 

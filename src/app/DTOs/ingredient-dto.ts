@@ -1,6 +1,6 @@
 export declare type IngredientList = IngredientDTO[];
 
 export interface IngredientDTO {
-    idIngredient?: number;
-    nameIngredient: string;
+  idIngredient?: number;
+  nameIngredient: string;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-recipe-search',
@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 // @Component({ templateUrl: 'recipe-search.component.html' })
 export class RecipeSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

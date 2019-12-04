@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IngredientDTO, IngredientList} from "../DTOs/ingredient-dto";
@@ -8,23 +8,24 @@ import {IngredientDTO, IngredientList} from "../DTOs/ingredient-dto";
 })
 export class IngredientService {
 
-  private static URL:string = "/api/ingredients";
+  private static URL: string = "/api/ingredients";
 
-  constructor(public http:HttpClient) { }
+  constructor(public http: HttpClient) {
+  }
 
-  query() : Observable<IngredientList>{
+  query(): Observable<IngredientList> {
     return this.http.get<IngredientList>(IngredientService.URL);
   }
 
-  post(ingredient: IngredientDTO): Observable<IngredientDTO>{
+  post(ingredient: IngredientDTO): Observable<IngredientDTO> {
     return this.http.post<IngredientDTO>(IngredientService.URL, ingredient);
   }
 
-  put(ingredient: IngredientDTO): Observable<any>{
+  put(ingredient: IngredientDTO): Observable<any> {
     return this.http.put(IngredientService.URL, ingredient);
   }
 
-  delete(id: number): Observable<any>{
+  delete(id: number): Observable<any> {
     return this.http.delete(`${IngredientService.URL}/${id}`);
   }
 }

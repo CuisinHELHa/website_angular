@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GlobalsService } from './globals.service';
+import {GlobalsService} from './globals.service';
 
 describe('GlobalsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
