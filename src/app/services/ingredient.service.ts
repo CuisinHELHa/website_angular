@@ -10,7 +10,9 @@ export class IngredientService {
 
   private static URL:string = "/api/ingredients";
 
-  constructor(public http:HttpClient) { }
+  constructor(private http:HttpClient) {
+
+  }
 
   query() : Observable<IngredientList>{
     return this.http.get<IngredientList>(IngredientService.URL);
