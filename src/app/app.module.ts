@@ -16,6 +16,8 @@ import { RecipeSearchComponent } from './components/pages/recipe-search/recipe-s
 import {appRoutingModule} from './app.routing';
 import { UserDetailsComponent } from './components/pages/user-details/user-details.component';
 import {HttpClientModule} from "@angular/common/http";
+import {RecipeCreateComponent} from "./components/pages/recipe-create/recipe-create.component";
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {HttpClientModule} from "@angular/common/http";
     AccountModalComponent,
     HomeComponent,
     RecipeSearchComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    RecipeCreateComponent
   ],
   imports: [
     BrowserModule,

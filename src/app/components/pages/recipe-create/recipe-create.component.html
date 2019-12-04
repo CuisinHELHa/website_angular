@@ -1,12 +1,16 @@
+<div class="container-fluid col-lg-12 imgBack">
 
-<div class="container-fluid col-lg-3"></div>
-<div class="container-fluid border col-lg-7 col-sm-12 mt-3 text-center">
+
+<div class="container-fluid col-lg-3">
+
+</div>
+<div class="container-fluid border col-lg-7 col-sm-12 text-center " style="background-color: white">
   <h3 class="text-center font-weight-bold p-3">Create recipe</h3>
   <form #formElement="ngForm" (ngSubmit)=addRecipe()>
     <div class="form-row">
       <div class="col-md-12 mb-3">
         <label for="recipeName">Recipe Name</label>
-        <input type="text" class="form-control" id="recipeName" [(ngModel)]="recipeName" minlength="5" required>
+        <input type="text" class="form-control" id="recipeName" minlength="5" required>
       </div>
     </div>
     <div class="form-row">
@@ -21,10 +25,7 @@
         <label for="recipeType">Recipe Type</label>
         <div class="input-group">
           <select class="custom-select" id="recipeType" required>
-            <option selected disabled value="">Choose...</option>
-            <option>Starter</option>
-            <option>Main course</option>
-            <option>Dessert</option>
+            <option *ngFor="let filter of filters">{{filter.value}}</option>
           </select>
         </div>
       </div>
@@ -54,7 +55,9 @@
       <div class="col-md-5 mb-3">
         <label for="ingredients">ingredients</label>
         <select class="custom-select" id="ingredients">
-          <option>ingredients</option>
+          <option *ngFor="let ingredient of ingredients; index as i">
+            {{ingredient.nameIngredient}}
+          </option>
         </select>
 
       </div>
@@ -84,10 +87,13 @@
         <button class="btn btn-sm btn-dark" style="height:30px" >Add step</button>
       </div>
     </div>
-
+    <div class="form-row">
+      <button class="btn btn-sm btn-dark" style="height:30px;width: 80px"> choisir un fichier</button>
+    </div>
     <button [disabled]="!formElement.valid" class="btn btn-md btn-warning mr-2 col-12 mt-2" type="submit">
       <h6 class="d-inline font-weight-bold">Submit recipe</h6>
     </button>
   </form>
 </div>
 <div class="container-fluid col-lg-3"></div>
+</div>
