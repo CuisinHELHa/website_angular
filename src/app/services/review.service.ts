@@ -8,12 +8,16 @@ import {ReviewDTO, ReviewList} from "../DTOs/review-dto";
 })
 export class ReviewService {
 
-  private static URL:string = "/api/reviews";
+  private static URL:string = "/api/reviews/";
 
   constructor(public http:HttpClient) { }
 
   query() : Observable<ReviewList>{
     return this.http.get<ReviewList>(ReviewService.URL);
+  }
+
+  queryByRecipe(id: number) : Observable<ReviewList>{
+    return this.http.get<ReviewList>(ReviewService.URL + "recipe="+ id);
   }
 
   post(ingredient: ReviewDTO): Observable<ReviewDTO>{

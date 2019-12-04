@@ -8,12 +8,16 @@ import {StepDTO, StepList} from "../DTOs/step-dto";
 })
 export class StepService {
 
-  private static URL:string = "/api/steps";
+  private static URL:string = "/api/steps/";
 
   constructor(public http:HttpClient) { }
 
   query() : Observable<StepList>{
     return this.http.get<StepList>(StepService.URL);
+  }
+
+  queryByRecipe(id: number) : Observable<StepList>{
+    return this.http.get<StepList>(StepService.URL + id);
   }
 
   post(ingredient: StepDTO): Observable<StepDTO>{

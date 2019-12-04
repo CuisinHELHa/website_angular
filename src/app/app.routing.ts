@@ -9,8 +9,8 @@ import {UserDetailsComponent} from "./components/pages/user-details";
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'recipe-search', component: RecipeSearchComponent },
-  { path: 'recipe-detail', component: RecipeDetailsComponent},
-  { path: 'user-detail', component: UserDetailsComponent },
+  { path: 'recipe-details/:id', component: RecipeDetailsComponent},
+  { path: 'user-details', component: UserDetailsComponent },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

@@ -2,6 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {RecipeDTO} from "../../../DTOs/recipe-dto";
 import {StepDTO, StepList} from "../../../DTOs/step-dto";
 import {IngredientDTO, IngredientList} from "../../../DTOs/ingredient-dto";
+import {IngredientService} from "../../../services/ingredient.service";
+import {Subscription} from "rxjs";
+import {RecipeService} from "../../../services/recipe.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {StepService} from "../../../services/step.service";
+import {ReviewDTO, ReviewList} from "../../../DTOs/review-dto";
+import {ReviewService} from "../../../services/review.service";
 
 @Component({
   selector: 'app-recipe-details',
@@ -9,46 +16,44 @@ import {IngredientDTO, IngredientList} from "../../../DTOs/ingredient-dto";
   styleUrls: ['./recipe-details.component.css']
 })
 export class RecipeDetailsComponent implements OnInit {
+
+  private idParam:string;
+  private idRecipe:number;
   private _recipe: RecipeDTO;
   private _spices:number[];
   private _ingredients: IngredientList;
   private _steps: StepList;
+  private _reviews: ReviewList;
+  private subscriptions: Subscription[] = [];
 
-  private MOCK_STEPS: StepList = [{
-    idRecipe: 1,
-    stepNb: 1,
-    step: "Couper 300 cubes de beurre"
-  },{
-    idRecipe: 1,
-    stepNb: 2,
-    step: "faire fondre le beurre"
-  },{
-    idRecipe: 1,
-    stepNb: 3,
-    step: "étaler le beurre sur la tartine"
-  },{
-    idRecipe: 2,
-    stepNb: 1,
-    step: "étape ne devant pas apparaitre"
-  }];
-
-  private MOCK_INGREDIENT: IngredientList = [{
-    nameIngredient: "Beurre",
-
-  }];
-
-  constructor() { }
+  constructor(private ingredientService: IngredientService,
+              private stepService: StepService,
+              private recipeService: RecipeService,
+              private reviewService: ReviewService,
+              public route:ActivatedRoute,
+              public router:Router) { }
 
   ngOnInit() {
-    this.ingredients=this.MOCK_INGREDIENT;
-    this.steps = this.MOCK_STEPS;
+
+    console.log(this.route.paramMap);
+    const sub = this.route.paramMap.subscribe(params =>{
+      this.idParam = params.get("id");
+      console.log(this.idParam);
+      this.idRecipe = parseInt(this.idParam);
+    });
+
+    console.log(this.idRecipe);
+    this.subscriptions.push(sub);
+    this.loadRecipe();
+    this.loadIngredients();
+    this.loadSteps();
+    this.loadReviews();
   }
 
   get recipe(): RecipeDTO {
     return this._recipe;
   }
 
-  @Input()
   set recipe(value: RecipeDTO) {
     this._recipe = value;
     this.updateSpice(value.spiceRate);
@@ -77,9 +82,47 @@ export class RecipeDetailsComponent implements OnInit {
     this._ingredients = value;
   }
 
+  get reviews(): ReviewDTO[] {
+    return this._reviews;
+  }
+
+  set reviews(value: ReviewDTO[]) {
+    this._reviews = value;
+  }
+
   updateSpice(nb:number){
     this._spices = Array(nb).fill(0);
   }
 
+  loadIngredients()
+  {
+    const sub:Subscription = this.ingredientService
+        .queryRecipeId(this.idRecipe)
+        .subscribe(ingredients => this.ingredients = ingredients);
+    this.subscriptions.push(sub);
+  }
 
+
+  private loadRecipe() {
+    const sub: Subscription = this.recipeService
+        .queryId(this.idRecipe)
+        .subscribe(recipes => this.recipe=recipes[0]);
+    this.subscriptions.push(sub);
+  }
+
+  private loadSteps()
+  {
+    const sub: Subscription = this.stepService
+        .queryByRecipe(this.idRecipe)
+        .subscribe(steps => this.steps = steps);
+    this.subscriptions.push(sub);
+  }
+
+  private loadReviews()
+  {
+    const sub: Subscription = this.reviewService
+        .queryByRecipe(this.idRecipe)
+        .subscribe(reviews => this.reviews = reviews);
+    this.subscriptions.push(sub);
+  }
 }

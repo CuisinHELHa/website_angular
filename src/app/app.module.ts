@@ -15,6 +15,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { RecipeSearchComponent } from './components/pages/recipe-search/recipe-search.component';
 import {appRoutingModule} from './app.routing';
 import { UserDetailsComponent } from './components/pages/user-details/user-details.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UserDetailsComponent } from './components/pages/user-details/user-detai
     BrowserModule,
     AngularFontAwesomeModule,
     FormsModule,
-    appRoutingModule
+    appRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

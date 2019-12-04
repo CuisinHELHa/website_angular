@@ -17,9 +17,17 @@ export class RecipeService {
     return this.http.get<RecipeList>(RecipeService.URL);
   }
 
+  queryPseudo(): Observable<RecipeList>{
+    return this.http.get<RecipeList>(RecipeService.URL + "pseudo");
+  }
+
   queryText(text:string): Observable<RecipeList>{
     text.replace(" ", "_");
     return this.http.get<RecipeList>(RecipeService.URL + "text=" + text);
+  }
+
+  queryId(id:number): Observable<RecipeList>{
+    return this.http.get<RecipeList>(RecipeService.URL + "id=" +id);
   }
 
   post(ingredient: RecipeDTO): Observable<RecipeDTO>{
