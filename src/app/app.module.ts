@@ -6,7 +6,6 @@ import {HeaderComponent} from './components/header/header.component';
 import {LoginFormComponent} from './components/login-form/login-form.component';
 import {FormsModule} from '@angular/forms';
 import { RecipeSearchBarComponent } from './components/recipe-search-bar/recipe-search-bar.component';
-import { RecipeResultsListComponent } from './components/recipe-results-list/recipe-results-list.component';
 import { RecipeResultComponent } from './components/recipe-result/recipe-result.component';
 import { RecipePipe } from './pipes/recipe-pipe.pipe';
 import { RecipeDetailsComponent } from './components/pages/recipe-details/recipe-details.component';
@@ -25,13 +24,12 @@ import {RecipeCreateComponent} from "./components/pages/recipe-create/recipe-cre
     HeaderComponent,
     LoginFormComponent,
     RecipeSearchBarComponent,
-    RecipeResultsListComponent,
+    RecipeSearchComponent,
     RecipeResultComponent,
     RecipePipe,
     RecipeDetailsComponent,
     AccountModalComponent,
     HomeComponent,
-    RecipeSearchComponent,
     UserDetailsComponent,
     RecipeCreateComponent
   ],

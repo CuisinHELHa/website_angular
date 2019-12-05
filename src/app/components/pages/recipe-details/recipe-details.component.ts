@@ -34,15 +34,11 @@ export class RecipeDetailsComponent implements OnInit {
               public router:Router) { }
 
   ngOnInit() {
-
-    console.log(this.route.paramMap);
     const sub = this.route.paramMap.subscribe(params =>{
       this.idParam = params.get("id");
-      console.log(this.idParam);
       this.idRecipe = parseInt(this.idParam);
     });
 
-    console.log(this.idRecipe);
     this.subscriptions.push(sub);
     this.loadRecipe();
     this.loadIngredients();
