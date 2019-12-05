@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RecipeDTO} from "../../DTOs/recipe-dto";
+import {Subscription} from "rxjs";
+import {RecipeService} from "@app/services/recipe.service";
 
 @Component({
   selector: 'app-recipe-result',
@@ -7,6 +9,12 @@ import {RecipeDTO} from "../../DTOs/recipe-dto";
   styleUrls: ['./recipe-result.component.css']
 })
 export class RecipeResultComponent implements OnInit {
+
+  @Output()
+  private recipeDeleted:EventEmitter<RecipeDTO> = new EventEmitter<RecipeDTO>();
+  id: number = 1;
+  type: boolean = true;
+
   constructor() {
   }
 
@@ -38,4 +46,8 @@ export class RecipeResultComponent implements OnInit {
   updateSpice(nb: number) {
     this._spices = Array(nb).fill(0);
   }
+
+    deleteRecipe() {
+      this.recipeDeleted.next(this.recipe);
+    }
 }

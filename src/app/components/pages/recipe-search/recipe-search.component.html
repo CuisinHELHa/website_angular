@@ -6,6 +6,6 @@
 
 <div>
     <div *ngFor="let recipe of filteredRecipes">
-        <app-recipe-result [recipe]="recipe" [routerLink]="'/recipe-details/'+recipe.idRecipe"></app-recipe-result>
+        <app-recipe-result [recipe]="recipe" (recipeDeleted)="deleteRecipeInDB($event)"></app-recipe-result>
     </div>
 </div>

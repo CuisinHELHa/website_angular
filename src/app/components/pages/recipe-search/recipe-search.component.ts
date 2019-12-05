@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {RecipeDTO, RecipeList} from "../../../DTOs/recipe-dto";
 import {RECIPE_TYPE_FILTER, RecipeType} from "../../../enumerations/recipe-type.enum";
 import {RecipePipe} from "../../../pipes/recipe-pipe.pipe";
 import {RecipeService} from "../../../services/recipe.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
+import {ok} from "assert";
 
 @Component({
   selector: 'app-recipe-search',
@@ -14,7 +15,7 @@ import {Subscription} from "rxjs";
 
 
 
-export class RecipeSearchComponent implements OnInit {
+export class RecipeSearchComponent implements OnInit, OnDestroy {
 
   filterSelected: RecipeType = RecipeType.ALL;
   private searchText: string = "";
@@ -40,6 +41,12 @@ export class RecipeSearchComponent implements OnInit {
     });
 
     this.subscriptions.push(sub);
+  }
+
+  ngOnDestroy(): void{
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   }
 
   get recipes(): RecipeDTO[] {
@@ -69,5 +76,22 @@ export class RecipeSearchComponent implements OnInit {
         .queryText(this.searchText)
         .subscribe(recipes => this.recipes=recipes);
     this.subscriptions.push(sub);
+
+  }
+
+  deleteRecipeInDB($event: RecipeDTO) {
+    const sub = this.recipeService
+        .delete($event.idRecipe)
+        .subscribe(() => {
+            this.deleteRecipe($event);
+        });
+    this.subscriptions.push(sub);
+  }
+
+  deleteRecipe(recipe: RecipeDTO)
+  {
+    const index = this.recipes.indexOf(recipe);
+    this._recipes.splice(index, 1);
+    this.updateFilteredRecipes();
   }
 }

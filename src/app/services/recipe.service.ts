@@ -39,6 +39,6 @@ export class RecipeService {
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${RecipeService.URL}/${id}`);
+    return this.http.delete(`${RecipeService.URL}${id}`);
   }
 }
