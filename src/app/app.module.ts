@@ -16,6 +16,7 @@ import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {appRoutingModule} from "@app/app.routing";
 import {HttpClientModule} from "@angular/common/http";
+import { ReviewFormComponent } from './components/review-form/review-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {HttpClientModule} from "@angular/common/http";
     AccountModalComponent,
     HomeComponent,
     UserDetailsComponent,
-    RecipeCreateComponent
+    RecipeCreateComponent,
+    ReviewFormComponent
   ],
     imports: [
         BrowserModule,
