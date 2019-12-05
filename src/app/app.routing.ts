@@ -1,11 +1,10 @@
-import { Routes, RouterModule } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
-import { HomeComponent } from './components/pages/home';
+import {HomeComponent} from './components/pages/home';
 import {RecipeDetailsComponent} from "./components/pages/recipe-details";
 import {UserDetailsComponent} from "./components/pages/user-details";
-import {RecipeCreateComponent} from "./components/pages/recipe-create/recipe-create.component";
 import {RecipeSearchComponent} from "./components/pages/recipe-search";
-
+import {RecipeCreateComponent} from "@app/components/pages/recipe-create/recipe-create.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,9 +13,8 @@ const routes: Routes = [
   { path: 'recipe-details/:id', component: RecipeDetailsComponent},
   { path: 'user-details', component: UserDetailsComponent },
   { path: 'recipe-create', component: RecipeCreateComponent },
-
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  {path: '**', redirectTo: ''}
 ];
 
 export const appRoutingModule = RouterModule.forRoot(routes);

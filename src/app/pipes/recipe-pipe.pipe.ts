@@ -8,7 +8,7 @@ import {RecipeType} from "../enumerations/recipe-type.enum";
 export class RecipePipe implements PipeTransform {
 
   transform(recipes: RecipeList, recipeType: RecipeType): RecipeList {
-    switch (recipeType){
+    switch (recipeType) {
       case RecipeType.ENTREE:
         return recipes.filter(recipe => recipe.recipeType == "Entrée");
       case RecipeType.PLAT:

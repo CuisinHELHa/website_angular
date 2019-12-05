@@ -1,13 +1,14 @@
 <form #formElement="ngForm" [routerLink]="'recipe-search/'+userSearch" class="pb-1 pl-1">
   <div class="row no-gutters">
     <div class="col-1 d-flex justify-content-end">
-     <button [disabled]="formElement.invalid" class="btn btn-sm btn-light" type="submit">
-      <fa name="search"></fa>
-     </button>
+      <button [disabled]="formElement.invalid" class="btn btn-sm btn-light" type="submit">
+        <fa name="search"></fa>
+      </button>
     </div>
     <div class="col-11">
-      <input type="text" id="userSearch" name="userSearch" placeholder="Entrer une recette, un ingrédient, ..." class="form-control form-control-sm"
-             [(ngModel)]="userSearch" minlength="3" required #loginElement="ngModel">
+      <input #loginElement="ngModel" [(ngModel)]="userSearch" class="form-control form-control-sm" id="userSearch"
+             minlength="3"
+             name="userSearch" placeholder="Entrer une recette, un ingrédient, ..." required type="text">
     </div>
   </div>
 </form>

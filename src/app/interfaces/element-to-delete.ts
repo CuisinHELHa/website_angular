@@ -1,4 +1,4 @@
 export interface ElementToDelete<T> {
-    object:T;
-    index: number;
+  object: T;
+  index: number;
 }

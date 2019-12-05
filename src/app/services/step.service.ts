@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {StepDTO, StepList} from "../DTOs/step-dto";
@@ -7,12 +7,12 @@ import {StepDTO, StepList} from "../DTOs/step-dto";
   providedIn: 'root'
 })
 export class StepService {
-
   private static URL:string = "/api/steps/";
 
-  constructor(public http:HttpClient) { }
+  constructor(public http: HttpClient) {
+  }
 
-  query() : Observable<StepList>{
+  query(): Observable<StepList> {
     return this.http.get<StepList>(StepService.URL);
   }
 
@@ -24,11 +24,11 @@ export class StepService {
     return this.http.post<StepDTO>(StepService.URL, ingredient);
   }
 
-  put(ingredient: StepDTO): Observable<any>{
+  put(ingredient: StepDTO): Observable<any> {
     return this.http.put(StepService.URL, ingredient);
   }
 
-  delete(id: number): Observable<any>{
+  delete(id: number): Observable<any> {
     return this.http.delete(`${StepService.URL}/${id}`);
   }
 }

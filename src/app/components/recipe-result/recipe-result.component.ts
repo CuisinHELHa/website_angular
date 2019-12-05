@@ -7,13 +7,10 @@ import {RecipeDTO} from "../../DTOs/recipe-dto";
   styleUrls: ['./recipe-result.component.css']
 })
 export class RecipeResultComponent implements OnInit {
-  private _recipe:RecipeDTO;
-  private _spices:number[];
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
+
+  private _recipe: RecipeDTO;
 
   get recipe(): RecipeDTO {
     return this._recipe;
@@ -25,6 +22,8 @@ export class RecipeResultComponent implements OnInit {
     this.updateSpice(value.spiceRate);
   }
 
+  private _spices: number[];
+
   get spices(): number[] {
     return this._spices;
   }
@@ -33,7 +32,10 @@ export class RecipeResultComponent implements OnInit {
     this._spices = value;
   }
 
-  updateSpice(nb:number){
+  ngOnInit() {
+  }
+
+  updateSpice(nb: number) {
     this._spices = Array(nb).fill(0);
   }
 }

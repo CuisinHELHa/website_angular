@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-recipe-search-bar',
@@ -6,12 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-search-bar.component.css']
 })
 export class RecipeSearchBarComponent implements OnInit {
-  private _userSearch: String="";
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
+
+  private _userSearch: String = "";
 
   get userSearch(): String {
     return this._userSearch;
@@ -19,5 +17,12 @@ export class RecipeSearchBarComponent implements OnInit {
 
   set userSearch(value: String) {
     this._userSearch = value;
+  }
+
+  ngOnInit() {
+  }
+
+  searchRecipe() {
+
   }
 }

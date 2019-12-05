@@ -1,4 +1,4 @@
-import {HostListener, Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +8,13 @@ import {HostListener, Injectable, OnInit} from '@angular/core';
  * Represents global variables such as if the user's on a smartphone.
  */
 @Injectable()
-export class GlobalsService{
-  private _mobile:boolean;
-  public static readonly MOBILE_MAX_WIDTH:number = 420;
+export class GlobalsService {
+  public static readonly MOBILE_MAX_WIDTH: number = 420;
 
-  constructor() {}
-
-  /// MOBILE
-  updateMobile():void {
-    this._mobile = window.screen.width <= GlobalsService.MOBILE_MAX_WIDTH;
+  constructor() {
   }
+
+  private _mobile: boolean;
 
   get mobile(): boolean {
     return this._mobile;
@@ -25,6 +22,11 @@ export class GlobalsService{
 
   set mobile(value: boolean) {
     this._mobile = value;
+  }
+
+  /// MOBILE
+  updateMobile(): void {
+    this._mobile = window.screen.width <= GlobalsService.MOBILE_MAX_WIDTH;
   }
 
 }

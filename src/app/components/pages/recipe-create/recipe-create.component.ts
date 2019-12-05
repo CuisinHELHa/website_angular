@@ -10,18 +10,17 @@ import {RECIPE_TYPE, RECIPE_TYPE_FILTER} from "../../../enumerations/recipe-type
   styleUrls: ['./recipe-create.component.css']
 })
 export class RecipeCreateComponent implements OnInit {
-
   private filters:any[] = RECIPE_TYPE;
   private _ingredients: IngredientList = [];
   private  subscriptions: Subscription[] = [];
   constructor(public ingredientService:IngredientService) { }
+
 
   ngOnInit() {
     this.loadIngredients();
   }
 
   private loadIngredients():void{
-    console.log("plop");
     const sub: Subscription=this.ingredientService
       .query()
       .subscribe(ingredients => this._ingredients = ingredients);

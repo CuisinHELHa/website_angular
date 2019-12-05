@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { StepService } from './step.service';
+import {StepService} from './step.service';
 
 describe('StepService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

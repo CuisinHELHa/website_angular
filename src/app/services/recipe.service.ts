@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {RecipeDTO, RecipeList} from "../DTOs/recipe-dto";
@@ -7,13 +7,13 @@ import {RecipeDTO, RecipeList} from "../DTOs/recipe-dto";
   providedIn: 'root'
 })
 export class RecipeService {
-
   private static search:string = "";
   private static URL:string = "/api/recipes/";
 
-  constructor(public http:HttpClient) { }
+  constructor(public http: HttpClient) {
+  }
 
-  query() : Observable<RecipeList>{
+  query(): Observable<RecipeList> {
     return this.http.get<RecipeList>(RecipeService.URL);
   }
 
@@ -34,11 +34,11 @@ export class RecipeService {
     return this.http.post<RecipeDTO>(RecipeService.URL, ingredient);
   }
 
-  put(ingredient: RecipeDTO): Observable<any>{
+  put(ingredient: RecipeDTO): Observable<any> {
     return this.http.put(RecipeService.URL, ingredient);
   }
 
-  delete(id: number): Observable<any>{
+  delete(id: number): Observable<any> {
     return this.http.delete(`${RecipeService.URL}/${id}`);
   }
 }
