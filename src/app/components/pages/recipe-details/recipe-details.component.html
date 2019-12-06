@@ -3,6 +3,7 @@
 <h4>{{recipe.recipeType}} pour {{recipe.persons}} personnes ({{recipe.prepTime}} min)</h4>
 {{recipe.summary}}<br>
 <i>postée le {{recipe.postDate}} par {{recipe.pseudo}}</i>
+<br>
 ingrédients :
 <ul>
     <li *ngFor="let ingredient of ingredients">
@@ -16,9 +17,13 @@ préparation :
     </li>
 </ul>
 
-<h5>Formulaire de commentaires</h5>
-
+<app-review-form *ngIf="true; else guestUser;" (reviewPosted)="postReview($event)"></app-review-form>
 <div *ngFor="let review of reviews">
     <h6>{{review.pseudo}}</h6> ({{review.rate}}/5)
     <p>{{review.reviewMessage}}</p>
+    <button *ngIf="type || idUser === review.idUser" (click)="deleteReviewInDB(review)">supprimer le commentaire</button>
 </div>
+
+<ng-template #guestUser>
+    <b>You must log in to post a review</b>
+</ng-template>

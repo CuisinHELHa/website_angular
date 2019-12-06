@@ -12,17 +12,6 @@ import {AuthenticationService} from "@app/services/authentication.service";
 
 export class AppComponent implements OnInit {
   title = 'pCuisinHELHa';
-  private nullRecipe: RecipeDTO = {
-    idRecipe: -1,
-    idUser: 1,
-    nameRecipe: "",
-    postDate: "",
-    summary: "",
-    persons: 0,
-    prepTime: 0,
-    spiceRate: 0,
-    recipeType: ""
-  };
 
   constructor(private globals: GlobalsService,
               private router: Router,

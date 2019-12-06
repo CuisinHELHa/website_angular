@@ -1,0 +1,8 @@
+<form [formGroup]="_form" (ngSubmit)="postReview()">
+    <label for="rate">Rating (X/5): </label>
+    <input id="rate" type="number" min="0" max="5" formControlName="rate">
+    <label for="review">Review : </label>
+    <textarea id="review" formControlName="review">
+    </textarea>
+    <button [disabled]="!_form.valid">Post review</button>
+</form>

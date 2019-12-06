@@ -28,7 +28,7 @@ export class ReviewService {
     return this.http.put(ReviewService.URL, ingredient);
   }
 
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${ReviewService.URL}/${id}`);
+  delete(idUser: number, idRecipe: number): Observable<any> {
+    return this.http.delete(`${ReviewService.URL}${idUser}/${idRecipe}`);
   }
 }

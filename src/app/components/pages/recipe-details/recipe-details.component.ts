@@ -25,6 +25,8 @@ export class RecipeDetailsComponent implements OnInit {
   private _steps: StepList;
   private _reviews: ReviewList;
   private subscriptions: Subscription[] = [];
+  type: boolean = false;
+  idUser: number = 7;
 
   constructor(private ingredientService: IngredientService,
               private stepService: StepService,
@@ -34,15 +36,11 @@ export class RecipeDetailsComponent implements OnInit {
               public router:Router) { }
 
   ngOnInit() {
-
-    console.log(this.route.paramMap);
     const sub = this.route.paramMap.subscribe(params =>{
       this.idParam = params.get("id");
-      console.log(this.idParam);
       this.idRecipe = parseInt(this.idParam);
     });
 
-    console.log(this.idRecipe);
     this.subscriptions.push(sub);
     this.loadRecipe();
     this.loadIngredients();
@@ -124,5 +122,28 @@ export class RecipeDetailsComponent implements OnInit {
         .queryByRecipe(this.idRecipe)
         .subscribe(reviews => this.reviews = reviews);
     this.subscriptions.push(sub);
+  }
+
+  postReview($event: ReviewDTO) {
+        $event.idRecipe = this.recipe.idRecipe;
+        const sub = this.reviewService
+            .post($event)
+            .subscribe(()=>this.loadReviews());
+        this.subscriptions.push(sub);
+  }
+
+  deleteReviewInDB(review: ReviewDTO) {
+    const sub = this.reviewService
+        .delete(review.idUser, review.idRecipe)
+        .subscribe(()=>{
+          this.deleteReview(review);
+        })
+    this.subscriptions.push(sub);
+  }
+
+
+  private deleteReview(review: ReviewDTO) {
+    const index = this.reviews.indexOf(review);
+    this.reviews.splice(index, 1);
   }
 }

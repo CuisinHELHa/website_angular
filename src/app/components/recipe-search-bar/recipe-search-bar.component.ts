@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-recipe-search-bar',
@@ -6,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./recipe-search-bar.component.css']
 })
 export class RecipeSearchBarComponent implements OnInit {
-  constructor() {
+  constructor(private router: Router) {
   }
 
   private _userSearch: String = "";
@@ -23,6 +24,6 @@ export class RecipeSearchBarComponent implements OnInit {
   }
 
   searchRecipe() {
-
+    this.router.navigateByUrl("/recipe-search/"+this.userSearch);
   }
 }
