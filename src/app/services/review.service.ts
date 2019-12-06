@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ReviewDTO, ReviewList} from "../DTOs/review-dto";
+import {RecipeList} from "@app/DTOs/recipe-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,14 @@ export class ReviewService {
 
   queryByRecipe(id: number) : Observable<ReviewList>{
     return this.http.get<ReviewList>(ReviewService.URL + "recipe="+ id);
+  }
+
+  queryUser(id: number): Observable<ReviewList>{
+    return this.http.get<ReviewList>(ReviewService.URL + "user="+id);
+  }
+
+  queryAvgByRecipe(id: number):Observable<number>{
+    return this.http.get<number>(ReviewService.URL+"average/"+id);
   }
 
   post(ingredient: ReviewDTO): Observable<ReviewDTO>{

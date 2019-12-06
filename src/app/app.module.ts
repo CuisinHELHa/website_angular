@@ -17,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {appRoutingModule} from "@app/app.routing";
 import {HttpClientModule} from "@angular/common/http";
 import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { RecipeAvgRateComponent } from './components/recipe-avg-rate/recipe-avg-rate.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
     HomeComponent,
     UserDetailsComponent,
     RecipeCreateComponent,
-    ReviewFormComponent
+    ReviewFormComponent,
+    RecipeAvgRateComponent
   ],
     imports: [
         BrowserModule,
