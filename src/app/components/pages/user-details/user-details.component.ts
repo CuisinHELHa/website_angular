@@ -18,7 +18,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     idUser: 5,
     firstName:"Robin",
     lastName:"Roekens",
-    pseudo: "RobinR",
+    username: "RobinR",
     userType: true,
     mail:"robin.roekens@outlook.com",
     token:"////kfkhjkmdshfm"

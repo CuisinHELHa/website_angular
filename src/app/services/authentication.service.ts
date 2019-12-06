@@ -4,18 +4,20 @@ import {UserDTO} from "@app/DTOs/user-dto";
 import {HttpClient} from "@angular/common/http";
 
 import {environment} from "@environments/environment";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  public static readonly AUTH_API_PATH:string = "/api/users/authenticate";
+  public static readonly USER_KEY:string = "currentUser";
+
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
 
-  private readonly USER_KEY = "currentUser";
-
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem(this.USER_KEY)));
+    this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem(AuthenticationService.USER_KEY)));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -23,8 +25,20 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(login:string, password:string){
-    return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, {login, password})
+  login(username:string, password:string){
+    let authPath = `${environment.apiUrl}${AuthenticationService.AUTH_API_PATH}`;
+    // let authPath = `https://localhost:5001${AuthenticationService.AUTH_API_PATH}`;
+    return this.http.post<any>(authPath, {username, password})
+      .pipe(map(user => {
+        localStorage.setItem(AuthenticationService.USER_KEY, JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        return user;
+      }));
+  }
+
+  logout(){
+    localStorage.removeItem(AuthenticationService.USER_KEY);
+    this.currentUserSubject.next(null);
   }
 }
 

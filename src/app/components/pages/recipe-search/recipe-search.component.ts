@@ -12,9 +12,6 @@ import {ok} from "assert";
   templateUrl: './recipe-search.component.html',
   styleUrls: ['./recipe-search.component.css']
 })
-
-
-
 export class RecipeSearchComponent implements OnInit, OnDestroy {
 
   filterSelected: RecipeType = RecipeType.ALL;

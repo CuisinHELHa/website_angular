@@ -1,4 +1,11 @@
-import {NgModule} from "@angular/core";
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {JwtInterceptor} from "@app/helpers/jwt-interceptor";
+import {ErrorInterceptor} from "@app/helpers/error-interceptor";
+import {ReviewFormComponent} from './components/review-form/review-form.component';
 import {AppComponent} from "@app/app.component";
 import {HeaderComponent} from "@app/components/header/header.component";
 import {LoginFormComponent} from "@app/components/login-form/login-form.component";
@@ -11,12 +18,7 @@ import {RecipeDetailsComponent} from "@app/components/pages/recipe-details";
 import {HomeComponent} from "@app/components/pages/home";
 import {UserDetailsComponent} from "@app/components/pages/user-details";
 import {RecipeCreateComponent} from "@app/components/pages/recipe-create/recipe-create.component";
-import {BrowserModule} from "@angular/platform-browser";
-import {AngularFontAwesomeModule} from "angular-font-awesome";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {appRoutingModule} from "@app/app.routing";
-import {HttpClientModule} from "@angular/common/http";
-import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { RecipeAvgRateComponent } from './components/recipe-avg-rate/recipe-avg-rate.component';
 
 @NgModule({
@@ -36,18 +38,20 @@ import { RecipeAvgRateComponent } from './components/recipe-avg-rate/recipe-avg-
     ReviewFormComponent,
     RecipeAvgRateComponent
   ],
-    imports: [
-        BrowserModule,
-        AngularFontAwesomeModule,
-        FormsModule,
-        appRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AngularFontAwesomeModule,
+    FormsModule,
+    appRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
-
-
 }
