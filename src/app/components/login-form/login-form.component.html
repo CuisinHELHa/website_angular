@@ -1,4 +1,4 @@
-<form (ngSubmit)="authenticate()" [formGroup]="form" class="pb-2 mb-1 mb-sm-0 text-dark font-weight-bold">
+<form (ngSubmit)="onSubmit()" [formGroup]="form" class="pb-2 mb-1 mb-sm-0 text-dark font-weight-bold">
   <div class="row">
     <!--    LEFT SIDE OF THE LOGIN-->
     <div class="col-10 offset-1">
@@ -102,6 +102,12 @@
               </button>
             </div>
           </div>
+
+          <span (click)="testIntegrity()">Integrity?</span>
+          <a href="/user-details" class="ml-2">User details</a>
+          <a href="/recipe-search" class="ml-2">Search</a>
+<!--          <a routerLink="/user-details" class="ml-2">User details</a>-->
+<!--          <a routerLink="/recipe-search" class="ml-2">Search</a>-->
         </div>
 
         <div *ngIf="isSigningUp" class="row">

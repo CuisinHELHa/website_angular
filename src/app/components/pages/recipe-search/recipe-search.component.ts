@@ -6,7 +6,6 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./recipe-search.component.css']
 })
 
-// @Component({ templateUrl: 'recipe-search.component.html' })
 export class RecipeSearchComponent implements OnInit {
 
   constructor() {

@@ -17,7 +17,7 @@ export class RecipeService {
     return this.http.get<RecipeList>(RecipeService.URL);
   }
 
-  queryPseudo(): Observable<RecipeList>{
+  queryPseudo(): Observable<RecipeList> {
     return this.http.get<RecipeList>(RecipeService.URL + "pseudo");
   }
 
