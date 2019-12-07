@@ -1,10 +1,10 @@
-<div class="container-fluid col-lg-12 imgBack">
+<div class="container-fluid col-lg-12 imgBack p-2">
 
 
 <div class="container-fluid col-lg-3">
 
 </div>
-<div class="container-fluid border col-lg-7 col-sm-12 text-center " style="background-color: white">
+<div class="container-fluid border col-lg-7 col-sm-12 text-center" style="background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
   <h3 class="text-center font-weight-bold p-3">Create recipe</h3>
   <form #formElement="ngForm" (ngSubmit)=addRecipe()>
     <div class="form-row">
@@ -40,7 +40,7 @@
       <div class="col-md-3 mb-3">
         <label for="">Spice Rate</label>
         <select class="custom-select" id="" required>
-          <option selected disabled value="">Choose...</option>
+          <option>0</option>
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -68,10 +68,8 @@
       <div class="col-md-4 mb-3">
         <label for="mesureIngredient">Mesure</label>
         <select class="custom-select" id="mesureIngredient" required>
-          <option selected disabled value="">Choose...</option>
-          <option>Gr</option>
-          <option>Ml</option>
-          <option>piece(s)</option>
+          <option *ngFor="let unit of units">{{unit.value}}</option>
+
         </select>
       </div>
 
@@ -87,9 +85,10 @@
         <button class="btn btn-sm btn-dark" style="height:30px" >Add step</button>
       </div>
     </div>
-    <div class="form-row">
-      <button class="btn btn-sm btn-dark" style="height:30px;width: 80px"> choisir un fichier</button>
-    </div>
+      <div class="form-group text-center">
+        <label for="addPicture">Ajouter une image</label>
+        <input type="file" class="form-control-file align-content-center" id="addPicture">
+      </div>
     <button [disabled]="!formElement.valid" class="btn btn-md btn-warning mr-2 col-12 mt-2" type="submit">
       <h6 class="d-inline font-weight-bold">Submit recipe</h6>
     </button>

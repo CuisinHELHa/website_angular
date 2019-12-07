@@ -1,8 +1,8 @@
 
 export enum RecipeType {
     ALL = "All",
-    ENTREE = "Starter",
-    PLAT = "Main course",
+    ENTREE = "Entrée",
+    PLAT = "Plat",
     DESSERT = "Dessert"
 }
 export const RECIPE_TYPE_FILTER: any[]=[{
