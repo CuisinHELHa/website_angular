@@ -7,7 +7,9 @@ import {Injectable} from '@angular/core';
 /**
  * Represents global variables such as if the user's on a smartphone.
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class GlobalsService {
   public static readonly MOBILE_MAX_WIDTH: number = 420;
 

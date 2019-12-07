@@ -4,8 +4,9 @@ export interface UserDTO {
   idUser?: number;
   firstName: string;
   lastName: string;
-  username: string;
+  pseudo: string;
   mail: string;
   userType: boolean;
-  token: string;
+  token?: string;
+  password?:string;
 }

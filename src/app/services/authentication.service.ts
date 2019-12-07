@@ -12,6 +12,7 @@ import {AccountModalComponent} from "@app/components/account-modal/account-modal
 })
 export class AuthenticationService {
   public static readonly AUTH_API_PATH:string = "/api/users/authenticate";
+  public static readonly SIGNUP_API_PATH:string = "/api/users";
   public static readonly USER_KEY:string = "currentUser";
 
   private currentUserSubject: BehaviorSubject<UserDTO>;
@@ -27,6 +28,7 @@ export class AuthenticationService {
   }
 
   login(username:string, password:string){
+    console.log(username + " " + password);
     let authPath = `${environment.apiUrl}${AuthenticationService.AUTH_API_PATH}`;
     return this.http.post<any>(authPath, {username, password})
       .pipe(map(user => {
@@ -34,6 +36,14 @@ export class AuthenticationService {
         this.currentUserSubject.next(user);
         AccountModalComponent.hideModal();
         return user;
+      }));
+  }
+
+  signUp(user:UserDTO){
+    let signUpPath = `${environment.apiUrl}${AuthenticationService.SIGNUP_API_PATH}`;
+    return this.http.post<any>(signUpPath, user)
+      .pipe(map(newUser => {
+        return newUser;
       }));
   }
 

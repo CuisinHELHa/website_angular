@@ -10,7 +10,7 @@ import {RECIPE_TYPE, RECIPE_TYPE_FILTER} from "../../../enumerations/recipe-type
   styleUrls: ['./recipe-create.component.css']
 })
 export class RecipeCreateComponent implements OnInit {
-  private filters:any[] = RECIPE_TYPE;
+  private _filters:any[] = RECIPE_TYPE;
   private _ingredients: IngredientList = [];
   private  subscriptions: Subscription[] = [];
   constructor(public ingredientService:IngredientService) { }
@@ -30,7 +30,6 @@ export class RecipeCreateComponent implements OnInit {
   }
 
   addRecipe() {
-
   }
 
   get ingredients(): IngredientList {
@@ -41,4 +40,7 @@ export class RecipeCreateComponent implements OnInit {
     this._ingredients = value;
   }
 
+  get filters(): any[] {
+    return this._filters;
+  }
 }

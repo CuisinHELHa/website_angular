@@ -12,13 +12,11 @@ import {Subscription} from "rxjs";
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
-
-
-  private user: UserDTO ={
+  public user: UserDTO ={
     idUser: 5,
     firstName:"Robin",
     lastName:"Roekens",
-    username: "RobinR",
+    pseudo: "RobinR",
     userType: true,
     mail:"robin.roekens@outlook.com",
     token:"////kfkhjkmdshfm"
@@ -28,8 +26,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   private _reviews: ReviewList;
 
   private subscriptions: Subscription[]=[];
-
-  private passwordPlaceHolder = "********";
 
   constructor(private recipeService: RecipeService,
               private reviewService: ReviewService) {

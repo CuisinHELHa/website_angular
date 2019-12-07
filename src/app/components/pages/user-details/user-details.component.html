@@ -1,7 +1,7 @@
 <div>
-    name : <h3>{{user.lastName}} "{{user.username}}" {{user.firstName}}</h3>
+    name : <h3>{{user.lastName}} "{{user.pseudo}}" {{user.firstName}}</h3>
     mail : <h5>{{user.mail}}</h5>
-    password : <h5>{{passwordPlaceHolder}}</h5>
+    password : <h5>********</h5>
     <h2>Recipes :</h2>
     <div *ngFor="let recipe of recipes" [routerLink]="'/recipe-details/'+recipe.idRecipe">
         <h3>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</h3>

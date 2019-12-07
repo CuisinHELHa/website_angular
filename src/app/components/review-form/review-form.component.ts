@@ -19,9 +19,8 @@ export class ReviewFormComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder,
-              private authService: AuthenticationService) {
-
-}
+              private _authService: AuthenticationService) {
+  }
 
   ngOnInit() {
 
@@ -36,5 +35,21 @@ export class ReviewFormComponent implements OnInit {
     })
 
     this._form.reset();
+  }
+
+  get form(): FormGroup {
+    return this._form;
+  }
+
+  set form(value: FormGroup) {
+    this._form = value;
+  }
+
+  get authService(): AuthenticationService {
+    return this._authService;
+  }
+
+  set authService(value: AuthenticationService) {
+    this._authService = value;
   }
 }

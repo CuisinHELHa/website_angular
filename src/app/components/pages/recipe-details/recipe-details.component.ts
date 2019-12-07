@@ -35,7 +35,7 @@ export class RecipeDetailsComponent implements OnInit {
               private reviewService: ReviewService,
               public route:ActivatedRoute,
               public router:Router,
-              private authService:AuthenticationService) {
+              private _authService:AuthenticationService) {
 
   }
 
@@ -104,7 +104,6 @@ export class RecipeDetailsComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
-
   private loadRecipe() {
     const sub: Subscription = this.recipeService
         .queryId(this.idRecipe)
@@ -145,9 +144,12 @@ export class RecipeDetailsComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
-
   private deleteReview(review: ReviewDTO) {
     const index = this.reviews.indexOf(review);
     this.reviews.splice(index, 1);
+  }
+
+  get authService(): AuthenticationService {
+    return this._authService;
   }
 }

@@ -13,7 +13,7 @@ export class AccountModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    AccountModalComponent.showModal();
+    // AccountModalComponent.showModal();
   }
 
   static showModal(): void {

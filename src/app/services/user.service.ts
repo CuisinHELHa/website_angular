@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserDTO, UserList} from "../DTOs/user-dto";
+import {environment} from "@environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class UserService {
     return this.http.get<UserList>(UserService.URL);
   }
 
-  post(ingredient: UserDTO): Observable<UserDTO> {
-    return this.http.post<UserDTO>(UserService.URL, ingredient);
+  post(user: UserDTO): Observable<UserDTO> {
+    return this.http.post<UserDTO>(environment.apiUrl + UserService.URL, user);
   }
 
-  put(ingredient: UserDTO): Observable<any> {
-    return this.http.put(UserService.URL, ingredient);
+  put(user: UserDTO): Observable<any> {
+    return this.http.put(UserService.URL, user);
   }
 
   delete(id: number): Observable<any> {

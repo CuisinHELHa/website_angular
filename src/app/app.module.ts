@@ -20,6 +20,7 @@ import {UserDetailsComponent} from "@app/components/pages/user-details";
 import {RecipeCreateComponent} from "@app/components/pages/recipe-create/recipe-create.component";
 import {appRoutingModule} from "@app/app.routing";
 import { RecipeAvgRateComponent } from './components/recipe-avg-rate/recipe-avg-rate.component';
+import { CreateUserPipe } from './pipes/create-user.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { RecipeAvgRateComponent } from './components/recipe-avg-rate/recipe-avg-
     UserDetailsComponent,
     RecipeCreateComponent,
     ReviewFormComponent,
-    RecipeAvgRateComponent
+    RecipeAvgRateComponent,
+    CreateUserPipe
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,9 @@ import {first} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "@environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {UserDTO} from "@app/DTOs/user-dto";
+import {CreateUserPipe} from "@app/pipes/create-user.pipe";
+import {UserService} from "@app/services/user.service";
 
 @Component({
   selector: 'app-login-form',
@@ -21,7 +24,7 @@ export class LoginFormComponent implements OnInit {
   private _submitted: boolean;
   private _isLoading: boolean;
   private _returnURL: string;
-  private _incorrectCredentials:boolean;
+  private userCreated: boolean;
   private _error: string;
 
   /**
@@ -39,7 +42,8 @@ export class LoginFormComponent implements OnInit {
               private authService: AuthenticationService,
               private router: Router,
               private route: ActivatedRoute,
-              private http:HttpClient) {
+              private http: HttpClient,
+              private userService: UserService) {
   }
 
   /**
@@ -64,55 +68,60 @@ export class LoginFormComponent implements OnInit {
     }
 
     this._isLoading = true;
+
+    // ON LOGIN
     if (!this._isSigningUp) {
       this.authService.login(this.fgCtrls.login.value, this.fgCtrls.password.value)
         .pipe(first())
         .subscribe(
           data => {
             this.router.navigate([this._returnURL]);
+            this.isLoading = false;
+          },
+          error => {
+            this._error = error;
+            this.isLoading = false;
+          }
+        );
+
+      // ON SIGNUP
+    } else {
+      // Creates the user using the form
+      var userCreated = this.createrUser();
+
+      // Post the user to the API
+      this.authService.signUp(userCreated)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.isLoading = false;
+            this.userCreated = true;
           },
           error => {
             this._error = error;
             this.isLoading = false;
           },
           () => {
-            this.isLoading = false;
+            if (userCreated) {
+              console.log("done");
+              this.authService.login(userCreated.pseudo, userCreated.password).subscribe();
+            }
           }
         );
-    } else {
-
     }
   }
 
   /**
-   * Returns the form controls.
+   * Creates an UserDTO using the form fields.
    */
-  get fgCtrls() {
-    return this.form.controls;
-  }
-
-  loginValid():boolean {
-    return this.fgCtrls.login.valid;
-  }
-
-  passwordValid():boolean {
-    return this.fgCtrls.password.valid;
-  }
-
-  passwordConfirmValid():boolean {
-    return this.fgCtrls.passwordConfirm.valid;
-  }
-
-  firstNameValid():boolean {
-    return this.fgCtrls.firstName.valid;
-  }
-
-  lastNameValid():boolean {
-    return this.fgCtrls.lastName.valid;
-  }
-
-  emailValid():boolean {
-    return this.fgCtrls.email.valid;
+  private createrUser(): UserDTO {
+    return new CreateUserPipe().transform(
+      this.fgCtrls.login.value,
+      this.fgCtrls.password.value,
+      this.fgCtrls.firstName.value,
+      this.fgCtrls.lastName.value,
+      this.fgCtrls.email.value,
+    );
   }
 
   /********************************************************
@@ -128,9 +137,8 @@ export class LoginFormComponent implements OnInit {
     });
 
     // Auto filling if in dev.
-    if(!environment.production){
-      // this.fgCtrls.login.setValue("ElsaD");
-      this.fgCtrls.login.setValue("Elaqzd");
+    if (!environment.production) {
+      this.fgCtrls.login.setValue("ElsaD");
       this.fgCtrls.password.setValue("adminElsa");
     }
   }
@@ -155,14 +163,16 @@ export class LoginFormComponent implements OnInit {
     );
 
     // Random filling if in dev.
-    if(!environment.production){
-      // let rand = Math.floor(Math.random()*1000000);
-      // this.fgCtrls.login.setValue("test" + rand);
-      // this.fgCtrls.password.setValue("password");
-      // this.fgCtrls.passwordConfirm.setValue("password");
-      // this.fgCtrls.firstName.setValue("first");
-      // this.fgCtrls.lastName.setValue("last");
-      // this.fgCtrls.email.setValue("test" + rand + "@gmail.com");
+    if (!environment.production) {
+      let rand = Math.floor(Math.random() * 1000000);
+      this.fgCtrls.login.setValue("test" + rand);
+      // this.fgCtrls.login.setValue("ElsaD");
+      this.fgCtrls.password.setValue("password");
+      this.fgCtrls.passwordConfirm.setValue("password");
+      this.fgCtrls.firstName.setValue("first");
+      this.fgCtrls.lastName.setValue("last");
+      this.fgCtrls.email.setValue("test" + rand + "@gmail.com");
+      // this.fgCtrls.email.setValue("elsadraux@gmail.com");
     }
   }
 
@@ -204,6 +214,37 @@ export class LoginFormComponent implements OnInit {
     return this._form.valid;
   }
 
+  /**
+   * Returns the form controls.
+   */
+  get fgCtrls() {
+    return this.form.controls;
+  }
+
+  loginValid(): boolean {
+    return this.fgCtrls.login.valid;
+  }
+
+  passwordValid(): boolean {
+    return this.fgCtrls.password.valid;
+  }
+
+  passwordConfirmValid(): boolean {
+    return this.fgCtrls.passwordConfirm.valid;
+  }
+
+  firstNameValid(): boolean {
+    return this.fgCtrls.firstName.valid;
+  }
+
+  lastNameValid(): boolean {
+    return this.fgCtrls.lastName.valid;
+  }
+
+  emailValid(): boolean {
+    return this.fgCtrls.email.valid;
+  }
+
   get form(): FormGroup {
     return this._form;
   }
@@ -211,7 +252,6 @@ export class LoginFormComponent implements OnInit {
   set form(value: FormGroup) {
     this._form = value;
   }
-
 
   get isSigningUp(): boolean {
     return this._isSigningUp;
@@ -237,4 +277,11 @@ export class LoginFormComponent implements OnInit {
     this._isLoading = value;
   }
 
+  get error(): string {
+    return this._error;
+  }
+
+  set error(value: string) {
+    this._error = value;
+  }
 }
