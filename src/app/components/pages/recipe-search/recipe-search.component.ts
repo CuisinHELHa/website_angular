@@ -33,7 +33,6 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
       {
         this.searchText="";
       }
-      console.log(this.searchText);
       this.loadRecipe();
     });
 

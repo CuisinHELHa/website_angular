@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
+import {environment} from "@environments/environment";
 
 @Component({
   selector: 'app-recipe-search-bar',

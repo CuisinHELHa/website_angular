@@ -7,7 +7,7 @@ import {UserDTO, UserList} from "../DTOs/user-dto";
   providedIn: 'root'
 })
 export class UserService {
-  private static URL: string = "/api/users";
+  public static URL: string = "/api/users";
 
   constructor(public http: HttpClient) {
   }

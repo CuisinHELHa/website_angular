@@ -4,24 +4,24 @@
 {{recipe.summary}}<br>
 <i>postée le {{recipe.postDate}} par {{recipe.pseudo}}</i>
 <br>
-ingrédients :
+Ingrédients :
 <ul>
     <li *ngFor="let ingredient of ingredients">
         {{ingredient.quantity}}{{ingredient.unit}} {{ingredient.nameIngredient}}
     </li>
 </ul>
-préparation :
+Préparation :
 <ul>
     <li *ngFor="let step of steps">
         {{step.stepNb}} : {{step.step}}
     </li>
 </ul>
 
-<app-review-form *ngIf="true; else guestUser;" (reviewPosted)="postReview($event)"></app-review-form>
+<app-review-form *ngIf="authService.currentUserValue; else guestUser;" (reviewPosted)="postReview($event)"></app-review-form>
 <div *ngFor="let review of reviews">
     <h6>{{review.pseudo}}</h6> ({{review.rate}}/5)
     <p>{{review.reviewMessage}}</p>
-    <button *ngIf="type || idUser === review.idUser" (click)="deleteReviewInDB(review)">supprimer le commentaire</button>
+    <button *ngIf="type || idUser === review.idUser" (click)="deleteReviewInDB(review)">Supprimer le commentaire</button>
 </div>
 
 <ng-template #guestUser>

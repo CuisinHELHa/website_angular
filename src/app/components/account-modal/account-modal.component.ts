@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 
 declare var $: any;
 
@@ -13,14 +13,14 @@ export class AccountModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showModal();
+    AccountModalComponent.showModal();
   }
 
-  showModal(): void {
+  static showModal(): void {
     $("#accountModal").modal('show');
   }
 
-  hideModal(): void {
+  static hideModal(): void {
     $("#accountModal").modal('hide');
   }
 }

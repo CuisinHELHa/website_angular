@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReviewDTO} from "@app/DTOs/review-dto";
+import {AuthenticationService} from "@app/services/authentication.service";
 
 @Component({
   selector: 'app-review-form',
@@ -17,7 +18,10 @@ export class ReviewFormComponent implements OnInit {
     review: this.fb.control("")
   });
 
-  constructor(public fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private authService: AuthenticationService) {
+
+}
 
   ngOnInit() {
 

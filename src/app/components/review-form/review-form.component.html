@@ -1,4 +1,4 @@
-<form [formGroup]="_form" (ngSubmit)="postReview()">
+<form *ngIf="authService.currentUserValue" [formGroup]="_form" (ngSubmit)="postReview()">
     <label for="rate">Rating (X/5): </label>
     <input id="rate" type="number" min="0" max="5" formControlName="rate">
     <label for="review">Review : </label>
