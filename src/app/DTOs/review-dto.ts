@@ -6,4 +6,5 @@ export interface ReviewDTO {
   rate: number;
   reviewMessage: string;
   pseudo?: string;
+  nameRecipe?: string;
 }

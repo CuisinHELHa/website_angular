@@ -1,6 +1,6 @@
 <div>
   <div  [routerLink]="'/recipe-details/'+recipe.idRecipe">
-  <h2>{{recipe.nameRecipe}}</h2>
+  <h2>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</h2>
   <h3 *ngFor="let s of spices">*</h3>
   <h4>{{recipe.recipeType}} pour {{recipe.persons}} personnes ({{recipe.prepTime}} min)</h4>
   {{recipe.summary}}<br>

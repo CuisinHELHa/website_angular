@@ -30,6 +30,10 @@ export class RecipeService {
     return this.http.get<RecipeList>(RecipeService.URL + "id=" +id);
   }
 
+  queryUser(id: number): Observable<RecipeList>{
+    return this.http.get<RecipeList>(RecipeService.URL + "user="+id);
+  }
+
   post(ingredient: RecipeDTO): Observable<RecipeDTO>{
     return this.http.post<RecipeDTO>(RecipeService.URL, ingredient);
   }
