@@ -1,8 +1,18 @@
+<form [formGroup]="_form" (ngSubmit)="postReview()">
+
 <form *ngIf="authService.currentUserValue" [formGroup]="form" (ngSubmit)="postReview()">
-    <label for="rate">Rating (X/5): </label>
-    <input id="rate" type="number" min="0" max="5" formControlName="rate">
-    <label for="review">Review : </label>
-    <textarea id="review" formControlName="review">
+  <div class="row">
+
+    <label class="col-4 text-left" for="review">Review : </label>
+    <label class="col-3" for="rate">Rating (X/5): </label>
+  </div>
+  <div class="row">
+
+
+    <textarea class="col-4 ml-2" id="review" formControlName="review">
     </textarea>
-    <button [disabled]="!form.valid">Post review</button>
+    <input class="col-1 ml-4" id="rate" type="number" min="0" max="5" formControlName="rate">
+    <button class="text-lg-center ml-5 btn-dark" [disabled]="!_form.valid">Post review</button>
+  </div>
+
 </form>

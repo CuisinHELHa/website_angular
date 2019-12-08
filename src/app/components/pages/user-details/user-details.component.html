@@ -1,26 +1,43 @@
-<div>
-    name : <h3>{{user.lastName}} "{{user.pseudo}}" {{user.firstName}}</h3>
-    mail : <h5>{{user.mail}}</h5><button (click)="changingMail = !changingMail">Change my e-mail</button>
-    <form *ngIf="changingMail" [formGroup]="mailForm" (ngSubmit)="updateMail()">
-        <label for="mail">New mail : </label>
-        <input id="mail" type="text" formControlName="newMail">
-        <button>Save new email</button>
-    </form>
-    password : <h5>********</h5><button (click)="changingPassword = !changingPassword; passwordSuccess=false; passwordError=false;">Change my password</button>
-    <p *ngIf="passwordSuccess">Password successfully set</p>
-    <form *ngIf="changingPassword" [formGroup]="pwdForm" (ngSubmit)="updatePassword()">
-        <label for="old">Old password : </label>
-        <input id="old" type="password" formControlName="oldPassword">
-        <label for="new">New password : </label>
-        <input id="new" type="password" formControlName="newPassword">
-        <p *ngIf="passwordError">An error occured, maybe your old password is incorrect...</p>
-        <button>Save new password</button>
-    </form>
-    <h2>Recipes :</h2>
-    <div *ngFor="let recipe of recipes" [routerLink]="'/recipe-details/'+recipe.idRecipe">
-        <h3>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</h3>
+
+<div class="container-fluid col-lg-12 userBG p-2">
+  <div class="container-fluid border col-lg-7 col-sm-12 pt-2" style="min-height: 550px;background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
+    <h2><b>User details</b></h2>
+    <div class="row">
+      <b class="col-4">Name : </b>
+      <div>{{user.lastName}} "{{user.pseudo}}" {{user.firstName}}</div>
     </div>
-    <div *ngFor="let review of reviews" [routerLink]="'/recipe-details/'+review.idRecipe">
-        {{review.nameRecipe}}({{review.rate}}/5) : <p>{{review.reviewMessage}}</p>
+    <div class="row">
+      <b class="col-4">Mail :</b>
+      <div>{{user.mail}}</div>
+        <button (click)="changingMail = !changingMail">Change my e-mail</button>
+        <form *ngIf="changingMail" [formGroup]="mailForm" (ngSubmit)="updateMail()">
+            <label for="mail">New mail : </label>
+            <input id="mail" type="text" formControlName="newMail">
+            <button>Save new email</button>
+        </form>
     </div>
+    <div class="row">
+      <b class="col-4">Password :</b>
+      <div>**********</div>
+        <button (click)="changingPassword = !changingPassword; passwordSuccess=false; passwordError=false;">Change my password</button>
+        <p *ngIf="passwordSuccess">Password successfully set</p>
+        <form *ngIf="changingPassword" [formGroup]="pwdForm" (ngSubmit)="updatePassword()">
+            <label for="old">Old password : </label>
+            <input id="old" type="password" formControlName="oldPassword">
+            <label for="new">New password : </label>
+            <input id="new" type="password" formControlName="newPassword">
+            <p *ngIf="passwordError">An error occured, maybe your old password is incorrect...</p>
+            <button>Save new password</button>
+        </form>
+    </div>
+    <h2><b>User recipes</b></h2>
+      <a *ngFor="let recipe of recipes" [routerLink]="'/recipe-details/'+recipe.idRecipe">
+          <div>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</div>
+      </a>
+    <h2><b>User comments</b></h2>
+      <a *ngFor="let review of reviews" [routerLink]="'/recipe-details/'+review.idRecipe">
+        <b>{{review.nameRecipe}} ({{review.rate}}/5)</b>
+        <p>{{review.reviewMessage}}</p>
+      </a>
+  </div>
 </div>

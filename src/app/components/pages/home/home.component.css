@@ -1,0 +1,5 @@
+.imgHome{
+  background-image: url("../../../../assets/img/accueil.jpg");
+  background-size: cover;
+  min-height: 550px;
+}
