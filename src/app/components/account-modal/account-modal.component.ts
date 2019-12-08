@@ -1,4 +1,5 @@
 import {Component, Injectable, OnInit} from '@angular/core';
+import {AuthenticationService} from "@app/services/authentication.service";
 
 declare var $: any;
 
@@ -9,7 +10,7 @@ declare var $: any;
 })
 export class AccountModalComponent implements OnInit {
 
-  constructor() {
+  constructor(private _authService:AuthenticationService) {
   }
 
   ngOnInit() {
@@ -22,5 +23,9 @@ export class AccountModalComponent implements OnInit {
 
   static hideModal(): void {
     $("#accountModal").modal('hide');
+  }
+
+  get authService(): AuthenticationService {
+    return this._authService;
   }
 }

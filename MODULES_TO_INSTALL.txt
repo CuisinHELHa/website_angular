@@ -1,3 +1,4 @@
 npm install bootstrap
 npm install --save font-awesome angular-font-awesome
 npm install jquery
+npm install js-sha256

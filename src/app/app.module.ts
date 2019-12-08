@@ -21,6 +21,7 @@ import {RecipeCreateComponent} from "@app/components/pages/recipe-create/recipe-
 import {appRoutingModule} from "@app/app.routing";
 import { RecipeAvgRateComponent } from './components/recipe-avg-rate/recipe-avg-rate.component';
 import { CreateUserPipe } from './pipes/create-user.pipe';
+import { AuthenticatedInterfaceComponent } from './components/authenticated-interface/authenticated-interface.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CreateUserPipe } from './pipes/create-user.pipe';
     RecipeCreateComponent,
     ReviewFormComponent,
     RecipeAvgRateComponent,
-    CreateUserPipe
+    CreateUserPipe,
+    AuthenticatedInterfaceComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { CreateUserPipe } from './pipes/create-user.pipe';
     FormsModule,
     appRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

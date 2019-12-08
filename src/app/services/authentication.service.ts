@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "@environments/environment";
 import {map} from "rxjs/operators";
 import {AccountModalComponent} from "@app/components/account-modal/account-modal.component";
+import {sha256} from "js-sha256";
 
 @Injectable({
   providedIn: 'root'
@@ -28,18 +29,20 @@ export class AuthenticationService {
   }
 
   login(username:string, password:string){
-    console.log(username + " " + password);
+    password = sha256(password);
+
     let authPath = `${environment.apiUrl}${AuthenticationService.AUTH_API_PATH}`;
     return this.http.post<any>(authPath, {username, password})
       .pipe(map(user => {
         localStorage.setItem(AuthenticationService.USER_KEY, JSON.stringify(user));
         this.currentUserSubject.next(user);
-        AccountModalComponent.hideModal();
         return user;
       }));
   }
 
   signUp(user:UserDTO){
+    user.password = sha256(user.password);
+
     let signUpPath = `${environment.apiUrl}${AuthenticationService.SIGNUP_API_PATH}`;
     return this.http.post<any>(signUpPath, user)
       .pipe(map(newUser => {

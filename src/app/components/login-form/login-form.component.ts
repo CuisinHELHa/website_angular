@@ -8,6 +8,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserDTO} from "@app/DTOs/user-dto";
 import {CreateUserPipe} from "@app/pipes/create-user.pipe";
 import {UserService} from "@app/services/user.service";
+import {AccountModalComponent} from "@app/components/account-modal/account-modal.component";
 
 @Component({
   selector: 'app-login-form',
@@ -103,8 +104,8 @@ export class LoginFormComponent implements OnInit {
           },
           () => {
             if (userCreated) {
-              console.log("done");
               this.authService.login(userCreated.pseudo, userCreated.password).subscribe();
+              AccountModalComponent.hideModal();
             }
           }
         );
