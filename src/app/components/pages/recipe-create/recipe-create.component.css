@@ -1,5 +1,5 @@
 .imgBack{
-  background-image: url("../../../../assets/img/createRecipeFull.jpg");
+  background: url("../../../../assets/img/createRecipeFull.jpg") center;
   background-size: cover;
 }
 

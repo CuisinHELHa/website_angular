@@ -69,12 +69,13 @@
 
     </form>
 
-    <ul>
-      <li *ngFor="let ingredient of ingredientRecipe; let i = index">
+
+      <p class="offset-3 text-left" *ngFor="let ingredient of ingredientRecipe; let i = index">
+        <button class="btn btn-dark btn-sm" (click)="removeIngredient(i)"><i class="fa fa-trash"></i></button>
         {{ingredient.quantity}}{{ingredient.unit}} {{ingredient.nameIngredient}}
-        <button (click)="removeIngredient(i)">X</button>
-      </li>
-    </ul>
+
+      </p>
+
 
     <form class="form-row" [formGroup]="_stepForm" (ngSubmit)="addStep()">
       <div class="col-md-12 mb-3">
@@ -86,12 +87,13 @@
       </div>
     </form>
 
-    <ul>
-      <li *ngFor="let step of stepsRecipe; let i = index">
-        {{step.stepNb}} : {{step.step}}
-        <button (click)="removeStep(i)">X</button>
-      </li>
-    </ul>
+
+      <p class="offset-3 text-left" *ngFor="let step of stepsRecipe; let i = index">
+        <button class="btn btn-dark btn-sm" (click)="removeStep(i)"><i class="fa fa-trash"></i></button>
+        étape {{step.stepNb}} : {{step.step}}
+
+      </p>
+
 
 <!--      <div class="form-group text-center">-->
 <!--        <label for="addPicture">Ajouter une image</label>-->
