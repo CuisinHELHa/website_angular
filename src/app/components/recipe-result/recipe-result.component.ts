@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RecipeDTO} from "../../DTOs/recipe-dto";
 import {Subscription} from "rxjs";
 import {RecipeService} from "@app/services/recipe.service";
+import {AuthenticationService} from "@app/services/authentication.service";
 
 @Component({
   selector: 'app-recipe-result',
@@ -15,7 +16,7 @@ export class RecipeResultComponent implements OnInit {
   id: number = 1;
   type: boolean = true;
 
-  constructor() {
+  constructor(private _authService: AuthenticationService) {
   }
 
   private _recipe: RecipeDTO;

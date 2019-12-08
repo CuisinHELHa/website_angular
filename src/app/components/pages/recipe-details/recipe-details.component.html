@@ -21,7 +21,7 @@ Préparation :
 <div *ngFor="let review of reviews">
     <h6>{{review.pseudo}}</h6> ({{review.rate}}/5)
     <p>{{review.reviewMessage}}</p>
-    <button *ngIf="type || idUser === review.idUser" (click)="deleteReviewInDB(review)">Supprimer le commentaire</button>
+    <button *ngIf="authService.currentUserValue.userType || authService.currentUserValue.idUser === review.idUser" (click)="deleteReviewInDB(review)">Delete review</button>
 </div>
 
 <ng-template #guestUser>

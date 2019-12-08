@@ -1,7 +1,21 @@
 <div>
     name : <h3>{{user.lastName}} "{{user.pseudo}}" {{user.firstName}}</h3>
-    mail : <h5>{{user.mail}}</h5>
-    password : <h5>********</h5>
+    mail : <h5>{{user.mail}}</h5><button (click)="changingMail = !changingMail">Change my e-mail</button>
+    <form *ngIf="changingMail" [formGroup]="mailForm" (ngSubmit)="updateMail()">
+        <label for="mail">New mail : </label>
+        <input id="mail" type="text" formControlName="newMail">
+        <button>Save new email</button>
+    </form>
+    password : <h5>********</h5><button (click)="changingPassword = !changingPassword; passwordSuccess=false; passwordError=false;">Change my password</button>
+    <p *ngIf="passwordSuccess">Password successfully set</p>
+    <form *ngIf="changingPassword" [formGroup]="pwdForm" (ngSubmit)="updatePassword()">
+        <label for="old">Old password : </label>
+        <input id="old" type="password" formControlName="oldPassword">
+        <label for="new">New password : </label>
+        <input id="new" type="password" formControlName="newPassword">
+        <p *ngIf="passwordError">An error occured, maybe your old password is incorrect...</p>
+        <button>Save new password</button>
+    </form>
     <h2>Recipes :</h2>
     <div *ngFor="let recipe of recipes" [routerLink]="'/recipe-details/'+recipe.idRecipe">
         <h3>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</h3>
