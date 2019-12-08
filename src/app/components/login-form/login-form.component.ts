@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, Form, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "@app/services/authentication.service";
-import {first, map} from "rxjs/operators";
+import {first} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "@environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {UserDTO, UserList} from "@app/DTOs/user-dto";
+import {UserDTO} from "@app/DTOs/user-dto";
+import {CreateUserPipe} from "@app/pipes/create-user.pipe";
+import {UserService} from "@app/services/user.service";
+import {AccountModalComponent} from "@app/components/account-modal/account-modal.component";
 
 @Component({
   selector: 'app-login-form',
@@ -20,9 +23,10 @@ export class LoginFormComponent implements OnInit {
   private _form: FormGroup;
   private _isSigningUp: boolean;
   private _submitted: boolean;
-  private _loading: boolean;
+  private _isLoading: boolean;
   private _returnURL: string;
-  private _error: string = "";
+  private userCreated: boolean;
+  private _error: string;
 
   /**
    * Required, minLength(3), maxLength(50), only letters (caps or not) and numbers pattern.
@@ -39,20 +43,9 @@ export class LoginFormComponent implements OnInit {
               private authService: AuthenticationService,
               private router: Router,
               private route: ActivatedRoute,
-              private http:HttpClient) {
+              private http: HttpClient,
+              private userService: UserService) {
   }
-
-  testIntegrity() {
-    var test = `${environment.apiUrl}/api/users/integrity`;
-    // var test = `https://localhost:5001/api/users/integrity`;
-    console.log(test);
-    console.log(this.http.get<UserDTO>(test));
-    return this.http.get<UserDTO>(test).pipe(map(user =>{
-      console.log(user);
-      return user;
-    }));
-  }
-
 
   /**
    * Use the login form at first and sets the return URL.
@@ -75,37 +68,68 @@ export class LoginFormComponent implements OnInit {
       return;
     }
 
-    this._loading = true;
+    this._isLoading = true;
+
+    // ON LOGIN
     if (!this._isSigningUp) {
       this.authService.login(this.fgCtrls.login.value, this.fgCtrls.password.value)
         .pipe(first())
         .subscribe(
           data => {
             this.router.navigate([this._returnURL]);
+            this.isLoading = false;
           },
           error => {
             this._error = error;
-            this.loading = false;
+            this.isLoading = false;
           }
         );
-    } else {
-      console.log("NOT IMPLEMENTED YET");
-    }
 
+      // ON SIGNUP
+    } else {
+      // Creates the user using the form
+      var userCreated = this.createrUser();
+
+      // Post the user to the API
+      this.authService.signUp(userCreated)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.isLoading = false;
+            this.userCreated = true;
+          },
+          error => {
+            this._error = error;
+            this.isLoading = false;
+          },
+          () => {
+            if (userCreated) {
+              this.authService.login(userCreated.pseudo, userCreated.password).subscribe();
+              AccountModalComponent.hideModal();
+            }
+          }
+        );
+    }
   }
 
   /**
-   * Returns the form controls.
+   * Creates an UserDTO using the form fields.
    */
-  get fgCtrls() {
-    return this.form.controls;
+  private createrUser(): UserDTO {
+    return new CreateUserPipe().transform(
+      this.fgCtrls.login.value,
+      this.fgCtrls.password.value,
+      this.fgCtrls.firstName.value,
+      this.fgCtrls.lastName.value,
+      this.fgCtrls.email.value,
+    );
   }
 
   /********************************************************
    ********************* FORM GROUP ************************
    *********************************************************/
   /**
-   * Buils "form" as the login form.
+   * Buils "form" as the login form and set as not submitted.
    */
   buildLoginFG(): void {
     this._form = this.fb.group({
@@ -114,7 +138,7 @@ export class LoginFormComponent implements OnInit {
     });
 
     // Auto filling if in dev.
-    if(!environment.production){
+    if (!environment.production) {
       this.fgCtrls.login.setValue("ElsaD");
       this.fgCtrls.password.setValue("adminElsa");
     }
@@ -129,7 +153,8 @@ export class LoginFormComponent implements OnInit {
         login: this._loginCtrl,
         email: this.fb.control('', [Validators.required, Validators.email]),
         password: this._passwordCtrl,
-        passwordConfirm: this.fb.control('').setValidators(this._passwordCtrl.validator),
+        passwordConfirm: this.fb.control('', [Validators.required, Validators.minLength(3),
+          Validators.maxLength(50), Validators.pattern(this.PASSWORD_PATTERN)]),
         firstName: this.fb.control('', [Validators.required, Validators.maxLength(50),
           Validators.pattern(this.NAME_PATTERN)]),
         lastName: this.fb.control('', [Validators.required, Validators.maxLength(50),
@@ -139,15 +164,16 @@ export class LoginFormComponent implements OnInit {
     );
 
     // Random filling if in dev.
-    if(!environment.production){
-      let rand = Math.floor(Math.random()*1000000);
+    if (!environment.production) {
+      let rand = Math.floor(Math.random() * 1000000);
       this.fgCtrls.login.setValue("test" + rand);
+      // this.fgCtrls.login.setValue("ElsaD");
       this.fgCtrls.password.setValue("password");
       this.fgCtrls.passwordConfirm.setValue("password");
       this.fgCtrls.firstName.setValue("first");
       this.fgCtrls.lastName.setValue("last");
       this.fgCtrls.email.setValue("test" + rand + "@gmail.com");
-      this.onSubmit();
+      // this.fgCtrls.email.setValue("elsadraux@gmail.com");
     }
   }
 
@@ -162,18 +188,20 @@ export class LoginFormComponent implements OnInit {
   }
 
   /**
-   * Sets _isSigningUp as true and builds the sign up FormGroup
+   * Sets _isSigningUp as true, _submitted as false and builds the sign up FormGroup
    */
   useSignUpForm() {
     this._isSigningUp = true;
+    this._submitted = false;
     this.buildSignupFG();
   }
 
   /**
-   * Sets _isSigningUp as false and builds the login FormGroup
+   * Sets _isSigningUp as false, _submitted as false and builds the login FormGroup
    */
   useLoginForm() {
     this._isSigningUp = false;
+    this._submitted = false;
     this.buildLoginFG();
   }
 
@@ -187,6 +215,37 @@ export class LoginFormComponent implements OnInit {
     return this._form.valid;
   }
 
+  /**
+   * Returns the form controls.
+   */
+  get fgCtrls() {
+    return this.form.controls;
+  }
+
+  loginValid(): boolean {
+    return this.fgCtrls.login.valid;
+  }
+
+  passwordValid(): boolean {
+    return this.fgCtrls.password.valid;
+  }
+
+  passwordConfirmValid(): boolean {
+    return this.fgCtrls.passwordConfirm.valid;
+  }
+
+  firstNameValid(): boolean {
+    return this.fgCtrls.firstName.valid;
+  }
+
+  lastNameValid(): boolean {
+    return this.fgCtrls.lastName.valid;
+  }
+
+  emailValid(): boolean {
+    return this.fgCtrls.email.valid;
+  }
+
   get form(): FormGroup {
     return this._form;
   }
@@ -194,7 +253,6 @@ export class LoginFormComponent implements OnInit {
   set form(value: FormGroup) {
     this._form = value;
   }
-
 
   get isSigningUp(): boolean {
     return this._isSigningUp;
@@ -212,12 +270,19 @@ export class LoginFormComponent implements OnInit {
     this._submitted = value;
   }
 
-  get loading(): boolean {
-    return this._loading;
+  get isLoading(): boolean {
+    return this._isLoading;
   }
 
-  set loading(value: boolean) {
-    this._loading = value;
+  set isLoading(value: boolean) {
+    this._isLoading = value;
   }
 
+  get error(): string {
+    return this._error;
+  }
+
+  set error(value: string) {
+    this._error = value;
+  }
 }

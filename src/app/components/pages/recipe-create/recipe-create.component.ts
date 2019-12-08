@@ -17,7 +17,9 @@ import {RecipeService} from "@app/services/recipe.service";
 })
 export class RecipeCreateComponent implements OnInit {
   private filters:any[] = RECIPE_TYPE;
+
   private units:any[]=UNIT;
+  private _filters:any[] = RECIPE_TYPE;
   private _ingredients: IngredientList = [];
   private  subscriptions: Subscription[] = [];
   private _recipe: RecipeDTO;
@@ -76,5 +78,8 @@ export class RecipeCreateComponent implements OnInit {
 
   set recipe(value: RecipeDTO) {
     this._recipe = value;
+  }
+  get filters(): any[] {
+    return this._filters;
   }
 }

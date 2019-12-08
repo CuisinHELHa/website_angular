@@ -1,4 +1,6 @@
 <form [formGroup]="_form" (ngSubmit)="postReview()">
+
+<form *ngIf="authService.currentUserValue" [formGroup]="form" (ngSubmit)="postReview()">
   <div class="row">
 
     <label class="col-4 text-left" for="review">Review : </label>

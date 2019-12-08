@@ -13,7 +13,8 @@
               </button>
             </div>
             <div class="modal-body">
-              <app-login-form></app-login-form>
+              <app-login-form *ngIf="!authService.currentUserValue"></app-login-form>
+              <app-authenticated-interface *ngIf="authService.currentUserValue"></app-authenticated-interface>
             </div>
           </div>
         </div>

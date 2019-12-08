@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {StepService} from "../../../services/step.service";
 import {ReviewDTO, ReviewList} from "../../../DTOs/review-dto";
 import {ReviewService} from "../../../services/review.service";
+import {AuthenticationService} from "@app/services/authentication.service";
 
 @Component({
   selector: 'app-recipe-details',
@@ -33,7 +34,10 @@ export class RecipeDetailsComponent implements OnInit {
               private recipeService: RecipeService,
               private reviewService: ReviewService,
               public route:ActivatedRoute,
-              public router:Router) { }
+              public router:Router,
+              private _authService:AuthenticationService) {
+
+  }
 
   ngOnInit() {
     const sub = this.route.paramMap.subscribe(params =>{
@@ -100,7 +104,6 @@ export class RecipeDetailsComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
-
   private loadRecipe() {
     const sub: Subscription = this.recipeService
         .queryId(this.idRecipe)
@@ -141,9 +144,12 @@ export class RecipeDetailsComponent implements OnInit {
     this.subscriptions.push(sub);
   }
 
-
   private deleteReview(review: ReviewDTO) {
     const index = this.reviews.indexOf(review);
     this.reviews.splice(index, 1);
+  }
+
+  get authService(): AuthenticationService {
+    return this._authService;
   }
 }

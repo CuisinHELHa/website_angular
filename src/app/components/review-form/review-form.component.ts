@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReviewDTO} from "@app/DTOs/review-dto";
+import {AuthenticationService} from "@app/services/authentication.service";
 
 @Component({
   selector: 'app-review-form',
@@ -17,7 +18,9 @@ export class ReviewFormComponent implements OnInit {
     review: this.fb.control("")
   });
 
-  constructor(public fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private _authService: AuthenticationService) {
+  }
 
   ngOnInit() {
 
@@ -32,5 +35,21 @@ export class ReviewFormComponent implements OnInit {
     })
 
     this._form.reset();
+  }
+
+  get form(): FormGroup {
+    return this._form;
+  }
+
+  set form(value: FormGroup) {
+    this._form = value;
+  }
+
+  get authService(): AuthenticationService {
+    return this._authService;
+  }
+
+  set authService(value: AuthenticationService) {
+    this._authService = value;
   }
 }

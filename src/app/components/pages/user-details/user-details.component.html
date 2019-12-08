@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 <div class="container-fluid col-lg-12 userBG p-2">
   <div class="container-fluid border col-lg-7 col-sm-12 pt-2" style="min-height: 550px;background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
     <h2><b>User details</b></h2>
     <div class="row">
       <b class="col-4">Name : </b>
       <div>{{user.lastName}} "{{user.username}}" {{user.firstName}}</div>
+      <div>{{user.lastName}} "{{user.pseudo}}" {{user.firstName}}</div>
+<div>
     </div>
     <div class="row">
       <b class="col-4">Mail :</b>
@@ -12,6 +15,7 @@
     <div class="row">
       <b class="col-4">Password :</b>
       <div>{{passwordPlaceHolder}}</div>
+      <div>**********</div>
     </div>
     <h2><b>User recipes</b></h2>
       <a *ngFor="let recipe of recipes" [routerLink]="'/recipe-details/'+recipe.idRecipe">

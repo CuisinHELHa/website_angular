@@ -10,6 +10,7 @@
 
     <img class="rounded-lg" src="../../../../assets/picture/tarteCitron.jpg" height="300" width="300">
 <br>
+
     <h5 class="font-weight-bold pt-2">Ingredients :</h5>
 
     <p class="mb-0" *ngFor="let ingredient of ingredients">
@@ -17,6 +18,7 @@
     </p>
 
     <h5 class="font-weight-bold mt-1">Preparation :</h5>
+
 <ul>
     <p *ngFor="let step of steps">
 <!--        {{step.stepNb}} : -->
@@ -25,12 +27,15 @@
 </ul>
 
 
+
     <h5 class="pl-2 text-left font-weight-bold">Comments</h5>
     <app-review-form *ngIf="true; else guestUser;" (reviewPosted)="postReview($event)"></app-review-form>
+    <app-review-form *ngIf="authService.currentUserValue; else guestUser;" (reviewPosted)="postReview($event)"></app-review-form>
 <div class="row pt-2" *ngFor="let review of reviews">
     <h6 class="col-2 text-left pl-3">{{review.pseudo}}</h6> ({{review.rate}}/5)
   <p class="font-italic col-5">{{review.reviewMessage}}</p>
     <button class="btn-dark" *ngIf="type || idUser === review.idUser" (click)="deleteReviewInDB(review)">Delete Comment</button>
+
 </div>
 
 <ng-template #guestUser>
@@ -40,3 +45,4 @@
 </div>
 <div class="container-fluid col-lg-3"></div>
 
+</div>

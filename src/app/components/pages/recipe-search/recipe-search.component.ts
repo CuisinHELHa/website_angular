@@ -18,7 +18,7 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
   private searchText: string = "";
   private _recipes: RecipeList;
   private _filteredRecipes: RecipeList;
-  private filters:any[] = RECIPE_TYPE_FILTER;
+  private _filters:any[] = RECIPE_TYPE_FILTER;
 
   private subscriptions: Subscription[]=[];
 
@@ -33,7 +33,6 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
       {
         this.searchText="";
       }
-      console.log(this.searchText);
       this.loadRecipe();
     });
 
@@ -90,5 +89,13 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     const index = this.recipes.indexOf(recipe);
     this._recipes.splice(index, 1);
     this.updateFilteredRecipes();
+  }
+
+  get filters(): any[] {
+    return this._filters;
+  }
+
+  set filters(value: any[]) {
+    this._filters = value;
   }
 }

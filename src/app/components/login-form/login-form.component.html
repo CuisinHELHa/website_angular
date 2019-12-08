@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="form" class="pb-2 mb-1 mb-sm-0 text-dark font-weight-bold">
   <div class="row">
-    <!--    LEFT SIDE OF THE LOGIN-->
+<!--    LOGIN-->
     <div class="col-10 offset-1">
       <div class="row">
         <span class="col col-sm-3">
@@ -12,6 +12,7 @@
       <div class="row">
         <span class="col">
           <input class="form-control form-control-sm" formControlName="login" id="login" name="login" type="text">
+          <h6 *ngIf="!loginValid() && submitted" class="text-danger pl-1">Invalid login</h6>
         </span>
       </div>
       <div class="row mt-3">
@@ -25,7 +26,13 @@
         <span class="col">
           <input class="form-control form-control-sm" formControlName="password" id="password" name="password"
                  type="password">
+          <h6 *ngIf="!passwordValid() && submitted" class="text-danger pl-1">Invalid password</h6>
         </span>
+      </div>
+      <div *ngIf="error && !isSigningUp" class="row mt-2 text-danger font-weight-bold">
+        <div class="col">
+          <h6>{{error}}</h6>
+        </div>
       </div>
 
       <!--      EMAIL AND PASSWORD CONFIRMATION-->
@@ -41,6 +48,7 @@
           <span class="col">
             <input class="form-control form-control-sm" formControlName="passwordConfirm" id="passwordConfirm" name="passwordConfirm"
                    type="password">
+            <h6 *ngIf="submitted && !passwordConfirmValid()" class="text-danger pl-1">Invalid password confirmation</h6>
           </span>
         </div>
 
@@ -55,6 +63,7 @@
           <span class="col">
             <input class="form-control form-control-sm" formControlName="firstName" id="firstName" name="firstName"
                    type="firstName">
+            <h6 *ngIf="submitted && !firstNameValid()" class="text-danger pl-1">Invalid first name</h6>
           </span>
         </div>
 
@@ -69,6 +78,7 @@
           <span class="col">
             <input class="form-control form-control-sm" formControlName="lastName" id="lastName" name="lastName"
                    type="lastName">
+            <h6 *ngIf="submitted && !lastNameValid()" class="text-danger pl-1">Invalid last name</h6>
           </span>
         </div>
 
@@ -82,6 +92,7 @@
         <div class="row mb-3">
           <span class="col">
             <input class="form-control form-control-sm" formControlName="email" id="email" name="email" type="email">
+            <h6 *ngIf="submitted && !emailValid()" class="text-danger pl-1">Invalid email</h6>
           </span>
         </div>
       </div>
@@ -90,37 +101,32 @@
       <div class="mt-4">
         <div *ngIf="!isSigningUp" class="row">
           <div class="col d-flex justify-content-between">
+            <div class="order-1">
+              <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">
+                <div [hidden]="!isLoading" class="mr-1 spinner-border spinner-border-sm"></div>
+                <h6 class="d-inline font-weight-bold">Login</h6>
+              </button>
+            </div>
             <div>
               <button (click)="useSignUpForm()" class="btn btn-sm btn-dark ml-1">
                 <h6 class="d-inline font-weight-bold">Sign-up</h6>
               </button>
             </div>
-            <div>
-              <button [disabled]="!isFormValid()" class="btn btn-sm btn-dark mr-2">
-                <!--              <button class="btn btn-sm btn-dark mr-2">-->
-                <h6 class="d-inline font-weight-bold">Login</h6>
-              </button>
-            </div>
           </div>
-
-          <span (click)="testIntegrity()">Integrity?</span>
-          <a href="/user-details" class="ml-2">User details</a>
-          <a href="/recipe-search" class="ml-2">Search</a>
-<!--          <a routerLink="/user-details" class="ml-2">User details</a>-->
-<!--          <a routerLink="/recipe-search" class="ml-2">Search</a>-->
         </div>
 
+<!--        WHEN SIGNING UP-->
         <div *ngIf="isSigningUp" class="row">
+          <div class="order-1">
+            <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">
+              <div [hidden]="!isLoading" class="mr-1 spinner-border spinner-border-sm"></div>
+              <h6 class="d-inline font-weight-bold">Confirm</h6>
+            </button>
+          </div>
           <div class="col d-flex justify-content-between">
             <div>
               <button (click)="useLoginForm()" class="btn btn-sm btn-dark ml-1">
                 <h6 class="d-inline font-weight-bold">Login</h6>
-              </button>
-            </div>
-            <div>
-              <button [disabled]="!isFormValid()" class="btn btn-sm btn-dark mr-2">
-                <!--              <button class="btn btn-sm btn-dark mr-2">-->
-                <h6 class="d-inline font-weight-bold">Confirm</h6>
               </button>
             </div>
           </div>
