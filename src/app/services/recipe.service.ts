@@ -38,8 +38,8 @@ export class RecipeService {
     return this.http.post<RecipeDTO>(RecipeService.URL, ingredient);
   }
 
-  put(ingredient: RecipeDTO): Observable<any> {
-    return this.http.put(RecipeService.URL, ingredient);
+  put(recipe: RecipeDTO): Observable<any> {
+    return this.http.put(RecipeService.URL, recipe);
   }
 
   delete(id: number): Observable<any> {

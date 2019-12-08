@@ -20,12 +20,12 @@ export class StepService {
     return this.http.get<StepList>(StepService.URL + id);
   }
 
-  post(ingredient: StepDTO): Observable<StepDTO>{
-    return this.http.post<StepDTO>(StepService.URL, ingredient);
+  post(step: StepDTO): Observable<StepDTO>{
+    return this.http.post<StepDTO>(StepService.URL, step);
   }
 
-  put(ingredient: StepDTO): Observable<any> {
-    return this.http.put(StepService.URL, ingredient);
+  put(step: StepDTO): Observable<any> {
+    return this.http.put(StepService.URL, step);
   }
 
   delete(id: number): Observable<any> {

@@ -25,6 +25,11 @@ import { AuthenticatedInterfaceComponent } from './components/authenticated-inte
 import { PictureFormComponent } from './components/picture-form/picture-form.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+import {registerLocaleData} from "@angular/common";
+import localeFr from "@angular/common/locales/fr-BE";
+
+registerLocaleData(localeFr, "fr");
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,4 +67,5 @@ import { FooterComponent } from './components/footer/footer.component';
 })
 
 export class AppModule {
+
 }

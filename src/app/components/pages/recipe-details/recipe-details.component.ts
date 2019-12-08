@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {RecipeDTO} from "../../../DTOs/recipe-dto";
 import {StepDTO, StepList} from "../../../DTOs/step-dto";
 import {IngredientDTO, IngredientList} from "../../../DTOs/ingredient-dto";
@@ -16,7 +16,7 @@ import {AuthenticationService} from "@app/services/authentication.service";
   templateUrl: './recipe-details.component.html',
   styleUrls: ['./recipe-details.component.css']
 })
-export class RecipeDetailsComponent implements OnInit {
+export class RecipeDetailsComponent implements OnInit, OnDestroy {
 
   private idParam:string;
   private idRecipe:number;
@@ -49,6 +49,12 @@ export class RecipeDetailsComponent implements OnInit {
     this.loadIngredients();
     this.loadSteps();
     this.loadReviews();
+  }
+
+  ngOnDestroy(): void{
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   }
 
   get recipe(): RecipeDTO {
