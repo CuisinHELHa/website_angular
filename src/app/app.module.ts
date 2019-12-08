@@ -24,6 +24,11 @@ import { CreateUserPipe } from './pipes/create-user.pipe';
 import { AuthenticatedInterfaceComponent } from './components/authenticated-interface/authenticated-interface.component';
 import { PictureFormComponent } from './components/picture-form/picture-form.component';
 
+import {registerLocaleData} from "@angular/common";
+import localeFr from "@angular/common/locales/fr-BE";
+
+registerLocaleData(localeFr, "fr");
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,4 +65,5 @@ import { PictureFormComponent } from './components/picture-form/picture-form.com
 })
 
 export class AppModule {
+
 }

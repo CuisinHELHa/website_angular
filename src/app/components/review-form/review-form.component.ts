@@ -29,7 +29,7 @@ export class ReviewFormComponent implements OnInit {
   postReview() {
     this.reviewPosted.next({
       idRecipe:-1,
-      idUser:7,
+      idUser:this._authService.currentUserValue.idUser,
       rate:this._form.get("rate").value,
       reviewMessage:this._form.get("review").value
     })

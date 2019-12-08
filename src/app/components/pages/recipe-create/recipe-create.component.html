@@ -6,17 +6,17 @@
 </div>
 <div class="container-fluid border col-lg-7 col-sm-12 text-center" style="background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
   <h3 class="text-center font-weight-bold p-3">Create recipe</h3>
-  <form [formGroup]="_form" (ngSubmit)=postRecipe($event)>
+  <form [formGroup]="_form" (ngSubmit)=postRecipe()>
     <div class="form-row">
       <div class="col-md-12 mb-3">
         <label for="nameRecipe">Recipe Name</label>
-        <input type="text" class="form-control" formControlName="nameRecipe" id="nameRecipe" minlength="5" required>
+        <input type="text" class="form-control" formControlName="nameRecipe" id="nameRecipe" minlength="5">
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-12 mb-3">
         <label for="Summary">Summary of your recipe</label>
-        <input type="text" class="form-control" id="Summary" required>
+        <input type="text" class="form-control" id="Summary" formControlName="summary">
       </div>
     </div>
 
@@ -24,37 +24,30 @@
       <div class="col-md-3 mb-3">
         <label for="recipeType">Recipe Type</label>
         <div class="input-group">
-          <select class="custom-select" id="recipeType" required>
+          <select class="custom-select" id="recipeType" formControlName="recipeType">
             <option *ngFor="let filter of filters">{{filter.value}}</option>
           </select>
         </div>
       </div>
       <div class="col-md-3 mb-3">
         <label for="prepTime">Preparation time</label>
-        <input type="number" class="form-control" id="prepTime" required>
+        <input type="number" class="form-control" id="prepTime" formControlName="prepTime">
       </div>
       <div class="col-md-3 mb-3">
         <label for="persons">Persons</label>
-        <input type="number" class="form-control" id="persons" required>
+        <input type="number" class="form-control" id="persons" formControlName="persons">
       </div>
       <div class="col-md-3 mb-3">
         <label for="spicesRate">Spice Rate</label>
-        <select class="custom-select" id="spicesRate" required>
-          <option>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        <input type="number" min="0" max="5" class="custom-select" id="spicesRate" formControlName="spicesRate"/>
       </div>
     </div>
 
     <!-- Ingredients -->
-    <div class="form-row">
+    <form class="form-row" [formGroup]="_ingredientForm" (ngSubmit)="addIngredients()">
       <div class="col-md-5 mb-3">
         <label for="ingredients">ingredients</label>
-        <select class="custom-select" id="ingredients">
+        <select class="custom-select" id="ingredients" formControlName="nameIngredient">
           <option *ngFor="let ingredient of ingredients; index as i">
             {{ingredient.nameIngredient}}
           </option>
@@ -63,35 +56,49 @@
       </div>
       <div class="col-md-3 mb-3">
         <label for="ingredientQuantity">quantity</label>
-        <input type="number" class="form-control" id="ingredientQuantity" required>
+        <input type="number" class="form-control" id="ingredientQuantity" formControlName="quantity">
       </div>
       <div class="col-md-4 mb-3">
         <label for="mesureIngredient">Mesure</label>
-        <select class="custom-select" id="mesureIngredient" required>
+        <select class="custom-select" id="mesureIngredient" formControlName="unit">
           <option *ngFor="let unit of units">{{unit.value}}</option>
-
         </select>
       </div>
 
-      <button class="btn btn-sm btn-dark mr-2" style="height:30px">Add ingredient</button>
+      <button class="btn btn-sm btn-dark mr-2" style="height:30px" [disabled]="!_ingredientForm.valid">Add ingredient</button>
 
-    </div>
-    <div class="form-row">
+    </form>
+
+    <ul>
+      <li *ngFor="let ingredient of ingredientRecipe; let i = index">
+        {{ingredient.quantity}}{{ingredient.unit}} {{ingredient.nameIngredient}}
+        <button (click)="removeIngredient(i)">X</button>
+      </li>
+    </ul>
+
+    <form class="form-row" [formGroup]="_stepForm" (ngSubmit)="addStep()">
       <div class="col-md-12 mb-3">
         <label for="steps">Step(s)</label>
-        <textarea class="form-control" id="steps"></textarea>
+        <textarea class="form-control" id="steps" formControlName="step"></textarea>
       </div>
       <div class="">
-        <button class="btn btn-sm btn-dark" style="height:30px" >Add step</button>
+        <button class="btn btn-sm btn-dark" style="height:30px" [disabled]="!_stepForm.valid">Add step</button>
       </div>
-    </div>
+    </form>
+
+    <ul>
+      <li *ngFor="let step of stepsRecipe; let i = index">
+        {{step.stepNb}} : {{step.step}}
+        <button (click)="removeStep(i)">X</button>
+      </li>
+    </ul>
 
 <!--      <div class="form-group text-center">-->
 <!--        <label for="addPicture">Ajouter une image</label>-->
 <!--        <input type="file" class="form-control-file align-content-center" id="addPicture">-->
 <!--      </div>-->
-    <button class="btn btn-md btn-dark mr-2 col-12 mt-2 mb-2" type="submit">
-      <h6 class="d-inline font-weight-bold ">Submit recipe</h6>
+    <button class="btn btn-md btn-dark mr-2 col-12 mt-2 mb-2" [disabled]="!_form.valid">
+      <h6 class="d-inline font-weight-bold " >Submit recipe</h6>
     </button>
   </form>
   <app-picture-form></app-picture-form>

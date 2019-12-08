@@ -21,8 +21,8 @@ export class PictureService {
     return this.http.post<PictureDTO>(PictureService.URL, ingredient);
   }
 
-  put(ingredient: PictureDTO): Observable<any> {
-    return this.http.put(PictureService.URL, ingredient);
+  put(picture: PictureDTO): Observable<any> {
+    return this.http.put(PictureService.URL, picture);
   }
 
   delete(id: number): Observable<any> {

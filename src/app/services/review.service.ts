@@ -29,12 +29,12 @@ export class ReviewService {
     return this.http.get<number>(ReviewService.URL+"average/"+id);
   }
 
-  post(ingredient: ReviewDTO): Observable<ReviewDTO>{
-    return this.http.post<ReviewDTO>(ReviewService.URL, ingredient);
+  post(review: ReviewDTO): Observable<ReviewDTO>{
+    return this.http.post<ReviewDTO>(ReviewService.URL, review);
   }
 
-  put(ingredient: ReviewDTO): Observable<any> {
-    return this.http.put(ReviewService.URL, ingredient);
+  put(review: ReviewDTO): Observable<any> {
+    return this.http.put(ReviewService.URL, review);
   }
 
   delete(idUser: number, idRecipe: number): Observable<any> {
