@@ -1,10 +1,11 @@
-<div>
+<div class="border border-dark rounded p-2" style="background: rgba(255,255,255,0.20);backdrop-filter: blur(3px);">
   <div  [routerLink]="'/recipe-details/'+recipe.idRecipe">
-  <h2>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</h2>
-  <h3 *ngFor="let s of spices">*</h3>
-  <h4>{{recipe.recipeType}} pour {{recipe.persons}} personnes ({{recipe.prepTime}} min)</h4>
-  {{recipe.summary}}<br>
-  <i>postée le {{recipe.postDate}} par {{recipe.pseudo}}</i>
+  <h4>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</h4>
+  {{recipe.recipeType}} for {{recipe.persons}} persons ({{recipe.prepTime}} min)<br>
+  {{recipe.summary}}
   </div>
-  <button *ngIf=" this._authService.currentUserValue.userType || _authService.currentUserValue.idUser === recipe.idUser" (click)="deleteRecipe()">Delete recipe</button>
+  <div class="row pr-3">
+    <i class="col-9 ">posté on {{recipe.postDate}} by <b>{{recipe.pseudo}}</b></i>
+    <button class="col-3" *ngIf=" this._authService.currentUserValue.userType || _authService.currentUserValue.idUser === recipe.idUser" (click)="deleteRecipe()">Delete recipe</button>
+  </div>
 </div>

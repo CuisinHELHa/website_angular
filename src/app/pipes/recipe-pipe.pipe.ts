@@ -10,9 +10,9 @@ export class RecipePipe implements PipeTransform {
   transform(recipes: RecipeList, recipeType: RecipeType): RecipeList {
     switch (recipeType) {
       case RecipeType.ENTREE:
-        return recipes.filter(recipe => recipe.recipeType == "Entrée");
+        return recipes.filter(recipe => recipe.recipeType == "Starter");
       case RecipeType.PLAT:
-        return recipes.filter(recipe => recipe.recipeType == "Plat");
+        return recipes.filter(recipe => recipe.recipeType == "Main course");
       case RecipeType.DESSERT:
         return recipes.filter(recipe => recipe.recipeType == "Dessert");
       default:

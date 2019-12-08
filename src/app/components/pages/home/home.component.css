@@ -3,3 +3,14 @@
   background-size: cover;
   min-height: 550px;
 }
+.bgwhite{
+  max-width: 700px;
+  background:rgba(255,255,255,0.60);
+  backdrop-filter: blur(3px);
+}
+.bgwhite:hover{
+  max-width: 700px;
+  backdrop-filter: blur(3px);
+  cursor: pointer;
+}
+

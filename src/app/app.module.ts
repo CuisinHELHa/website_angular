@@ -23,6 +23,7 @@ import { RecipeAvgRateComponent } from './components/recipe-avg-rate/recipe-avg-
 import { CreateUserPipe } from './pipes/create-user.pipe';
 import { AuthenticatedInterfaceComponent } from './components/authenticated-interface/authenticated-interface.component';
 import { PictureFormComponent } from './components/picture-form/picture-form.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PictureFormComponent } from './components/picture-form/picture-form.com
     RecipeAvgRateComponent,
     CreateUserPipe,
     AuthenticatedInterfaceComponent,
-    PictureFormComponent
+    PictureFormComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
