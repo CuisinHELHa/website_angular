@@ -1,0 +1,13 @@
+.userBG{
+  background-image: url("../../../../assets/img/userBG.jpg");
+  background-size: cover;
+}
+a{
+  color: black;
+}
+
+h2{
+  margin: 5px;
+}
+
+

@@ -1,8 +1,9 @@
 <div class="container-fluid col-lg-12 imgHome p-2">
 
-  <h1 class="text-white">Recette du mois</h1>
-<div class="col-lg-6 col-sm-12 pb-2" style="background:rgba(255,255,255,0.60);backdrop-filter: blur(3px);">
-  <h2>{{recipe.nameRecipe}} de <i>{{recipe.pseudo}}</i></h2>
+  <h1 class="text-white">Recipe of the month</h1>
+<div class="col-lg-6 col-sm-12 pb-2" style="background:rgba(255,255,255,0.60);backdrop-filter: blur(3px);"
+     [routerLink]="'/recipe-details/'+recipe.idRecipe">
+  <h2>{{recipe.nameRecipe}} by <i>{{recipe.pseudo}}</i></h2>
   <div class="row">
   <img class="pl-3 rounded-lg" src="../../../../assets/picture/tarteCitron.jpg" height="200" width="200">
     <h5>{{recipe.summary}}</h5><br>

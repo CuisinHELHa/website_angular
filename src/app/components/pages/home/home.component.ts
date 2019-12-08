@@ -15,7 +15,9 @@ import {ActivatedRoute} from "@angular/router";
 // @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
 
+  //recette du mois possède l'id 1
   private idRecipe:number=1;
+
   private _recipe: RecipeDTO;
   private _reviews: ReviewList;
   private subscriptions: Subscription[] = [];

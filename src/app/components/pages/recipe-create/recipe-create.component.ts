@@ -6,7 +6,9 @@ import {RECIPE_TYPE, RECIPE_TYPE_FILTER} from "../../../enumerations/recipe-type
 import {UNIT, Unit} from "@app/enumerations/unit.enum";
 import {RecipeDTO} from "@app/DTOs/recipe-dto";
 import {StepList} from "@app/DTOs/step-dto";
-import {ReviewList} from "@app/DTOs/review-dto";
+import {ReviewDTO, ReviewList} from "@app/DTOs/review-dto";
+import {StepService} from "@app/services/step.service";
+import {RecipeService} from "@app/services/recipe.service";
 
 @Component({
   selector: 'app-recipe-create',
@@ -23,7 +25,9 @@ export class RecipeCreateComponent implements OnInit {
   private _steps: StepList;
   private _reviews: ReviewList;
 
-  constructor(public ingredientService:IngredientService) { }
+  constructor(public ingredientService:IngredientService,
+              private stepService: StepService,
+              private recipeService: RecipeService,) { }
 
 
   ngOnInit() {
@@ -38,6 +42,20 @@ export class RecipeCreateComponent implements OnInit {
     this.subscriptions.push(sub);
 
   }
+  postRecipe($event: RecipeDTO) {
+    // $event.idRecipe = this.recipe.idRecipe;
+    // const sub = this.recipeService
+    //   .post($event)
+    //   .subscribe(()=>this.loadRecipe());
+    // this.subscriptions.push(sub);
+  }
+
+  private loadRecipe() {
+    const sub: Subscription = this.recipeService
+      .query()
+      .subscribe(recipes => this.recipe=recipes[0]);
+    this.subscriptions.push(sub);
+  }
 
   addRecipe() {
 
@@ -51,4 +69,12 @@ export class RecipeCreateComponent implements OnInit {
     this._ingredients = value;
   }
 
+
+  get recipe(): RecipeDTO {
+    return this._recipe;
+  }
+
+  set recipe(value: RecipeDTO) {
+    this._recipe = value;
+  }
 }

@@ -1,8 +1,8 @@
 
 export enum RecipeType {
     ALL = "All",
-    ENTREE = "Entrée",
-    PLAT = "Plat",
+    ENTREE = "Starter",
+    PLAT = "Main course",
     DESSERT = "Dessert"
 }
 export const RECIPE_TYPE_FILTER: any[]=[{
@@ -10,11 +10,11 @@ export const RECIPE_TYPE_FILTER: any[]=[{
   value: RecipeType.ALL
 },
   {
-    id:"Entrée",
+    id:"Starter",
     value: RecipeType.ENTREE
   },
   {
-    id:"Plat",
+    id:"Main course",
     value: RecipeType.PLAT
   },
   {
@@ -23,11 +23,11 @@ export const RECIPE_TYPE_FILTER: any[]=[{
   }];
 export const RECIPE_TYPE: any[]=[
   {
-    id:"Entrée",
+    id:"Starter",
     value: RecipeType.ENTREE
   },
   {
-    id:"Plat",
+    id:"Main course",
     value: RecipeType.PLAT
   },
   {
