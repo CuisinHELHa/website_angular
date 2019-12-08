@@ -1,0 +1,9 @@
+<form #imageForm=ngForm (ngSubmit)="OnSubmit(idRecipe)">
+  <div class="form-group text-center">
+
+    <img [src]="pictureURL" style="width: 50px;height: 50px">
+    <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+<!--    <input type="file" class="form-control-file align-content-center" id="addPicture">-->
+    <button type="submit" class="btn-large btn-submit">Submit</button>
+  </div>
+</form>

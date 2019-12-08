@@ -30,6 +30,7 @@
 
     <h5 class="pl-2 text-left font-weight-bold">Comments</h5>
     <app-review-form *ngIf="true; else guestUser;" (reviewPosted)="postReview($event)"></app-review-form>
+
     <app-review-form *ngIf="authService.currentUserValue; else guestUser;" (reviewPosted)="postReview($event)"></app-review-form>
 <div class="row pt-2" *ngFor="let review of reviews">
     <h6 class="col-2 text-left pl-3">{{review.pseudo}}</h6> ({{review.rate}}/5)

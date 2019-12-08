@@ -6,17 +6,17 @@
 </div>
 <div class="container-fluid border col-lg-7 col-sm-12 text-center" style="background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
   <h3 class="text-center font-weight-bold p-3">Create recipe</h3>
-  <form #formElement="ngForm" (ngSubmit)=postRecipe()>
+  <form [formGroup]="_form" (ngSubmit)=postRecipe($event)>
     <div class="form-row">
       <div class="col-md-12 mb-3">
-        <label for="recipeName">Recipe Name</label>
-        <input type="text" class="form-control" id="recipeName" minlength="5" required>
+        <label for="nameRecipe">Recipe Name</label>
+        <input type="text" class="form-control" formControlName="nameRecipe" id="nameRecipe" minlength="5" required>
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-12 mb-3">
-        <label for="recipeSummary">Summary of your recipe</label>
-        <input type="text" class="form-control" id="recipeSummary" required>
+        <label for="Summary">Summary of your recipe</label>
+        <input type="text" class="form-control" id="Summary" required>
       </div>
     </div>
 
@@ -30,16 +30,16 @@
         </div>
       </div>
       <div class="col-md-3 mb-3">
-        <label for="prepTimeRecipe">Preparation time</label>
-        <input type="number" class="form-control" id="prepTimeRecipe" required>
+        <label for="prepTime">Preparation time</label>
+        <input type="number" class="form-control" id="prepTime" required>
       </div>
       <div class="col-md-3 mb-3">
         <label for="persons">Persons</label>
         <input type="number" class="form-control" id="persons" required>
       </div>
       <div class="col-md-3 mb-3">
-        <label for="">Spice Rate</label>
-        <select class="custom-select" id="" required>
+        <label for="spicesRate">Spice Rate</label>
+        <select class="custom-select" id="spicesRate" required>
           <option>0</option>
           <option>1</option>
           <option>2</option>
@@ -85,14 +85,17 @@
         <button class="btn btn-sm btn-dark" style="height:30px" >Add step</button>
       </div>
     </div>
-      <div class="form-group text-center">
-        <label for="addPicture">Ajouter une image</label>
-        <input type="file" class="form-control-file align-content-center" id="addPicture">
-      </div>
-    <button [disabled]="!formElement.valid" class="btn btn-md btn-dark mr-2 col-12 mt-2 mb-2" type="submit">
+
+<!--      <div class="form-group text-center">-->
+<!--        <label for="addPicture">Ajouter une image</label>-->
+<!--        <input type="file" class="form-control-file align-content-center" id="addPicture">-->
+<!--      </div>-->
+    <button class="btn btn-md btn-dark mr-2 col-12 mt-2 mb-2" type="submit">
       <h6 class="d-inline font-weight-bold ">Submit recipe</h6>
     </button>
   </form>
+  <app-picture-form></app-picture-form>
+
 </div>
 <div class="container-fluid col-lg-3"></div>
 </div>

@@ -22,6 +22,7 @@ import {appRoutingModule} from "@app/app.routing";
 import { RecipeAvgRateComponent } from './components/recipe-avg-rate/recipe-avg-rate.component';
 import { CreateUserPipe } from './pipes/create-user.pipe';
 import { AuthenticatedInterfaceComponent } from './components/authenticated-interface/authenticated-interface.component';
+import { PictureFormComponent } from './components/picture-form/picture-form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AuthenticatedInterfaceComponent } from './components/authenticated-inte
     ReviewFormComponent,
     RecipeAvgRateComponent,
     CreateUserPipe,
-    AuthenticatedInterfaceComponent
+    AuthenticatedInterfaceComponent,
+    PictureFormComponent
   ],
   imports: [
     BrowserModule,
