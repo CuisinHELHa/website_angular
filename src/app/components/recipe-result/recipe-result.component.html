@@ -6,5 +6,5 @@
   {{recipe.summary}}<br>
   <i>postée le {{recipe.postDate}} par {{recipe.pseudo}}</i>
   </div>
-  <button *ngIf="type || id === recipe.idUser" (click)="deleteRecipe()">X</button>
+  <button *ngIf=" this._authService.currentUserValue.userType || _authService.currentUserValue.idUser === recipe.idUser" (click)="deleteRecipe()">Delete recipe</button>
 </div>

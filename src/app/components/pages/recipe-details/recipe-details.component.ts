@@ -27,7 +27,6 @@ export class RecipeDetailsComponent implements OnInit {
   private _reviews: ReviewList;
   private subscriptions: Subscription[] = [];
   type: boolean = false;
-  idUser: number = 7;
 
   constructor(private ingredientService: IngredientService,
               private stepService: StepService,
