@@ -16,7 +16,7 @@ export class RecipeResultComponent implements OnInit {
   id: number = 1;
   type: boolean = true;
 
-  constructor(private _authService: AuthenticationService) {
+  constructor(public _authService: AuthenticationService) {
   }
 
   private _recipe: RecipeDTO;

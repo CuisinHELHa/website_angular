@@ -20,7 +20,7 @@ import {formatDate} from "@angular/common";
 })
 export class RecipeCreateComponent implements OnInit, OnDestroy {
 
-  private _form: FormGroup = this.fb.group({
+  public _form: FormGroup = this.fb.group({
     nameRecipe: this.fb.control("", Validators.required),
     summary: this.fb.control("", Validators.required),
     persons: this.fb.control("", Validators.required),
@@ -40,7 +40,31 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
   });
 
 
-  private units:any[]=UNIT;
+  get ingredientForm(): FormGroup {
+    return this._ingredientForm;
+  }
+
+  set ingredientForm(value: FormGroup) {
+    this._ingredientForm = value;
+  }
+
+  get stepForm(): FormGroup {
+    return this._stepForm;
+  }
+
+  set stepForm(value: FormGroup) {
+    this._stepForm = value;
+  }
+
+  get units(): any[] {
+    return this._units;
+  }
+
+  set units(value: any[]) {
+    this._units = value;
+  }
+
+  private _units:any[]=UNIT;
   private _filters:any[] = RECIPE_TYPE;
   private _ingredients: IngredientList;
   private  subscriptions: Subscription[] = [];
@@ -251,6 +275,8 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
   set authService(value: AuthenticationService) {
     this._authService = value;
   }
+
+
 
 
 }

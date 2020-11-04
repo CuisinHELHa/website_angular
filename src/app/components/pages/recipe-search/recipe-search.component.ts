@@ -15,7 +15,7 @@ import {ok} from "assert";
 export class RecipeSearchComponent implements OnInit, OnDestroy {
 
   filterSelected: RecipeType = RecipeType.ALL;
-  private searchText: string = "";
+  private _searchText: string = "";
   private _recipes: RecipeList;
   private _filteredRecipes: RecipeList;
   private _filters:any[] = RECIPE_TYPE_FILTER;
@@ -28,10 +28,10 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const sub = this.route.paramMap.subscribe(params =>{
-      this.searchText = params.get("text");
-      if(this.searchText == null)
+      this._searchText = params.get("text");
+      if(this._searchText == null)
       {
-        this.searchText="";
+        this._searchText="";
       }
       this.loadRecipe();
     });
@@ -69,7 +69,7 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
 
   loadRecipe() {
     const sub: Subscription = this.recipeService
-        .queryText(this.searchText)
+        .queryText(this._searchText)
         .subscribe(recipes => this.recipes=recipes);
     this.subscriptions.push(sub);
 
@@ -97,5 +97,13 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
 
   set filters(value: any[]) {
     this._filters = value;
+  }
+
+  get searchText(): string {
+    return this._searchText;
+  }
+
+  set searchText(value: string) {
+    this._searchText = value;
   }
 }

@@ -13,10 +13,12 @@ export class ReviewFormComponent implements OnInit {
   @Output()
   private reviewPosted:EventEmitter<ReviewDTO> = new EventEmitter<ReviewDTO>()
 
-  private _form: FormGroup = this.fb.group({
+  public _form: FormGroup = this.fb.group({
     rate: this.fb.control("", Validators.required),
     review: this.fb.control("")
   });
+
+
 
   constructor(private fb: FormBuilder,
               private _authService: AuthenticationService) {
