@@ -29,13 +29,13 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
     recipeType: this.fb.control("", Validators.required)
   });
 
-  private _ingredientForm: FormGroup = this.fb.group({
+  public _ingredientForm: FormGroup = this.fb.group({
     nameIngredient: this.fb.control("rien"),
     quantity: this.fb.control(0, Validators.required),
     unit: this.fb.control("g", Validators.required)
   });
 
-  private _stepForm: FormGroup = this.fb.group({
+  public _stepForm: FormGroup = this.fb.group({
     step: this.fb.control("", Validators.required)
   });
 
