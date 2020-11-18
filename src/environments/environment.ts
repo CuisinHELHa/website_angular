@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:5001',
-  // apiUrl: 'https://localhost:4200',
-  // apiUrl: '',
+  apiUrl: 'http://cuisinhelha.azurewebsites.net',
 };
 
 /*

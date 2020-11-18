@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserDTO} from "@app/DTOs/user-dto";
-import {RecipeDTO, RecipeList} from "@app/DTOs/recipe-dto";
-import {ReviewDTO, ReviewList} from "@app/DTOs/review-dto";
-import {RecipeService} from "@app/services/recipe.service";
-import {ReviewService} from "@app/services/review.service";
-import {Subscription} from "rxjs";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "@app/services/user.service";
-import {AuthenticationService} from "@app/services/authentication.service";
+import {UserDTO} from '@app/DTOs/user-dto';
+import {RecipeDTO, RecipeList} from '@app/DTOs/recipe-dto';
+import {ReviewDTO, ReviewList} from '@app/DTOs/review-dto';
+import {RecipeService} from '@app/services/recipe.service';
+import {ReviewService} from '@app/services/review.service';
+import {Subscription} from 'rxjs';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '@app/services/user.service';
+import {AuthenticationService} from '@app/services/authentication.service';
 import validate = WebAssembly.validate;
 
 @Component({
@@ -18,19 +18,19 @@ import validate = WebAssembly.validate;
 export class UserDetailsComponent implements OnInit, OnDestroy {
   public user: UserDTO;
   public mailForm: FormGroup = this.fb.group({
-    newMail: this.fb.control("", Validators.required)
-  })
+    newMail: this.fb.control('', Validators.required)
+  });
 
   public pwdForm: FormGroup = this.fb.group({
-    newPassword: this.fb.control("", Validators.required),
-    oldPassword: this.fb.control("", Validators.required)
-  })
+    newPassword: this.fb.control('', Validators.required),
+    oldPassword: this.fb.control('', Validators.required)
+  });
 
 
   private _recipes: RecipeList;
   private _reviews: ReviewList;
 
-  private subscriptions: Subscription[]=[];
+  private subscriptions: Subscription[] = [];
   private _changingMail: boolean;
   private _changingPassword: boolean;
   private _passwordError: boolean;
@@ -55,54 +55,50 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadRecipe()
-  {
+  loadRecipe() {
     const sub = this.recipeService
         .queryUser(this.user.idUser)
-        .subscribe(recipes => this.recipes=recipes);
+        .subscribe(recipes => this.recipes = recipes);
     this.subscriptions.push(sub);
   }
 
-  loadReview()
-  {
+  loadReview() {
     const sub = this.reviewService
         .queryUser(this.user.idUser)
-        .subscribe(reviews => this.reviews=reviews);
+        .subscribe(reviews => this.reviews = reviews);
     this.subscriptions.push(sub);
   }
 
-  updateMail()
-  {
+  updateMail() {
     const sub = this.userService
         .putMail({
           userID: this.user.idUser,
-          mail: this.mailForm.get("newMail").value
+          mail: this.mailForm.get('newMail').value
         })
-        .subscribe(answer=>{
+        .subscribe(answer => {
           console.log(answer);
-          this.user.mail = this.mailForm.get("newMail").value;
-          //localStorage.setItem()
+          this.user.mail = this.mailForm.get('newMail').value;
+          // localStorage.setItem()
           this.mailForm.reset();
-          this.changingMail=false;
+          this.changingMail = false;
         });
     this.subscriptions.push(sub);
   }
 
-  updatePassword()
-  {
+  updatePassword() {
     const sub = this.userService
         .putPassword({
           userID: this.user.idUser,
-          passwordNew: this.pwdForm.get("newPassword").value,
-          passwordOld: this.pwdForm.get("oldPassword").value
+          passwordNew: this.pwdForm.get('newPassword').value,
+          passwordOld: this.pwdForm.get('oldPassword').value
         })
-        .subscribe(result =>{
-          this.passwordSuccess=true;
-          this.changingPassword=false;
+        .subscribe(result => {
+          this.passwordSuccess = true;
+          this.changingPassword = false;
           this.pwdForm.reset();
         },
-        error=>{
-          this.passwordError=true;
+        error => {
+          this.passwordError = true;
         });
     this.subscriptions.push(sub);
   }

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ReviewService} from "@app/services/review.service";
+import {ReviewService} from '@app/services/review.service';
 
 @Component({
   selector: 'app-recipe-avg-rate',
@@ -9,7 +9,7 @@ import {ReviewService} from "@app/services/review.service";
 export class RecipeAvgRateComponent implements OnInit {
 
     avgRate: number;
-    private _idRecipe: number = -1;
+    private _idRecipe = -1;
 
   constructor(private reviewService: ReviewService) { }
 

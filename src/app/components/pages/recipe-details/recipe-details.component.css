@@ -1,6 +1,7 @@
-.imgDetail{
+.detail-recipe-img{
   background-image: url("../../../../assets/img/sushi.jpg");
   background-size: cover;
+  min-height: 704px;
 }
 
 .bgDetail{

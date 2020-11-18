@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {GlobalsService} from '../../services/globals.service';
+import {Component} from '@angular/core';
 
 declare var $: any;
 
@@ -9,21 +8,9 @@ declare var $: any;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   readonly LOGO_PATH: string = 'assets/img/cuisinHELHa_logo.png';
 
-  constructor(public globals: GlobalsService) {
-  }
-
-  /// MOBILE
-  get mobile(): boolean {
-    return this.globals.mobile;
-  }
-
-  ngOnInit() {
-  }
-
-  /// CLICKED LOGIN ICON
   onLoginIconClick() {
     $('#accountModal').modal('show');
   }

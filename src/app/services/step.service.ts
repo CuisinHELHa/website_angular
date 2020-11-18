@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {StepDTO, StepList} from "../DTOs/step-dto";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {StepDTO, StepList} from '../DTOs/step-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StepService {
-  private static URL:string = "/api/steps/";
+  private static URL = '/api/steps/';
 
   constructor(public http: HttpClient) {
   }
@@ -16,11 +16,11 @@ export class StepService {
     return this.http.get<StepList>(StepService.URL);
   }
 
-  queryByRecipe(id: number) : Observable<StepList>{
+  queryByRecipe(id: number): Observable<StepList> {
     return this.http.get<StepList>(StepService.URL + id);
   }
 
-  post(step: StepDTO): Observable<StepDTO>{
+  post(step: StepDTO): Observable<StepDTO> {
     return this.http.post<StepDTO>(StepService.URL, step);
   }
 

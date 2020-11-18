@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, RouterLink} from "@angular/router";
-import {environment} from "@environments/environment";
+import {Router, RouterLink} from '@angular/router';
+import {environment} from '@environments/environment';
 
 @Component({
   selector: 'app-recipe-search-bar',
@@ -11,7 +11,7 @@ export class RecipeSearchBarComponent implements OnInit {
   constructor(private router: Router) {
   }
 
-  private _userSearch: String = "";
+  private _userSearch: String = '';
 
   get userSearch(): String {
     return this._userSearch;
@@ -25,6 +25,6 @@ export class RecipeSearchBarComponent implements OnInit {
   }
 
   searchRecipe() {
-    this.router.navigateByUrl("/recipe-search/"+this.userSearch);
+    this.router.navigateByUrl('/recipe-search/' + this.userSearch);
   }
 }

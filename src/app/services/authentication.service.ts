@@ -1,37 +1,36 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {UserDTO} from "@app/DTOs/user-dto";
-import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject, Observable} from 'rxjs';
+import {UserDTO} from '@app/DTOs/user-dto';
+import {HttpClient} from '@angular/common/http';
 
-import {environment} from "@environments/environment";
-import {map} from "rxjs/operators";
-import {AccountModalComponent} from "@app/components/account-modal/account-modal.component";
-import {sha256} from "js-sha256";
+import {environment} from '@environments/environment';
+import {map} from 'rxjs/operators';
+import {sha256} from 'js-sha256';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  public static readonly AUTH_API_PATH:string = "/api/users/authenticate";
-  public static readonly SIGNUP_API_PATH:string = "/api/users";
-  public static readonly USER_KEY:string = "currentUser";
-
-  private currentUserSubject: BehaviorSubject<UserDTO>;
+  public static readonly AUTH_API_PATH: string = '/api/users/authenticate';
+  public static readonly SIGNUP_API_PATH: string = '/api/users';
+  public static readonly USER_KEY: string = 'currentUser';
   public currentUser: Observable<UserDTO>;
+  private currentUserSubject: BehaviorSubject<UserDTO>;
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem(AuthenticationService.USER_KEY)));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue():UserDTO{
+  public get currentUserValue(): UserDTO {
     return this.currentUserSubject.value;
   }
 
-  login(username:string, password:string){
+  login(username: string, password: string) {
     password = sha256(password);
 
-    let authPath = `${environment.apiUrl}${AuthenticationService.AUTH_API_PATH}`;
+    const authPath = `${environment.apiUrl}${AuthenticationService.AUTH_API_PATH}`;
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', authPath);
     return this.http.post<any>(authPath, {username, password})
       .pipe(map(user => {
         localStorage.setItem(AuthenticationService.USER_KEY, JSON.stringify(user));
@@ -40,17 +39,17 @@ export class AuthenticationService {
       }));
   }
 
-  signUp(user:UserDTO){
+  signUp(user: UserDTO) {
     user.password = sha256(user.password);
 
-    let signUpPath = `${environment.apiUrl}${AuthenticationService.SIGNUP_API_PATH}`;
+    const signUpPath = `${environment.apiUrl}${AuthenticationService.SIGNUP_API_PATH}`;
     return this.http.post<any>(signUpPath, user)
       .pipe(map(newUser => {
         return newUser;
       }));
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem(AuthenticationService.USER_KEY);
     this.currentUserSubject.next(null);
   }

@@ -1,15 +1,15 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {RecipeDTO} from "../../../DTOs/recipe-dto";
-import {StepDTO, StepList} from "../../../DTOs/step-dto";
-import {IngredientDTO, IngredientList} from "../../../DTOs/ingredient-dto";
-import {IngredientService} from "../../../services/ingredient.service";
-import {Subscription} from "rxjs";
-import {RecipeService} from "../../../services/recipe.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {StepService} from "../../../services/step.service";
-import {ReviewDTO, ReviewList} from "../../../DTOs/review-dto";
-import {ReviewService} from "../../../services/review.service";
-import {AuthenticationService} from "@app/services/authentication.service";
+import {RecipeDTO} from '../../../DTOs/recipe-dto';
+import {StepDTO, StepList} from '../../../DTOs/step-dto';
+import {IngredientDTO, IngredientList} from '../../../DTOs/ingredient-dto';
+import {IngredientService} from '../../../services/ingredient.service';
+import {Subscription} from 'rxjs';
+import {RecipeService} from '../../../services/recipe.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {StepService} from '../../../services/step.service';
+import {ReviewDTO, ReviewList} from '../../../DTOs/review-dto';
+import {ReviewService} from '../../../services/review.service';
+import {AuthenticationService} from '@app/services/authentication.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -18,29 +18,29 @@ import {AuthenticationService} from "@app/services/authentication.service";
 })
 export class RecipeDetailsComponent implements OnInit, OnDestroy {
 
-  private idParam:string;
-  private idRecipe:number;
+  private idParam: string;
+  private idRecipe: number;
   private _recipe: RecipeDTO;
-  private _spices:number[];
+  private _spices: number[];
   private _ingredients: IngredientList;
   private _steps: StepList;
   private _reviews: ReviewList;
   private subscriptions: Subscription[] = [];
-  type: boolean = false;
+  type = false;
 
   constructor(private ingredientService: IngredientService,
               private stepService: StepService,
               private recipeService: RecipeService,
               private reviewService: ReviewService,
-              public route:ActivatedRoute,
-              public router:Router,
-              private _authService:AuthenticationService) {
+              public route: ActivatedRoute,
+              public router: Router,
+              private _authService: AuthenticationService) {
 
   }
 
   ngOnInit() {
-    const sub = this.route.paramMap.subscribe(params =>{
-      this.idParam = params.get("id");
+    const sub = this.route.paramMap.subscribe(params => {
+      this.idParam = params.get('id');
       this.idRecipe = parseInt(this.idParam);
     });
 
@@ -51,7 +51,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     this.loadReviews();
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     for (const sub of this.subscriptions) {
       sub.unsubscribe();
     }
@@ -97,13 +97,12 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     this._reviews = value;
   }
 
-  updateSpice(nb:number){
+  updateSpice(nb: number) {
     this._spices = Array(nb).fill(0);
   }
 
-  loadIngredients()
-  {
-    const sub:Subscription = this.ingredientService
+  loadIngredients() {
+    const sub: Subscription = this.ingredientService
         .queryRecipeId(this.idRecipe)
         .subscribe(ingredients => this.ingredients = ingredients);
     this.subscriptions.push(sub);
@@ -112,20 +111,18 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   private loadRecipe() {
     const sub: Subscription = this.recipeService
         .queryId(this.idRecipe)
-        .subscribe(recipes => this.recipe=recipes[0]);
+        .subscribe(recipes => this.recipe = recipes[0]);
     this.subscriptions.push(sub);
   }
 
-  private loadSteps()
-  {
+  private loadSteps() {
     const sub: Subscription = this.stepService
         .queryByRecipe(this.idRecipe)
         .subscribe(steps => this.steps = steps);
     this.subscriptions.push(sub);
   }
 
-  private loadReviews()
-  {
+  private loadReviews() {
     const sub: Subscription = this.reviewService
         .queryByRecipe(this.idRecipe)
         .subscribe(reviews => this.reviews = reviews);
@@ -136,16 +133,16 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
         $event.idRecipe = this.recipe.idRecipe;
         const sub = this.reviewService
             .post($event)
-            .subscribe(()=>this.loadReviews());
+            .subscribe(() => this.loadReviews());
         this.subscriptions.push(sub);
   }
 
   deleteReviewInDB(review: ReviewDTO) {
     const sub = this.reviewService
         .delete(review.idUser, review.idRecipe)
-        .subscribe(()=>{
+        .subscribe(() => {
           this.deleteReview(review);
-        })
+        });
     this.subscriptions.push(sub);
   }
 

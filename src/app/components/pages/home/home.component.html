@@ -1,22 +1,21 @@
-<div class="container-fluid col-lg-12 imgHome p-2">
-
+<div class="container-fluid col-lg-12 home-img p-3">
   <h1 class="text-white">Recipe of the month</h1>
 
-  <div class="card mb-3 bgwhite" [routerLink]="'/recipe-details/'+recipe.idRecipe">
-    <div class="row no-gutters">
-      <div class="col-sm-4">
-        <img src="../../../../assets/picture/tarteCitron.jpg" class="card-img" alt="tarte">
-      </div>
-      <div class="col-sm-8">
-        <div class="card-body">
-          <h5 class="card-title">{{recipe.nameRecipe}} by <i>{{recipe.pseudo}}</i></h5>
-          <p class="card-text">{{recipe.summary}}</p>
-          <p class="card-text"><small class="text-muted">posted on {{recipe.postDate}}</small></p>
+  <ng-container *ngIf="frontRecipeObs | async as recipe">
+    <div [routerLink]="'/recipe-details/'+recipe.idRecipe" class="card mb-3 bg-white">
+      <div class="row no-gutters">
+        <div class="col-sm-4">
+          <img alt="A tart" class="card-img" src="../../../../assets/picture/tarteCitron.jpg">
+        </div>
+        <div class="col-sm-8">
+          <div class="card-body">
+            <h5 class="card-title"><b>{{recipe.nameRecipe}} by <i>{{recipe.pseudo}}</i></b></h5>
+            <p class="card-text">{{recipe.summary}}</p>
+            <p class="card-text"><small class="text-muted">Shared on {{recipe.postDate | date }}</small></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-
-
+  </ng-container>
 </div>
+<!---->

@@ -17,3 +17,23 @@ body {
 .align-y-center {
   margin-top: 50%;
 }
+
+.border-light {
+  border-color: #e9e9e9;
+}
+
+.border-md {
+  border-width: 2px !important;
+}
+
+.bg-dark {
+  background-color: #262626 !important;
+}
+
+.bg-dark-neutral {
+  background-color: #303030 !important;
+}
+
+.border-light-transparent {
+  border-color: rgb(241, 241, 241) !important;
+}

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://cuisinhelha.database.windows.net",
+  apiUrl: 'http://cuisinhelha.azurewebsites.net',
 };

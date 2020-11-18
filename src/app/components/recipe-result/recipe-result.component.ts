@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {RecipeDTO} from "../../DTOs/recipe-dto";
-import {Subscription} from "rxjs";
-import {RecipeService} from "@app/services/recipe.service";
-import {AuthenticationService} from "@app/services/authentication.service";
+import {RecipeDTO} from '../../DTOs/recipe-dto';
+import {Subscription} from 'rxjs';
+import {RecipeService} from '@app/services/recipe.service';
+import {AuthenticationService} from '@app/services/authentication.service';
 
 @Component({
   selector: 'app-recipe-result',
@@ -12,9 +12,9 @@ import {AuthenticationService} from "@app/services/authentication.service";
 export class RecipeResultComponent implements OnInit {
 
   @Output()
-  private recipeDeleted:EventEmitter<RecipeDTO> = new EventEmitter<RecipeDTO>();
-  id: number = 1;
-  type: boolean = true;
+  private recipeDeleted: EventEmitter<RecipeDTO> = new EventEmitter<RecipeDTO>();
+  id = 1;
+  type = true;
 
   constructor(public _authService: AuthenticationService) {
   }

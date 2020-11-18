@@ -5,7 +5,7 @@ export class Picture {
   private _picture: string;
 
 
-  constructor(idRecipe: number=1, picture: string="") {
+  constructor(idRecipe: number= 1, picture: string= '') {
 
     this._idRecipe = idRecipe;
     this._picture = picture;

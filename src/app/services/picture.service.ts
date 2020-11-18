@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {PictureDTO, PictureList} from "../DTOs/picture-dto";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {PictureDTO, PictureList} from '../DTOs/picture-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PictureService {
 
-  private static URL: string = "/api/pictures";
+  private static URL = '/api/pictures';
 
   constructor(public http: HttpClient) {
   }

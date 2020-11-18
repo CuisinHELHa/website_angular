@@ -8,5 +8,5 @@ export interface UserDTO {
   mail: string;
   userType: boolean;
   token?: string;
-  password?:string;
+  password?: string;
 }

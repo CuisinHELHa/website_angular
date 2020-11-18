@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ReviewDTO, ReviewList} from "@app/DTOs/review-dto";
-import {Subscription} from "rxjs";
-import {RecipeDTO} from "@app/DTOs/recipe-dto";
-import {RecipeService} from "@app/services/recipe.service";
-import {ReviewService} from "@app/services/review.service";
-import {ActivatedRoute} from "@angular/router";
+import {RecipeDTO} from '@app/DTOs/recipe-dto';
+import {RecipeService} from '@app/services/recipe.service';
+import {ReviewService} from '@app/services/review.service';
+import {ActivatedRoute} from '@angular/router';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,57 +11,30 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./home.component.css']
 })
 
-// @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
-
-  //recette du mois possède l'id 1
-  private idRecipe:number=1;
-
-  private _recipe: RecipeDTO;
-  private _reviews: ReviewList;
-  private subscriptions: Subscription[] = [];
-
+  private readonly idFrontRecipe = 160;
+  private frontRecipeSubject = new Subject<RecipeDTO>();
 
   constructor(private recipeService: RecipeService,
-              private reviewService: ReviewService,
-              public route:ActivatedRoute) {
+              public route: ActivatedRoute) {
+  }
+
+  private _frontRecipeObs = this.frontRecipeSubject.asObservable();
+
+  get frontRecipeObs(): Observable<RecipeDTO> {
+    return this._frontRecipeObs;
   }
 
   ngOnInit() {
     this.loadRecipe();
-    this.loadReviews();
-
-  }
-
-
-  get recipe(): RecipeDTO {
-    return this._recipe;
-  }
-
-  set recipe(value: RecipeDTO) {
-    this._recipe = value;
-  }
-
-
-  get reviews(): ReviewDTO[] {
-    return this._reviews;
-  }
-
-  set reviews(value: ReviewDTO[]) {
-    this._reviews = value;
   }
 
   private loadRecipe() {
-    const sub: Subscription = this.recipeService
-      .queryId(this.idRecipe)
-      .subscribe(recipes => this.recipe=recipes[0]);
-    this.subscriptions.push(sub);
-  }
-  private loadReviews()
-  {
-    const sub: Subscription = this.reviewService
-      .queryByRecipe(this.idRecipe)
-      .subscribe(reviews => this.reviews = reviews);
-    this.subscriptions.push(sub);
+    this.recipeService
+      .queryId(this.idFrontRecipe)
+      .subscribe(recipes => {
+        this.frontRecipeSubject.next(recipes[0]);
+        console.log(recipes[0]);
+      });
   }
 }

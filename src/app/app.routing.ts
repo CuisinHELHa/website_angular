@@ -1,11 +1,11 @@
 import {RouterModule, Routes} from '@angular/router';
 
 import {HomeComponent} from './components/pages/home';
-import {RecipeDetailsComponent} from "./components/pages/recipe-details";
-import {UserDetailsComponent} from "./components/pages/user-details";
-import {RecipeSearchComponent} from "./components/pages/recipe-search";
-import {RecipeCreateComponent} from "./components/pages/recipe-create/recipe-create.component";
-import {AuthGuard} from "@app/helpers";
+import {RecipeDetailsComponent} from './components/pages/recipe-details';
+import {UserDetailsComponent} from './components/pages/user-details';
+import {RecipeSearchComponent} from './components/pages/recipe-search';
+import {RecipeCreateComponent} from './components/pages/recipe-create/recipe-create.component';
+import {AuthGuard} from '@app/helpers';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, pathMatch: 'full'},
