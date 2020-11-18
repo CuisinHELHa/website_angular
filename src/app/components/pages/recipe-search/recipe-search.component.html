@@ -1,18 +1,30 @@
 <div class="container-fluid col-lg-12 imgHome p-2">
-  <div class="p-2 container-fluid border col-lg-7 col-sm-12 text-center" style="background: rgba(255,255,255,0.60);backdrop-filter: blur(3px);">
-    <div class="row ml-3">
-      <div *ngFor="let filter of filters">
-        <input type="radio" [id]="filter.id"[(ngModel)]="filterSelected"
-               (change)="updateFilteredRecipes()" [value]="filter.value">
-          <label [for]="filter.id" class="m-2">{{filter.id}}</label>
+  <div class="p-2 container-fluid border col-lg-7 col-sm-12 text-center"
+       style="background: rgba(255,255,255,0.60);backdrop-filter: blur(3px);">
+    <div class="row">
 
+    </div>
+    <div class="row px-3 pt-3">
+      <div class="col text-left pl-3">
+        <h4>Type of dish:</h4>
       </div>
     </div>
-    <div>
-      <h3>Résultat de la recherche pour {{searchText}}</h3>
-        <div class="text-left" *ngFor="let recipe of filteredRecipes">
-            <app-recipe-result [recipe]="recipe" (recipeDeleted)="deleteRecipeInDB($event)"></app-recipe-result>
+    <div class="row px-3 mb-3">
+      <div class="col text-left">
+        <ng-container *ngFor="let filter of filters">
+          <input (change)="updateFilteredRecipes()" [(ngModel)]="filterSelected" [id]="filter.id"
+                 [value]="filter.value" type="radio">
+          <label [for]="filter.id" class="m-2">{{filter.id}}</label>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h3>Results for "{{searchText}}"</h3>
+        <div *ngFor="let recipe of filteredRecipes" class="text-left mb-3">
+          <app-recipe-result (recipeDeleted)="deleteRecipeInDB($event)" [recipe]="recipe"></app-recipe-result>
         </div>
+      </div>
     </div>
   </div>
 </div>

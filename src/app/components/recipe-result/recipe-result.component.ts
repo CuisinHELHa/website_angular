@@ -1,7 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {RecipeDTO} from '../../DTOs/recipe-dto';
-import {Subscription} from 'rxjs';
-import {RecipeService} from '@app/services/recipe.service';
 import {AuthenticationService} from '@app/services/authentication.service';
 
 @Component({
@@ -9,12 +7,9 @@ import {AuthenticationService} from '@app/services/authentication.service';
   templateUrl: './recipe-result.component.html',
   styleUrls: ['./recipe-result.component.css']
 })
-export class RecipeResultComponent implements OnInit {
-
+export class RecipeResultComponent {
   @Output()
   private recipeDeleted: EventEmitter<RecipeDTO> = new EventEmitter<RecipeDTO>();
-  id = 1;
-  type = true;
 
   constructor(public _authService: AuthenticationService) {
   }
@@ -41,14 +36,11 @@ export class RecipeResultComponent implements OnInit {
     this._spices = value;
   }
 
-  ngOnInit() {
-  }
-
   updateSpice(nb: number) {
     this._spices = Array(nb).fill(0);
   }
 
-    deleteRecipe() {
-      this.recipeDeleted.next(this.recipe);
-    }
+  deleteRecipe() {
+    this.recipeDeleted.next(this.recipe);
+  }
 }

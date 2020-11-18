@@ -30,7 +30,6 @@ export class AuthenticationService {
     password = sha256(password);
 
     const authPath = `${environment.apiUrl}${AuthenticationService.AUTH_API_PATH}`;
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', authPath);
     return this.http.post<any>(authPath, {username, password})
       .pipe(map(user => {
         localStorage.setItem(AuthenticationService.USER_KEY, JSON.stringify(user));

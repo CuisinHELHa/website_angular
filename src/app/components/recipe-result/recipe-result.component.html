@@ -1,11 +1,19 @@
 <div class="border border-dark rounded p-2" style="background: rgba(255,255,255,0.20);backdrop-filter: blur(3px);">
-  <div  [routerLink]="'/recipe-details/'+recipe.idRecipe">
-  <h4>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</h4>
-  {{recipe.recipeType}} for {{recipe.persons}} persons ({{recipe.prepTime}} min)<br>
-  {{recipe.summary}}
+  <div [routerLink]="'/recipe-details/'+recipe.idRecipe">
+    <h4>{{recipe.nameRecipe}} (
+      <app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>
+      /5)
+    </h4>
+    {{recipe.recipeType}} for {{recipe.persons}} persons ({{recipe.prepTime}} min)<br>
+    {{recipe.summary}}
   </div>
   <div class="row pr-3">
     <i class="col-9 ">posté on {{recipe.postDate}} by <b>{{recipe.pseudo}}</b></i>
-    <button class="col-3" *ngIf=" this._authService.currentUserValue.userType || _authService.currentUserValue.idUser === recipe.idUser" (click)="deleteRecipe()">Delete recipe</button>
+
+    <ng-container
+      *ngIf="this._authService.currentUserValue && (this._authService.currentUserValue.userType || _authService.currentUserValue.idUser === recipe.idUser)">
+      <button (click)="deleteRecipe()" class="col-3">Delete recipe
+      </button>
+    </ng-container>
   </div>
 </div>
