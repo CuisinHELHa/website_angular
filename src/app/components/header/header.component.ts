@@ -1,7 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 
 declare var $: any;
-
 
 @Component({
   selector: 'app-header',

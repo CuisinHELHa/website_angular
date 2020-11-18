@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeDTO} from '@app/DTOs/recipe-dto';
 import {RecipeService} from '@app/services/recipe.service';
-import {ReviewService} from '@app/services/review.service';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 
@@ -32,9 +31,6 @@ export class HomeComponent implements OnInit {
   private loadRecipe() {
     this.recipeService
       .queryId(this.idFrontRecipe)
-      .subscribe(recipes => {
-        this.frontRecipeSubject.next(recipes[0]);
-        console.log(recipes[0]);
-      });
+      .subscribe(recipes => this.frontRecipeSubject.next(recipes[0]));
   }
 }

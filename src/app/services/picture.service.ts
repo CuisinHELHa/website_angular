@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PictureDTO, PictureList} from '../DTOs/picture-dto';
+import {environment} from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +15,18 @@ export class PictureService {
   }
 
   query(): Observable<PictureList> {
-    return this.http.get<PictureList>(PictureService.URL);
+    return this.http.get<PictureList>(environment.apiUrl + PictureService.URL);
   }
 
   post(ingredient: PictureDTO): Observable<PictureDTO> {
-    return this.http.post<PictureDTO>(PictureService.URL, ingredient);
+    return this.http.post<PictureDTO>(environment.apiUrl + PictureService.URL, ingredient);
   }
 
   put(picture: PictureDTO): Observable<any> {
-    return this.http.put(PictureService.URL, picture);
+    return this.http.put(environment.apiUrl + PictureService.URL, picture);
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${PictureService.URL}/${id}`);
+    return this.http.delete(`${environment.apiUrl}${PictureService.URL}/${id}`);
   }
 }

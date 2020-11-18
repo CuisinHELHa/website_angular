@@ -4,7 +4,6 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 import {AuthenticationService} from '@app/services/authentication.service';
-import {environment} from '@environments/environment';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

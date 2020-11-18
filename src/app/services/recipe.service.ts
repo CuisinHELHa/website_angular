@@ -28,7 +28,6 @@ export class RecipeService {
   }
 
   queryId(id: number): Observable<RecipeList> {
-    console.log(environment.apiUrl + RecipeService.URL + 'id=' + id);
     return this.http.get<RecipeList>(environment.apiUrl + RecipeService.URL + 'id=' + id);
   }
 

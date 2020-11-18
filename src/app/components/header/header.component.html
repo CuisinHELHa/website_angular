@@ -1,21 +1,21 @@
-<div class="bg-dark shadow pt-3 pb-1 border-bottom border-light-transparent border-md">
+<div class="bg-dark pt-3 pb-1 border-bottom border-light border-md">
   <div class="container-fluid">
-    <div class="row mb-3 justify-content-center">
+    <div class="row mb-3">
 
       <div class="col-sm-6 offset-sm-3 d-none d-md-block d-flex text-center">
-        <img class="img-fluid mx-auto" src="../../../assets/img/cuisineHELHa_logo.png" routerLink=""
+        <img class="img-fluid mx-auto" routerLink="" src="../../../assets/img/cuisineHELHa_logo.png"
              style="width: 85%;height: auto; max-width: 415px">
       </div>
 
       <div class="mt-2 mt-sm-0 col-sm-2 offset-sm-1 d-flex justify-content-end">
-        <div class="d-flex p-2 mx-auto mr-2 mt-2 rounded-circle text-white bg-dark-neutral border border-light-transparent" style="max-height: 64px">
+        <div  id="user-icon" class="d-flex p-2 mx-auto mr-2 mt-2 rounded-circle text-light bg-dark-neutral border border-md border-light">
           <fa (click)="onLoginIconClick()" class="my-auto" name="user-circle" size="3x"></fa>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12 col-sm-7 col-md-5 col-lg-8 col-xl-8 offset-xl-2 p-2">
+    <div class="row no-gutters justify-content-center">
+      <div class="col col-12 col-sm-7 col-xl-4 p-2 ">
         <app-recipe-search-bar></app-recipe-search-bar>
       </div>
     </div>

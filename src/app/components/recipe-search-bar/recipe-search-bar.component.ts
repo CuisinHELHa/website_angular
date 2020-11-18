@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {environment} from '@environments/environment';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-recipe-search-bar',
@@ -11,14 +10,30 @@ export class RecipeSearchBarComponent implements OnInit {
   constructor(private router: Router) {
   }
 
-  private _userSearch: String = '';
+  private _mouseIn: boolean;
 
-  get userSearch(): String {
+  get mouseIn(): boolean {
+    return this._mouseIn;
+  }
+
+  private _userSearch: string = '';
+
+  get userSearch(): string {
     return this._userSearch;
   }
 
-  set userSearch(value: String) {
+  set userSearch(value: string) {
     this._userSearch = value;
+  }
+
+  @HostListener('mouseenter')
+  public mouseEnter(): void {
+    this._mouseIn = true;
+  }
+
+  @HostListener('mouseleave')
+  public mouseLeave(): void {
+    this._mouseIn = false;
   }
 
   ngOnInit() {

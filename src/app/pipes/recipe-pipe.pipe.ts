@@ -19,5 +19,4 @@ export class RecipePipe implements PipeTransform {
         return recipes;
     }
   }
-
 }

@@ -4,8 +4,8 @@
   min-height: 704px;
 }
 
-.bgDetail{
-  background: rgba(255,255,255,0.80);
+.bg-detail{
+  background: rgba(255,255,255,0.93);
   backdrop-filter: blur(3px);
 
 }

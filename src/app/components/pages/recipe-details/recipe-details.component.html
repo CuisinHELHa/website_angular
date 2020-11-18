@@ -1,49 +1,70 @@
 <div class="container-fluid col-lg-12 detail-recipe-img pt-2 pb-2">
   <div class="container-fluid col-lg-3 "></div>
-  <div class="container-fluid border col-lg-6 col-sm-12 text-center bgDetail">
-    <p class="text-right font-italic" style="font-size: small">post on {{recipe.postDate}} by <b>{{recipe.pseudo}}</b>
+  <div class="container-fluid border col-lg-6 col-sm-12 text-center shadow bg-detail border border-dark ">
+    <p class="text-right pt-2" style="font-size: medium">Posted on {{recipe.postDate | date}} by
+      <b>{{recipe.pseudo}}</b>
     </p>
 
-    <h3 class="text-center font-weight-bold pt-3 mb-0">{{recipe.nameRecipe}}</h3>
-    <span *ngFor="let s of spices"> <img height="20" src="../../../../assets/img/chili.png" width="20"></span>
-    <h4 class="pt-2">{{recipe.recipeType}} for {{recipe.persons}} persons ({{recipe.prepTime}} min)</h4>
-    {{recipe.summary}}<br>
+    <h3 class="text-center font-weight-bold pt-3 mb-1">{{recipe.nameRecipe}}</h3>
+    <h4 class="pt-2">{{recipe.recipeType}}, {{recipe.persons}} servings ({{recipe.prepTime}} min)</h4>
+    <span class="mb-2">
+      <ng-container *ngFor="let s of spices">
+        <img height="20" src="../../../../assets/img/chili.png" width="20">
+      </ng-container>
+    </span><br/>
 
-    <img class="rounded-lg" height="300" src="../../../../assets/picture/tarteCitron.jpg" width="300">
-    <br>
-
-    <h5 class="font-weight-bold pt-2">Ingredients :</h5>
-
-    <p *ngFor="let ingredient of ingredients" class="mb-0">
-      {{ingredient.nameIngredient}} {{ingredient.quantity}} {{ingredient.unit}}
+    <p class="mt-3">
+      {{recipe.summary}}
     </p>
 
-    <h5 class="font-weight-bold mt-1">Preparation :</h5>
+    <img class="rounded-md border border-dark mb-3" height="300" src="../../../../assets/picture/tarteCitron.jpg"
+         width="300">
 
-    <ul>
-      <p *ngFor="let step of steps">
-        <!--        {{step.stepNb}} : -->
-        {{step.step}}
+    <div class="mb-3">
+      <h5 class="font-weight-bold pt-2">Ingredients:</h5>
+
+      <p *ngFor="let ingredient of ingredients" class="mb-0">
+        {{ingredient.nameIngredient}} {{ingredient.quantity}} {{ingredient.unit}}
       </p>
-    </ul>
-    <h5 class="pl-2 text-left font-weight-bold">Comments</h5>
-    <app-review-form (reviewPosted)="postReview($event)"
-                     *ngIf="authService.currentUserValue; else guestUser;"></app-review-form>
-    <div *ngFor="let review of reviews" class="row pt-2">
-      <h6 class="col-2 text-left pl-3">{{review.pseudo}}</h6> ({{review.rate}}/5)
-      <p class="font-italic col-5">{{review.reviewMessage}}</p>
-
-      <button (click)="deleteReviewInDB(review)"
-              *ngIf="authService.currentUserValue.userType || authService.currentUserValue.idUser === review.idUser"
-              class="btn-dark">Delete Comment
-      </button>
     </div>
 
-    <ng-template #guestUser>
-      <b>You must log in to post a review</b>
-    </ng-template>
+    <div class="mb-3">
+      <h5 class="font-weight-bold mt-1">Steps:</h5>
+      <ul>
+        <p *ngFor="let step of steps">
+          {{step.step}}
+        </p>
+      </ul>
+    </div>
 
+    <div class="mb-3">
+      <h5 class="pl-3 mb-3 text-left font-weight-bold">Reviews:</h5>
+      <app-review-form (reviewPosted)="postReview($event)"
+                       *ngIf="authService.currentUserValue; else guestUser;"></app-review-form>
+
+      <div class="container mt-3 pt-2">
+        <div *ngFor="let review of reviews" class="row pt-2 mb-3 border-top border-grey ">
+          <div class="col-3 border-right border-grey">
+            <h6 class="text-left font-weight-bold">({{review.rate}}/5) - {{review.pseudo}}</h6>
+          </div>
+          <div class="col-6">
+            <p class="d-inline">{{review.reviewMessage}}</p>
+          </div>
+          <div class="col-3">
+            <button
+              (click)="deleteReviewInDB(review)"
+              *ngIf="authService.currentUserValue && (authService.currentUserValue.userType || authService.currentUserValue.idUser === review.idUser)" class="btn btn-sm btn-dark">
+              Delete review
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #guestUser>
+        <span class="mb-3">
+          <b>You must login to post a review.</b>
+        </span>
+      </ng-template>
+    </div>
   </div>
-  <div class="container-fluid col-lg-3"></div>
-
 </div>

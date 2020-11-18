@@ -16,8 +16,6 @@ export class CreateUserPipe implements PipeTransform {
       mail: email,
       userType: false,
     };
-
     return this._user;
   }
-
 }

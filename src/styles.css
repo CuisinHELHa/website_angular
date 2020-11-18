@@ -6,6 +6,10 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}
+
 .main-color {
   background-color: #000000;
 }
@@ -23,7 +27,11 @@ body {
 }
 
 .border-md {
-  border-width: 2px !important;
+  border-width: 0.18em !important;
+}
+
+.border-lg {
+  border-width: 0.24em !important;
 }
 
 .bg-dark {
@@ -34,6 +42,14 @@ body {
   background-color: #303030 !important;
 }
 
-.border-light-transparent {
+.border-light {
   border-color: rgb(241, 241, 241) !important;
+}
+
+.border-grey {
+  border-color: rgb(179, 179, 179) !important;
+}
+
+.border-dark {
+  border-color: #262626 !important;
 }
