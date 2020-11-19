@@ -25,22 +25,73 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     newPassword: this.fb.control('', Validators.required),
     oldPassword: this.fb.control('', Validators.required)
   });
-
-
-  private _recipes: RecipeList;
-  private _reviews: ReviewList;
-
   private subscriptions: Subscription[] = [];
-  private _changingMail: boolean;
-  private _changingPassword: boolean;
-  private _passwordError: boolean;
-  private _passwordSuccess: boolean;
 
   constructor(private recipeService: RecipeService,
               private reviewService: ReviewService,
               private userService: UserService,
               private _authService: AuthenticationService,
               private fb: FormBuilder) {
+  }
+
+  private _recipes: RecipeList;
+
+  get recipes(): RecipeDTO[] {
+    return this._recipes;
+  }
+
+  set recipes(value: RecipeDTO[]) {
+    this._recipes = value;
+  }
+
+  private _reviews: ReviewList;
+
+  get reviews(): ReviewDTO[] {
+    return this._reviews;
+  }
+
+  set reviews(value: ReviewDTO[]) {
+    this._reviews = value;
+  }
+
+  private _changingMail: boolean;
+
+  get changingMail(): boolean {
+    return this._changingMail;
+  }
+
+  set changingMail(value: boolean) {
+    this._changingMail = value;
+  }
+
+  private _changingPassword: boolean;
+
+  get changingPassword(): boolean {
+    return this._changingPassword;
+  }
+
+  set changingPassword(value: boolean) {
+    this._changingPassword = value;
+  }
+
+  private _passwordError: boolean;
+
+  get passwordError(): boolean {
+    return this._passwordError;
+  }
+
+  set passwordError(value: boolean) {
+    this._passwordError = value;
+  }
+
+  private _passwordSuccess: boolean;
+
+  get passwordSuccess(): boolean {
+    return this._passwordSuccess;
+  }
+
+  set passwordSuccess(value: boolean) {
+    this._passwordSuccess = value;
   }
 
   ngOnInit() {
@@ -57,42 +108,42 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   loadRecipe() {
     const sub = this.recipeService
-        .queryUser(this.user.idUser)
-        .subscribe(recipes => this.recipes = recipes);
+      .queryUser(this.user.idUser)
+      .subscribe(recipes => this.recipes = recipes);
     this.subscriptions.push(sub);
   }
 
   loadReview() {
     const sub = this.reviewService
-        .queryUser(this.user.idUser)
-        .subscribe(reviews => this.reviews = reviews);
+      .queryUser(this.user.idUser)
+      .subscribe(reviews => this.reviews = reviews);
     this.subscriptions.push(sub);
   }
 
   updateMail() {
     const sub = this.userService
-        .putMail({
-          userID: this.user.idUser,
-          mail: this.mailForm.get('newMail').value
-        })
-        .subscribe(answer => {
-          console.log(answer);
-          this.user.mail = this.mailForm.get('newMail').value;
-          // localStorage.setItem()
-          this.mailForm.reset();
-          this.changingMail = false;
-        });
+      .putMail({
+        userID: this.user.idUser,
+        mail: this.mailForm.get('newMail').value
+      })
+      .subscribe(answer => {
+        console.log(answer);
+        this.user.mail = this.mailForm.get('newMail').value;
+        localStorage.setItem(AuthenticationService.USER_KEY, JSON.stringify(this.user));
+        this.mailForm.reset();
+        this.changingMail = false;
+      });
     this.subscriptions.push(sub);
   }
 
   updatePassword() {
     const sub = this.userService
-        .putPassword({
-          userID: this.user.idUser,
-          passwordNew: this.pwdForm.get('newPassword').value,
-          passwordOld: this.pwdForm.get('oldPassword').value
-        })
-        .subscribe(result => {
+      .putPassword({
+        userID: this.user.idUser,
+        passwordNew: this.pwdForm.get('newPassword').value,
+        passwordOld: this.pwdForm.get('oldPassword').value
+      })
+      .subscribe(result => {
           this.passwordSuccess = true;
           this.changingPassword = false;
           this.pwdForm.reset();
@@ -101,51 +152,5 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
           this.passwordError = true;
         });
     this.subscriptions.push(sub);
-  }
-
-  get reviews(): ReviewDTO[] {
-    return this._reviews;
-  }
-
-  set reviews(value: ReviewDTO[]) {
-    this._reviews = value;
-  }
-  get recipes(): RecipeDTO[] {
-    return this._recipes;
-  }
-
-  set recipes(value: RecipeDTO[]) {
-    this._recipes = value;
-  }
-
-  get changingPassword(): boolean {
-    return this._changingPassword;
-  }
-
-  set changingPassword(value: boolean) {
-    this._changingPassword = value;
-  }
-  get changingMail(): boolean {
-    return this._changingMail;
-  }
-
-  set changingMail(value: boolean) {
-    this._changingMail = value;
-  }
-
-  get passwordError(): boolean {
-    return this._passwordError;
-  }
-
-  set passwordError(value: boolean) {
-    this._passwordError = value;
-  }
-
-  get passwordSuccess(): boolean {
-    return this._passwordSuccess;
-  }
-
-  set passwordSuccess(value: boolean) {
-    this._passwordSuccess = value;
   }
 }

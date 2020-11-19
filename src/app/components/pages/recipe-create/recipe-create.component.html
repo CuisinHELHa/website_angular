@@ -1,110 +1,111 @@
 <div class="container-fluid col-lg-12 imgBack p-2">
 
 
-<div class="container-fluid col-lg-3">
+  <div class="container-fluid col-lg-3">
 
-</div>
-<div class="container-fluid border col-lg-7 col-sm-12 text-center" style="background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
-  <h3 class="text-center font-weight-bold p-3">Create recipe</h3>
-  <form [formGroup]="_form" (ngSubmit)=postRecipe()>
-    <div class="form-row">
-      <div class="col-md-12 mb-3">
-        <label for="nameRecipe">Recipe Name</label>
-        <input type="text" class="form-control" formControlName="nameRecipe" id="nameRecipe" minlength="5">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="col-md-12 mb-3">
-        <label for="Summary">Summary of your recipe</label>
-        <input type="text" class="form-control" id="Summary" formControlName="summary">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="col-md-3 mb-3">
-        <label for="recipeType">Recipe Type</label>
-        <div class="input-group">
-          <select class="custom-select" id="recipeType" formControlName="recipeType">
-            <option *ngFor="let filter of filters">{{filter.value}}</option>
-          </select>
+  </div>
+  <div class="container-fluid border col-lg-7 col-sm-12 text-center"
+       style="background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
+    <h3 class="text-center font-weight-bold p-3">Create recipe</h3>
+    <form (ngSubmit)=postRecipe() [formGroup]="_form">
+      <div class="form-row">
+        <div class="col-md-12 mb-3">
+          <label for="nameRecipe">Name of the dish</label>
+          <input class="form-control" formControlName="nameRecipe" id="nameRecipe" minlength="5" type="text">
         </div>
       </div>
-      <div class="col-md-3 mb-3">
-        <label for="prepTime">Preparation time</label>
-        <input type="number" class="form-control" id="prepTime" formControlName="prepTime">
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="persons">Persons</label>
-        <input type="number" class="form-control" id="persons" formControlName="persons">
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="spicesRate">Spice Rate</label>
-        <input type="number" min="0" max="5" class="custom-select" id="spicesRate" formControlName="spicesRate"/>
-      </div>
-    </div>
-
-    <!-- Ingredients -->
-    <form class="form-row" [formGroup]="_ingredientForm" (ngSubmit)="addIngredients()">
-      <div class="col-md-5 mb-3">
-        <label for="ingredients">ingredients</label>
-        <select class="custom-select" id="ingredients" formControlName="nameIngredient">
-          <option *ngFor="let ingredient of ingredients; index as i">
-            {{ingredient.nameIngredient}}
-          </option>
-        </select>
-
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="ingredientQuantity">quantity</label>
-        <input type="number" class="form-control" id="ingredientQuantity" formControlName="quantity">
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="mesureIngredient">Mesure</label>
-        <select class="custom-select" id="mesureIngredient" formControlName="unit">
-          <option *ngFor="let unit of units">{{unit.value}}</option>
-        </select>
+      <div class="form-row">
+        <div class="col-md-12 mb-3">
+          <label for="Summary">Summary</label>
+          <input class="form-control" formControlName="summary" id="Summary" type="text">
+        </div>
       </div>
 
-      <button class="btn btn-sm btn-dark mr-2" style="height:30px" [disabled]="!_ingredientForm.valid">Add ingredient</button>
+      <div class="form-row">
+        <div class="col-md-3 mb-3">
+          <label for="recipeType">Type of dish</label>
+          <div class="input-group">
+            <select class="custom-select" formControlName="recipeType" id="recipeType">
+              <option *ngFor="let filter of filters">{{filter.value}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="prepTime">Preparation time</label>
+          <input class="form-control" formControlName="prepTime" id="prepTime" required type="number">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="persons">Servings</label>
+          <input class="form-control" formControlName="persons" id="persons" required type="number">
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="spicesRate">Spices rate</label>
+          <input class="custom-select" formControlName="spicesRate" id="spicesRate" required  max="5" min="0" type="number"/>
+        </div>
+      </div>
 
-    </form>
+      <!-- Ingredients -->
+      <form (ngSubmit)="addIngredients()" [formGroup]="_ingredientForm" class="form-row">
+        <div class="col-md-5 mb-3">
+          <label for="ingredients">Ingredients</label>
+          <select class="custom-select" formControlName="nameIngredient" required id="ingredients">
+            <option *ngFor="let ingredient of ingredients; index as i">
+              {{ingredient.nameIngredient}}
+            </option>
+          </select>
+
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="ingredientQuantity">Quantity</label>
+          <input class="form-control" formControlName="quantity" id="ingredientQuantity" required type="number">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="mesureIngredient">Scale</label>
+          <select class="custom-select" formControlName="unit" id="mesureIngredient">
+            <option *ngFor="let unit of units">{{unit.value}}</option>
+          </select>
+        </div>
+
+        <button [disabled]="!_ingredientForm.valid" class="btn btn-sm btn-dark mr-2" style="height:30px">Add
+          ingredient
+        </button>
+
+      </form>
 
 
-      <p class="offset-3 text-left" *ngFor="let ingredient of ingredientRecipe; let i = index">
-        <button class="btn btn-dark btn-sm" (click)="removeIngredient(i)"><i class="fa fa-trash"></i></button>
-        {{ingredient.quantity}}{{ingredient.unit}} {{ingredient.nameIngredient}}
-
+      <p *ngFor="let ingredient of ingredientRecipe; let i = index" class="offset-3 text-left">
+        <button (click)="removeIngredient(i)" class="btn btn-dark btn-sm mt-2"><i class="fa fa-trash"></i></button>
+        <span class="ml-2">
+          {{ingredient.nameIngredient}} - {{ingredient.quantity}}{{ingredient.unit}}
+        </span>
       </p>
 
 
-    <form class="form-row" [formGroup]="_stepForm" (ngSubmit)="addStep()">
-      <div class="col-md-12 mb-3">
-        <label for="steps">Step(s)</label>
-        <textarea class="form-control" id="steps" formControlName="step"></textarea>
-      </div>
-      <div class="">
-        <button class="btn btn-sm btn-dark" style="height:30px" [disabled]="!_stepForm.valid">Add step</button>
-      </div>
-    </form>
+      <form (ngSubmit)="addStep()" [formGroup]="_stepForm" class="form-row">
+        <div class="col-md-12 mb-3">
+          <label for="steps">Step(s)</label>
+          <textarea class="form-control" formControlName="step" id="steps"></textarea>
+        </div>
+        <div class="">
+          <button [disabled]="!_stepForm.valid" class="btn btn-sm btn-dark" style="height:30px">Add step</button>
+        </div>
+      </form>
 
 
-      <p class="offset-3 text-left" *ngFor="let step of stepsRecipe; let i = index">
-        <button class="btn btn-dark btn-sm" (click)="removeStep(i)"><i class="fa fa-trash"></i></button>
-        étape {{step.stepNb}} : {{step.step}}
+      <p *ngFor="let step of stepsRecipe; let i = index" class="offset-3 text-left">
+        <button (click)="removeStep(i)" class="btn btn-dark btn-sm mt-2"><i class="fa fa-trash"></i></button>
+        <span class="ml-2">
+          <b>  {{step.stepNb}}.</b> {{step.step}}
+        </span>
 
       </p>
 
+      <button [disabled]="!_form.valid" class="btn btn-md btn-dark mr-2 col-12 mt-2 mb-2">
+        <h6 class="d-inline font-weight-bold ">Submit recipe</h6>
+      </button>
+    </form>
+<!--    <app-picture-form></app-picture-form>-->
 
-<!--      <div class="form-group text-center">-->
-<!--        <label for="addPicture">Ajouter une image</label>-->
-<!--        <input type="file" class="form-control-file align-content-center" id="addPicture">-->
-<!--      </div>-->
-    <button class="btn btn-md btn-dark mr-2 col-12 mt-2 mb-2" [disabled]="!_form.valid">
-      <h6 class="d-inline font-weight-bold " >Submit recipe</h6>
-    </button>
-  </form>
-  <app-picture-form></app-picture-form>
-
-</div>
-<div class="container-fluid col-lg-3"></div>
+  </div>
+  <div class="container-fluid col-lg-3"></div>
 </div>

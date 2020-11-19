@@ -36,6 +36,7 @@ export class RecipeService {
   }
 
   post(ingredient: RecipeDTO): Observable<RecipeDTO> {
+    console.log(environment.apiUrl + RecipeService.URL, ingredient);
     return this.http.post<RecipeDTO>(environment.apiUrl + RecipeService.URL, ingredient);
   }
 

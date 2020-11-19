@@ -1,10 +1,7 @@
-<div class="container-fluid border-top border-grey p-2" style="background: rgba(255,255,255,0.20);backdrop-filter: blur(3px);">
-  <div class="row" [routerLink]="'/recipe-details/'+recipe.idRecipe">
+<div class="container-fluid" style="background: rgba(255,255,255,0.20);backdrop-filter: blur(3px);" [routerLink]="'/recipe-details/'+recipe.idRecipe">
+  <div class="row" >
     <div class="col">
-      <h4>{{recipe.nameRecipe}} (
-        <app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>
-        /5)
-      </h4>
+      <h4>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/ 5)</h4>
       {{recipe.recipeType}}, {{recipe.persons}} servings ({{recipe.prepTime}} min)<br>
       {{recipe.summary}}
     </div>
@@ -18,7 +15,7 @@
     <div class="col text-right">
       <ng-container
         *ngIf="this._authService.currentUserValue && (this._authService.currentUserValue.userType || _authService.currentUserValue.idUser === recipe.idUser)">
-        <button (click)="deleteRecipe()" class="col-3 mt-3 btn btn-sm btn-dark">Delete recipe
+        <button (click)="deleteRecipe()" class="col-3 mt-3 btn btn-sm btn-danger">Delete recipe
         </button>
       </ng-container>
     </div>

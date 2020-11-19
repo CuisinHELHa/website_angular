@@ -1,6 +1,6 @@
 <div class="container-fluid col-lg-12 detail-recipe-img pt-2 pb-2">
   <div class="container-fluid col-lg-3 "></div>
-  <div class="container-fluid border col-lg-6 col-sm-12 text-center shadow bg-detail border border-dark ">
+  <div class="container-fluid border col-lg-8 col-sm-12 text-center shadow bg-detail border border-dark ">
     <p class="text-right pt-2" style="font-size: medium">Posted on {{recipe.postDate | date}} by
       <b>{{recipe.pseudo}}</b>
     </p>
@@ -50,7 +50,7 @@
           <div class="col-6">
             <p class="d-inline">{{review.reviewMessage}}</p>
           </div>
-          <div class="col-3">
+          <div class="col-3 text-right">
             <button
               (click)="deleteReviewInDB(review)"
               *ngIf="authService.currentUserValue && (authService.currentUserValue.userType || authService.currentUserValue.idUser === review.idUser)" class="btn btn-sm btn-dark">

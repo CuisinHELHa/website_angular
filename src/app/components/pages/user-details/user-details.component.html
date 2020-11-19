@@ -1,44 +1,93 @@
-
 <div class="container-fluid col-lg-12 userBG p-2">
-  <div class="container-fluid border col-lg-7 col-sm-12 pt-2" style="min-height: 550px;background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
-    <h2><b>User details</b></h2>
+  <div class="container-fluid border col-lg-7 col-sm-12 pt-2"
+       style="min-height: 550px;background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
+    <h2 class="ml-2 mb-2 text-center"><b>Your details</b></h2>
+
     <div class="row">
-      <b class="col-4">Name : </b>
-      <div>{{user.lastName}} "{{user.pseudo}}" {{user.firstName}}</div>
+      <div class="col">
+        <b>Name:</b> {{user.lastName}} "{{user.pseudo}}" {{user.firstName}}
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-4 my-auto">
+        <b>Email:</b> {{user.mail}}
+      </div>
+      <div class="col-3 offset-5 text-right">
+        <button (click)="changingMail = !changingMail" class="btn btn-sm btn-dark">Update email</button>
+      </div>
     </div>
     <div class="row">
-      <b class="col-4">Mail :</b>
-      <div>{{user.mail}}</div>
-        <button (click)="changingMail = !changingMail">Change my e-mail</button>
-        <form *ngIf="changingMail" [formGroup]="mailForm" (ngSubmit)="updateMail()">
-            <label for="mail">New mail : </label>
-            <input id="mail" type="text" formControlName="newMail">
-            <button>Save new email</button>
+      <div class="col">
+        <form (ngSubmit)="updateMail()" *ngIf="changingMail" [formGroup]="mailForm">
+          <div class="row mt-2 mb-3">
+            <div class="col-2">
+              <label for="mail">
+                <b>New email:</b>
+              </label>
+            </div>
+            <div class="col-6">
+              <input class="form-control form-control-sm mb-2" formControlName="newMail" id="mail" type="text">
+            </div>
+            <div class="col-4">
+              <button class="btn btn-sm btn-success text-center">Update</button>
+            </div>
+          </div>
         </form>
+      </div>
     </div>
+
     <div class="row">
-      <b class="col-4">Password :</b>
-      <div>**********</div>
-        <button (click)="changingPassword = !changingPassword; passwordSuccess=false; passwordError=false;">Change my password</button>
-        <p *ngIf="passwordSuccess">Password successfully set</p>
-        <form *ngIf="changingPassword" [formGroup]="pwdForm" (ngSubmit)="updatePassword()">
+      <div class="col-4 my-auto">
+        <b class="mt-2">Password:</b> **********
+      </div>
+      <div class="col-3 offset-5 text-right">
+        <button (click)="changingPassword = !changingPassword; passwordSuccess=false; passwordError=false;"
+                class="btn btn-sm btn-dark">
+          Update password
+        </button>
+      </div>
+      <p *ngIf="passwordSuccess">Password successfully set</p>
+      <form (ngSubmit)="updatePassword()" *ngIf="changingPassword" [formGroup]="pwdForm">
+        <div class="row mx-auto mt-2 mb-3">
+          <div class="col-5">
             <label for="old">Old password : </label>
-            <input id="old" type="password" formControlName="oldPassword">
+            <input class="form-control form-control-sm" formControlName="oldPassword" id="old" type="password">
+          </div>
+          <div class="col-5">
             <label for="new">New password : </label>
-            <input id="new" type="password" formControlName="newPassword">
-            <p *ngIf="passwordError">An error occured, maybe your old password is incorrect...</p>
-            <button>Save new password</button>
-        </form>
+            <input class="form-control form-control-sm" formControlName="newPassword" id="new" type="password">
+          </div>
+          <div class="col-2 my-auto">
+            <p *ngIf="passwordError">An error occurred, please check your old password</p>
+            <button class="btn btn-sm btn-dark btn-success">Update</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <h2><b>User recipes</b></h2>
-      <a *ngFor="let recipe of recipes" [routerLink]="'/recipe-details/'+recipe.idRecipe">
-          <div>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/5)</div>
-      </a>
-    <h2><b>User comments</b></h2>
-      <a *ngFor="let review of reviews" [routerLink]="'/recipe-details/'+review.idRecipe">
-        <b>{{review.nameRecipe}} ({{review.rate}}/5)</b>
-        <p>{{review.reviewMessage}}</p>
-      </a>
+
+    <h2 class="ml-2 mb-2 text-center"><b>Your recipes</b></h2>
+    <ul>
+      <ng-container *ngFor="let recipe of recipes">
+        <li class="mb-2 border-grey border-bottom w-75">
+          <a [routerLink]="'/recipe-details/'+recipe.idRecipe">
+            <div>{{recipe.nameRecipe}} (
+              <app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>
+              / 5)
+            </div>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+
+    <h2 class="ml-2 mb-2 text-center"><b>Comments you posted</b></h2>
+    <div class="mx-2">
+      <ng-container *ngFor="let review of reviews">
+        <a [routerLink]="'/recipe-details/'+review.idRecipe">
+          <b>{{review.nameRecipe}} ({{review.rate}}/5)</b>
+          <p><i>"{{review.reviewMessage}}"</i></p>
+        </a>
+      </ng-container>
+    </div>
   </div>
 </div>
 

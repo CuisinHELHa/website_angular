@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="form" class="pb-2 mb-1 mb-sm-0 text-dark font-weight-bold">
   <div class="row">
-<!--    LOGIN-->
+    <!--    LOGIN-->
     <div class="col-10 offset-1">
       <div class="row">
         <span class="col col-sm-3">
@@ -12,7 +12,7 @@
       <div class="row">
         <span class="col">
           <input class="form-control form-control-sm" formControlName="login" id="login" name="login" type="text">
-          <h6 *ngIf="!loginValid() && submitted" class="text-danger pl-1">Invalid login</h6>
+          <h6 *ngIf="!loginValid() && submitted" class="text-danger mt-2 pl-1">Invalid login</h6>
         </span>
       </div>
       <div class="row mt-3">
@@ -26,12 +26,12 @@
         <span class="col">
           <input class="form-control form-control-sm" formControlName="password" id="password" name="password"
                  type="password">
-          <h6 *ngIf="!passwordValid() && submitted" class="text-danger pl-1">Invalid password</h6>
+          <h6 *ngIf="!passwordValid() && submitted" class="text-danger mt-2 pl-1">Invalid password</h6>
         </span>
       </div>
-      <div *ngIf="error && !isSigningUp" class="row mt-2 text-danger font-weight-bold">
+      <div *ngIf="error && !isSigningUp" class="row mt-3 text-danger font-weight-bold">
         <div class="col">
-          <h6>{{error}}</h6>
+          <h6><b>{{error}}</b></h6>
         </div>
       </div>
 
@@ -46,7 +46,8 @@
         </div>
         <div class="row mb-3">
           <span class="col">
-            <input class="form-control form-control-sm" formControlName="passwordConfirm" id="passwordConfirm" name="passwordConfirm"
+            <input class="form-control form-control-sm" formControlName="passwordConfirm" id="passwordConfirm"
+                   name="passwordConfirm"
                    type="password">
             <h6 *ngIf="submitted && !passwordConfirmValid()" class="text-danger pl-1">Invalid password confirmation</h6>
           </span>
@@ -115,7 +116,7 @@
           </div>
         </div>
 
-<!--        WHEN SIGNING UP-->
+        <!--        WHEN SIGNING UP-->
         <div *ngIf="isSigningUp" class="row">
           <div class="order-1">
             <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">

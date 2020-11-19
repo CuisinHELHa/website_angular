@@ -1,0 +1,33 @@
+<div class="">
+  <div class="row mx-1">
+    <div class="col d-flex justify-content-center h-100">
+      <fa (click)="hideModal()" class="mx-2" name="home" routerLink="/home" size="2x"></fa>
+      <h5 (click)="hideModal()" class="my-auto" routerLink="/home">Home</h5>
+    </div>
+  </div>
+  <div class="row mx-1 mt-3">
+    <div class="col d-flex justify-content-center h-100">
+      <fa (click)="hideModal()" class="mx-2" name="id-badge" routerLink="/user-details" size="2x"></fa>
+      <h5 (click)="hideModal()" class="my-auto" routerLink="/user-details">Your details</h5>
+    </div>
+  </div>
+  <div class="row mx-1 mt-3">
+    <div class="col d-flex justify-content-center h-100">
+      <fa (click)="hideModal()" class="mx-2" name="pencil" routerLink="/recipe-create" size="2x"></fa>
+      <h5 (click)="hideModal()" class="my-auto" routerLink="/recipe-create">Share a recipe</h5>
+    </div>
+  </div>
+  <div class="row mx-1 mt-3">
+    <div class="col d-flex justify-content-center h-100">
+      <fa (click)="isLoggingOut = !isLoggingOut" class="mx-2" name="sign-out" size="2x"></fa>
+      <h5 (click)="isLoggingOut = !isLoggingOut" class="my-auto">Logout</h5>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col d-flex justify-content-center">
+      <h6 (click)="authService.logout()" *ngIf="isLoggingOut" class="text-success font-weight-bold ml-3" routerLink="/home">
+        Click here to confirm.
+      </h6>
+    </div>
+  </div>
+</div>

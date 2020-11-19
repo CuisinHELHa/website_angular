@@ -1,5 +1,14 @@
 #user-icon:hover {
-  transition-duration: 300ms;
+  transition-duration: 400ms;
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   color: #262626!important;
+}
+
+#logo{
+  border: 0!important;
+  outline: 0!important;
+}
+
+#logo:hover{
+  filter:brightness(93%);
 }

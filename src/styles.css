@@ -6,7 +6,7 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-input:focus, textarea:focus, select:focus{
+input:focus, textarea:focus, select:focus {
   outline: none;
 }
 
@@ -52,4 +52,16 @@ input:focus, textarea:focus, select:focus{
 
 .border-dark {
   border-color: #262626 !important;
+}
+
+.transition-250ms {
+  transition-duration: 250ms;
+}
+
+.transition-500ms {
+  transition-duration: 500ms;
+}
+
+.transition-1s {
+  transition-duration: 1000ms;
 }

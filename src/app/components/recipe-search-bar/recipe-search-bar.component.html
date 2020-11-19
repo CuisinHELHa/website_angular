@@ -1,9 +1,10 @@
 <form #formElement="ngForm" (ngSubmit)="searchRecipe()" [class.border-grey]="mouseIn"
-      class="border border-light border-md rounded-pill bg-light py-1">
+      class="border border-light border-md rounded-pill bg-light py-1 transition-1s">
   <button [disabled]="formElement.invalid" class="btn btn-sm" style="width: 6%" type="submit">
     <fa name="search"></fa>
   </button>
   <input #loginElement="ngModel" [(ngModel)]="userSearch" class="border-0 bg-transparent align-middle"
-         id="userSearch" minlength="3" name="userSearch" placeholder="Search a recipe, ingredient, ... (you can try cookie, tart, poulet)"
+         id="userSearch" minlength="3" name="userSearch"
+         placeholder="Search a recipe, ingredient, ... (you can try cookie, tart, poulet)"
          required style="width: 94%" type="text">
 </form>

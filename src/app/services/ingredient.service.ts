@@ -15,7 +15,7 @@ export class IngredientService {
   }
 
   query(): Observable<IngredientList> {
-    return this.http.get<IngredientList>(environment.apiUrl + environment.apiUrl + IngredientService.URL);
+    return this.http.get<IngredientList>(environment.apiUrl + IngredientService.URL);
   }
 
   queryRecipeId(id: number): Observable<IngredientList> {
@@ -23,10 +23,12 @@ export class IngredientService {
   }
 
   post(ingredient: IngredientDTO): Observable<IngredientDTO> {
+    console.log('post');
     return this.http.post<IngredientDTO>(environment.apiUrl + IngredientService.URL, ingredient);
   }
 
   postToRecipe(ingredient: IngredientDTO): Observable<IngredientDTO> {
+    console.log('postToRecipe');
     return this.http.post<IngredientDTO>(environment.apiUrl + IngredientService.URL + 'recipe', ingredient);
   }
 

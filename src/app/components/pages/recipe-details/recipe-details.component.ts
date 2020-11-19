@@ -143,14 +143,10 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   }
 
   private loadSteps() {
-    console.log('STEPS');
     this.stepService
       .queryByRecipe(this.idRecipe)
       .subscribe(steps => {
-        console.log('STEPS-2222222222222222');
         this.steps = steps;
-        console.log(this.steps);
-        console.log('STEPS-33333333333333333');
       }, error => {
         console.error(error);
       });
