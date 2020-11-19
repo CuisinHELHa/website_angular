@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthenticationService} from '@app/services/authentication.service';
 import {AccountModalComponent} from '@app/components/account-modal/account-modal.component';
 
@@ -7,8 +7,8 @@ import {AccountModalComponent} from '@app/components/account-modal/account-modal
   templateUrl: './authenticated-interface.component.html',
   styleUrls: ['./authenticated-interface.component.css']
 })
-export class AuthenticatedInterfaceComponent implements OnInit {
-  constructor(private authService: AuthenticationService) {
+export class AuthenticatedInterfaceComponent {
+  constructor(private _authService: AuthenticationService) {
   }
 
   private _isLoggingOut: boolean;
@@ -21,7 +21,8 @@ export class AuthenticatedInterfaceComponent implements OnInit {
     this._isLoggingOut = value;
   }
 
-  ngOnInit() {
+  get authService(): AuthenticationService {
+    return this._authService;
   }
 
   hideModal() {

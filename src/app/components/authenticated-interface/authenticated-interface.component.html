@@ -25,7 +25,7 @@
   </div>
   <div class="row mt-2">
     <div class="col d-flex justify-content-center">
-      <h6 (click)="authService.logout()" *ngIf="isLoggingOut" class="text-success font-weight-bold ml-3" routerLink="/home">
+      <h6 (click)="authService.logout(); this.hideModal();" *ngIf="isLoggingOut" class="text-success font-weight-bold ml-3" routerLink="/home">
         Click here to confirm.
       </h6>
     </div>

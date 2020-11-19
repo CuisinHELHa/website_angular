@@ -15,8 +15,10 @@
     <div class="col-6">
       <textarea class="form-control input-group-sm" formControlName="review" id="review"></textarea>
     </div>
-    <div class="col-2">
-      <input class="col-3 form-control input-group-sm" formControlName="rate" id="rate" max="5" min="0" type="number">
+    <div class="col-2 justify-content-center">
+      <input (change)="changeRating()" [ngModel]="userRating" class="col-3 form-control input-group-sm"
+             formControlName="rate" id="rate" max="5" min="0" required style="min-width: 56px;"
+             type="number">
     </div>
     <div class="col-4">
       <button [disabled]="!_form.valid" class="text-lg-center ml-5 btn btn-sm btn-dark">Post review</button>
