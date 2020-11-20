@@ -26,8 +26,10 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
-    password = sha256(password);
+  login(username: string, password: string, hash: boolean) {
+    if (hash) {
+      password = sha256(password);
+    }
 
     const authPath = `${environment.apiUrl}${AuthenticationService.AUTH_API_PATH}`;
     return this.http.post<any>(authPath, {username, password})

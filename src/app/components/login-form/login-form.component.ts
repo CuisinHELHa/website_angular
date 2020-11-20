@@ -101,6 +101,9 @@ export class LoginFormComponent implements OnInit {
   ngOnInit() {
     // First use the login form
     this.useLoginForm();
+    if(this.userCreated){
+      this.useLoginForm();
+    }
 
     // get return url from route parameters or default to '/'
     this._returnURL = this.route.snapshot.queryParams.returnUrl || '/';
@@ -120,7 +123,7 @@ export class LoginFormComponent implements OnInit {
 
     // ON LOGIN
     if (!this._isSigningUp) {
-      this.authService.login(this.fgCtrls.login.value, this.fgCtrls.password.value)
+      this.authService.login(this.fgCtrls.login.value, this.fgCtrls.password.value, true)
         .pipe(first())
         .subscribe(
           data => {
@@ -143,18 +146,18 @@ export class LoginFormComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            console.log('success');
             this.isLoading = false;
             this.userCreated = true;
+            if (userCreated) {
+              console.log(userCreated);
+              this.authService.login(userCreated.pseudo, userCreated.password, false).subscribe();
+            }
           },
           error => {
+            console.log(error);
             this._error = error;
             this.isLoading = false;
-          },
-          () => {
-            if (userCreated) {
-              this.authService.login(userCreated.pseudo, userCreated.password).subscribe();
-              AccountModalComponent.hideModal();
-            }
           }
         );
     }

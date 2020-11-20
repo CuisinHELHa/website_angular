@@ -99,9 +99,26 @@
       </div>
 
       <!--      WHEN LOGGING-->
-      <div class="mt-4">
-        <div *ngIf="!isSigningUp" class="row">
-          <div class="col d-flex justify-content-between">
+      <div class="row">
+        <div class="col d-flex justify-content-between mt-4">
+          <ng-container *ngIf="isSigningUp; else isLogingIn">
+            <div class="order-1">
+              <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">
+                <div [hidden]="!isLoading" class="mr-1 spinner-border spinner-border-sm"></div>
+                <h6 class="d-inline font-weight-bold">Confirm</h6>
+              </button>
+            </div>
+            <div class="col d-flex justify-content-between">
+              <div>
+                <button (click)="useLoginForm()" class="btn btn-sm btn-dark ml-1">
+                  <h6 class="d-inline font-weight-bold">Cancel</h6>
+                </button>
+              </div>
+            </div>
+          </ng-container>
+
+          <!--        WHEN SIGNING UP-->
+          <ng-template #isLogingIn>
             <div class="order-1">
               <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">
                 <div [hidden]="!isLoading" class="mr-1 spinner-border spinner-border-sm"></div>
@@ -113,24 +130,7 @@
                 <h6 class="d-inline font-weight-bold">Sign-up</h6>
               </button>
             </div>
-          </div>
-        </div>
-
-        <!--        WHEN SIGNING UP-->
-        <div *ngIf="isSigningUp" class="row">
-          <div class="order-1">
-            <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">
-              <div [hidden]="!isLoading" class="mr-1 spinner-border spinner-border-sm"></div>
-              <h6 class="d-inline font-weight-bold">Confirm</h6>
-            </button>
-          </div>
-          <div class="col d-flex justify-content-between">
-            <div>
-              <button (click)="useLoginForm()" class="btn btn-sm btn-dark ml-1">
-                <h6 class="d-inline font-weight-bold">Login</h6>
-              </button>
-            </div>
-          </div>
+          </ng-template>
         </div>
       </div>
     </div>
