@@ -7,11 +7,13 @@
 
     <h3 class="text-center font-weight-bold pt-3 mb-1">{{recipe.nameRecipe}}</h3>
     <h4 class="pt-2">{{recipe.recipeType}}, {{recipe.persons}} servings ({{recipe.prepTime}} min)</h4>
-    <span class="mb-2">
-      <ng-container *ngFor="let s of spices">
-        <img height="20" src="../../../../assets/img/chili.png" width="20">
-      </ng-container>
-    </span><br/>
+    <ng-container *ngIf="spices && spices.length">
+      <span class="mb-2">
+          <ng-container *ngFor="let s of spices">
+            <img height="20" src="../../../../assets/img/chili.png" width="20">
+          </ng-container>
+      </span>
+    </ng-container>
 
     <p class="mt-3">
       {{recipe.summary}}
@@ -22,43 +24,71 @@
 
     <div class="mb-3">
       <h5 class="font-weight-bold pt-2">Ingredients:</h5>
+      <ng-container *ngIf="ingredients && ingredients.length; else noIngredients">
+        <ul>
+          <ng-container *ngFor="let ingredient of ingredients">
+            <li class="text-left">
+              {{ingredient.nameIngredient}} {{ingredient.quantity}} {{ingredient.unit}}
+            </li>
+          </ng-container>
+        </ul>
+      </ng-container>
 
-      <p *ngFor="let ingredient of ingredients" class="mb-0">
-        {{ingredient.nameIngredient}} {{ingredient.quantity}} {{ingredient.unit}}
-      </p>
+      <ng-template #noIngredients>
+        <h6 class="text-center font-weight-bold">This recipe has no ingredients (mock recipe).</h6>
+      </ng-template>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 pt-3 border-top border-grey">
       <h5 class="font-weight-bold mt-1">Steps:</h5>
-      <ul>
-        <p *ngFor="let step of steps">
-          {{step.step}}
-        </p>
-      </ul>
+      <ng-container *ngIf="steps && steps.length; else noSteps">
+        <ul>
+          <ng-container *ngFor="let step of steps">
+            <li class="text-left">
+              {{step.step}}
+            </li>
+          </ng-container>
+        </ul>
+      </ng-container>
+      <ng-template #noSteps>
+        <h6 class="text-center font-weight-bold">This recipe has no steps (mock recipe).</h6>
+      </ng-template>
     </div>
 
-    <div class="mb-3">
-      <h5 class="pl-3 mb-3 text-left font-weight-bold">Reviews:</h5>
-      <app-review-form (reviewPosted)="postReview($event)"
-                       *ngIf="authService.currentUserValue; else guestUser;"></app-review-form>
+    <div class="mb-3 pt-3 border-top border-grey">
+      <h5 class="pl-3 mb-3 text-center font-weight-bold">Reviews:</h5>
 
       <div class="container mt-3 pt-2">
-        <div *ngFor="let review of reviews" class="row pt-2 mb-3 border-top border-grey ">
-          <div class="col-3 border-right border-grey">
-            <h6 class="text-left font-weight-bold">({{review.rate}}/5) - {{review.pseudo}}</h6>
-          </div>
-          <div class="col-6">
-            <p class="d-inline">{{review.reviewMessage}}</p>
-          </div>
-          <div class="col-3 text-right">
-            <button
-              (click)="deleteReviewInDB(review)"
-              *ngIf="authService.currentUserValue && (authService.currentUserValue.userType || authService.currentUserValue.idUser === review.idUser)" class="btn btn-sm btn-dark">
-              Delete review
-            </button>
-          </div>
-        </div>
+        <ng-container *ngIf="reviews && reviews.length; else noReview;">
+          <ng-container *ngFor="let review of reviews">
+
+            <div class="row pt-2 mb-3 border-top border-grey ">
+              <div class="col-3 border-right border-grey">
+                <h6 class="text-left font-weight-bold">({{review.rate}}/5) - {{review.pseudo}}</h6>
+              </div>
+              <div class="col-6">
+                <p class="d-inline">{{review.reviewMessage}}</p>
+              </div>
+              <div class="col-3 text-right">
+                <button
+                  (click)="deleteReviewInDB(review)"
+                  *ngIf="authService.currentUserValue && (authService.currentUserValue.userType || authService.currentUserValue.idUser === review.idUser)"
+                  class="btn btn-sm btn-dark">
+                  Delete review
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #noReview>
+          <h6 class="text-center font-weight-bold">There is no review for this recipe.</h6>
+        </ng-template>
       </div>
+
+      <h5 class="pl-3 pt-3 mt-4 mb-3 text-center font-weight-bold border-top border-grey">Your review:</h5>
+      <app-review-form (reviewPosted)="postReview($event)"
+                       *ngIf="authService.currentUserValue; else guestUser;"></app-review-form>
 
       <ng-template #guestUser>
         <span class="mb-3">

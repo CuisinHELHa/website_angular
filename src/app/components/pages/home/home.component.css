@@ -1,7 +1,7 @@
 .home-img {
-  background-image: url("../../../../assets/img/accueil2.jpg");
+  background-image: url("../../../../assets/img/accueil.jpeg");
   background-size: cover;
-  min-height: 704px;
+  min-height: 692px;
 }
 
 .bg-white {
@@ -16,3 +16,6 @@
   cursor: pointer;
 }
 
+.bg-white{
+  background-color: rgba(252, 252, 252, 0.93) !important;
+}
