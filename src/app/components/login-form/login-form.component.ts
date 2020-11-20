@@ -129,6 +129,7 @@ export class LoginFormComponent implements OnInit {
           data => {
             this.router.navigate([this._returnURL]);
             this.isLoading = false;
+            this.error = null;
           },
           error => {
             this._error = error;
@@ -146,7 +147,7 @@ export class LoginFormComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            console.log('success');
+            this.error = null;
             this.isLoading = false;
             this.userCreated = true;
             if (userCreated) {
