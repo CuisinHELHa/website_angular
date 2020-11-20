@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://cuisinhelha.azurewebsites.net',
+  apiUrl: 'https://cuisinhelha-api.azurewebsites.net',
 };
