@@ -1,6 +1,6 @@
-<div class="container-fluid col-lg-12 detail-recipe-img pt-2 pb-2">
+<div class="container-fluid col-lg-12 detail-recipe-img pt-3 pb-2">
   <div class="container-fluid col-lg-3 "></div>
-  <div class="container-fluid border col-lg-8 col-sm-12 text-center shadow bg-detail border border-dark ">
+  <div class="container-fluid border col-lg-8 col-sm-12 text-center shadow bg-detail border border-grey border-lg ">
     <p class="text-right pt-2" style="font-size: medium">Posted on {{recipe.postDate | date}} by
       <b>{{recipe.pseudo}}</b>
     </p>
@@ -56,13 +56,13 @@
     </div>
 
     <div class="mb-3 pt-3 border-top border-grey">
-      <h5 class="pl-3 mb-3 text-center font-weight-bold">Reviews:</h5>
+      <h5 class="mb-3 text-center font-weight-bold">Reviews:</h5>
 
       <div class="container mt-3 pt-2">
         <ng-container *ngIf="reviews && reviews.length; else noReview;">
           <ng-container *ngFor="let review of reviews">
 
-            <div class="row pt-2 mb-3 border-top border-grey ">
+            <div class="row pt-2 mb-3">
               <div class="col-3 border-right border-grey">
                 <h6 class="text-left font-weight-bold">({{review.rate}}/5) - {{review.pseudo}}</h6>
               </div>
@@ -86,7 +86,7 @@
         </ng-template>
       </div>
 
-      <h5 class="pl-3 pt-3 mt-4 mb-3 text-center font-weight-bold border-top border-grey">Your review:</h5>
+      <h5 class="pt-3 mt-4 mb-3 text-center font-weight-bold border-top border-grey">Your review:</h5>
       <app-review-form (reviewPosted)="postReview($event)"
                        *ngIf="authService.currentUserValue; else guestUser;"></app-review-form>
 

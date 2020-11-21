@@ -11,6 +11,7 @@ import {RecipeService} from '@app/services/recipe.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '@app/services/authentication.service';
 import {formatDate} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-recipe-create',
@@ -26,7 +27,8 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
               private stepService: StepService,
               private recipeService: RecipeService,
               private fb: FormBuilder,
-              private _authService: AuthenticationService) {
+              private _authService: AuthenticationService,
+              private router: Router) {
   }
 
   public _form: FormGroup = this.fb.group({
@@ -139,7 +141,6 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.stepCounter = 1;
     this.loadIngredients();
-    this._form.get('recipeType').setValue(RECIPE_TYPE[0]);
   }
 
   ngOnDestroy(): void {
@@ -193,7 +194,7 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
     const recipe = {
       idUser: this._authService.currentUserValue.idUser,
       nameRecipe: this._form.get('nameRecipe').value,
-      postDate: formatDate(Date.now(), 'dd-MM-yyyy', 'fr'),
+      postDate: new Date(Date.now()).toISOString(),
       summary: this._form.get('summary').value,
       persons: this._form.get('persons').value,
       prepTime: this._form.get('prepTime').value,
@@ -202,17 +203,15 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
       idRecipe: -1
     };
 
-    const sub = this.recipeService
+    this.recipeService
       .post(recipe)
       .subscribe(recipeResult => {
         recipe.idRecipe = recipeResult.idRecipe;
         this.setStepRecipeId(recipe.idRecipe);
         this.setIngredientRecipeId(recipe.idRecipe);
         this.postIngredient(0);
+        this.router.navigate([`/recipe-details/${recipe.idRecipe}`]);
       });
-
-    this.subscriptions.push(sub);
-
   }
 
   setStepRecipeId(id: number) {
@@ -260,15 +259,11 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
   }
 
   private loadIngredients(): void {
-    const sub: Subscription = this.ingredientService
+    this.ingredientService
       .query()
       .subscribe(ingredients => {
         this._ingredients = ingredients;
         this._ingredientForm.reset();
       });
-
-    this.subscriptions.push(sub);
   }
-
-
 }

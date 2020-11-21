@@ -1,4 +1,4 @@
-<div class="container-fluid col-lg-12 imgBack p-2">
+<div class="container-fluid col-lg-12 imgBack p-2 pt-3">
 
 
   <div class="container-fluid col-lg-3">
@@ -26,7 +26,8 @@
           <label for="recipeType">Type of dish</label>
           <div class="input-group">
             <select class="custom-select" formControlName="recipeType" id="recipeType">
-              <option *ngFor="let filter of filters">{{filter.value}}</option>
+              <option *ngFor="let filter of filters" [selected]="filter === filter[0]"
+                      [value]="filter.value">{{filter.value}}</option>
             </select>
           </div>
         </div>
@@ -40,7 +41,8 @@
         </div>
         <div class="col-md-3 mb-3">
           <label for="spicesRate">Spices rate</label>
-          <input class="custom-select" formControlName="spicesRate" id="spicesRate" required  max="5" min="0" type="number"/>
+          <input class="custom-select" formControlName="spicesRate" id="spicesRate" max="5" min="0" required
+                 type="number"/>
         </div>
       </div>
 
@@ -48,7 +50,7 @@
       <form (ngSubmit)="addIngredients()" [formGroup]="_ingredientForm" class="form-row">
         <div class="col-md-5 mb-3">
           <label for="ingredients">Ingredients</label>
-          <select class="custom-select" formControlName="nameIngredient" required id="ingredients">
+          <select class="custom-select" formControlName="nameIngredient" id="ingredients" required>
             <option *ngFor="let ingredient of ingredients; index as i">
               {{ingredient.nameIngredient}}
             </option>
@@ -104,7 +106,7 @@
         <h6 class="d-inline font-weight-bold ">Submit recipe</h6>
       </button>
     </form>
-<!--    <app-picture-form></app-picture-form>-->
+    <!--    <app-picture-form></app-picture-form>-->
 
   </div>
   <div class="container-fluid col-lg-3"></div>
