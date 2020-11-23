@@ -230,6 +230,7 @@ export class LoginFormComponent implements OnInit {
    * Sets _isSigningUp as true, _submitted as false and builds the sign up FormGroup
    */
   useSignUpForm() {
+    this.error = null;
     this._isSigningUp = true;
     this._submitted = false;
     this.buildSignupFG();
@@ -239,6 +240,7 @@ export class LoginFormComponent implements OnInit {
    * Sets _isSigningUp as false, _submitted as false and builds the login FormGroup
    */
   useLoginForm() {
+    this.error = null;
     this._isSigningUp = false;
     this._submitted = false;
     this.buildLoginFG();

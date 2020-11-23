@@ -13,7 +13,7 @@
         <span class="col">
           <input class="form-control form-control-sm" formControlName="login" id="login" name="login" type="text">
           <h6 *ngIf="!loginValid() && submitted" class="text-danger mt-2 pl-1">Invalid login</h6>
-          <h6 *ngIf="error" class="text-danger mt-2 pl-1">{{error}}</h6>
+          <h6 *ngIf="error && isSigningUp" class="text-danger mt-2 pl-1">{{error}}</h6>
         </span>
       </div>
       <div class="row mt-3">
@@ -99,7 +99,7 @@
         </div>
       </div>
 
-      <!--      WHEN LOGGING-->
+      <!--      WHEN SIGNING UP-->
       <div class="row">
         <div class="col d-flex justify-content-between mt-4">
           <ng-container *ngIf="isSigningUp; else isLogingIn">
@@ -118,7 +118,7 @@
             </div>
           </ng-container>
 
-          <!--        WHEN SIGNING UP-->
+          <!--        WHEN LOGIN-->
           <ng-template #isLogingIn>
             <div class="order-1">
               <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">
