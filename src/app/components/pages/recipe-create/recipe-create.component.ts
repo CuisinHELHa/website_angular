@@ -204,7 +204,7 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
 
     this.recipeService
       .post(recipe)
-      .subscribe(recipeResult => {
+      .subscribe(arecipeResult => {
         recipe.idRecipe = recipeResult.idRecipe;
         this.setStepRecipeId(recipe.idRecipe);
         this.setIngredientRecipeId(recipe.idRecipe);
