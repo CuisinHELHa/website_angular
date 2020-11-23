@@ -1,5 +1,6 @@
 .imgBack{
   background: url("../../../../assets/img/createRecipeFull.jpg") center;
   background-size: cover;
+  min-height: 692px;
 }
 

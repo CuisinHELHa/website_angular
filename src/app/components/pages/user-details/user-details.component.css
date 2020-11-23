@@ -1,6 +1,7 @@
 .userBG{
   background-image: url("../../../../assets/img/userBG.jpg");
   background-size: cover;
+  min-height: 692px;
 }
 a{
   color: black;

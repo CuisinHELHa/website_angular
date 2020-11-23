@@ -1,14 +1,23 @@
-<div class="container-fluid" style="background: rgba(255,255,255,0.20);backdrop-filter: blur(3px);" [routerLink]="'/recipe-details/'+recipe.idRecipe">
-  <div class="row" >
+<div [routerLink]="'/recipe-details/'+recipe.idRecipe" class="container-fluid"
+     style="background: rgba(255,255,255,0.20);backdrop-filter: blur(3px);">
+  <div class="row">
     <div class="col">
-      <h4>{{recipe.nameRecipe}} (<app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>/ 5)</h4>
-      {{recipe.recipeType}}, {{recipe.persons}} servings ({{recipe.prepTime}} min)<br>
-      {{recipe.summary}}
+      <h4>{{recipe.nameRecipe}} (
+        <app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>
+        / 5)
+      </h4>
+      <div class="pl-2 mb-1">
+        {{recipe.recipeType}}, {{recipe.persons}} servings ({{recipe.prepTime}} min)<br>
+        "{{recipe.summary}}"
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      Posted on {{recipe.postDate | date}} by <b>{{recipe.pseudo}}</b>
+      Posted on {{recipe.postDate | date}}
+      <ng-container *ngIf="recipe.pseudo">
+        by <b>{{recipe.pseudo}}</b>
+      </ng-container>
     </div>
   </div>
   <div class="row">

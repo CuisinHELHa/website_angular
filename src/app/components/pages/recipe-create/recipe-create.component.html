@@ -14,6 +14,7 @@
           <input class="form-control" formControlName="nameRecipe" id="nameRecipe" minlength="5" type="text">
         </div>
       </div>
+
       <div class="form-row">
         <div class="col-md-12 mb-3">
           <label for="Summary">Summary</label>
@@ -25,8 +26,8 @@
         <div class="col-md-3 mb-3">
           <label for="recipeType">Type of dish</label>
           <div class="input-group">
-            <select class="custom-select" formControlName="recipeType" id="recipeType">
-              <option *ngFor="let filter of filters" [selected]="filter === filter[0]"
+            <select class="custom-select" formControlName="recipeType" id="recipeType" required>
+              <option *ngFor="let filter of filters; index as i" [selected]="i === 0"
                       [value]="filter.value">{{filter.value}}</option>
             </select>
           </div>
@@ -47,11 +48,11 @@
       </div>
 
       <!-- Ingredients -->
-      <form (ngSubmit)="addIngredients()" [formGroup]="_ingredientForm" class="form-row">
+      <form (ngSubmit)="addIngredient()" [formGroup]="_ingredientForm" class="form-row">
         <div class="col-md-5 mb-3">
           <label for="ingredients">Ingredients</label>
           <select class="custom-select" formControlName="nameIngredient" id="ingredients" required>
-            <option *ngFor="let ingredient of ingredients; index as i">
+            <option *ngFor="let ingredient of ingredients; index as i" [selected]="i === 0">
               {{ingredient.nameIngredient}}
             </option>
           </select>
@@ -75,10 +76,10 @@
       </form>
 
 
-      <p *ngFor="let ingredient of ingredientRecipe; let i = index" class="offset-3 text-left">
+      <p *ngFor="let ingredient of recipeIngredientsUsed; let i = index" class="offset-3 text-left">
         <button (click)="removeIngredient(i)" class="btn btn-dark btn-sm mt-2"><i class="fa fa-trash"></i></button>
         <span class="ml-2">
-          {{ingredient.nameIngredient}} - {{ingredient.quantity}}{{ingredient.unit}}
+          {{ingredient.nameIngredient}} - {{ingredient.quantity}} {{ingredient.unit}}
         </span>
       </p>
 
@@ -94,7 +95,7 @@
       </form>
 
 
-      <p *ngFor="let step of stepsRecipe; let i = index" class="offset-3 text-left">
+      <p *ngFor="let step of recipeSteps; let i = index" class="offset-3 text-left">
         <button (click)="removeStep(i)" class="btn btn-dark btn-sm mt-2"><i class="fa fa-trash"></i></button>
         <span class="ml-2">
           <b>  {{step.stepNb}}.</b> {{step.step}}

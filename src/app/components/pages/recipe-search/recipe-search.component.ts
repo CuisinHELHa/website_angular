@@ -68,7 +68,7 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
       if (this._searchText == null) {
         this._searchText = '';
       }
-      this.loadRecipe();
+      this.loadRecipes();
     });
 
     this.subscriptions.push(sub);
@@ -85,24 +85,29 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
       .transform(this._recipes, this.filterSelected);
   }
 
-  loadRecipe() {
-    const sub: Subscription = this.recipeService
-      .queryText(this._searchText)
-      .subscribe(recipes => {
-        this.recipes = recipes;
-        console.info(recipes);
-      });
-    this.subscriptions.push(sub);
-
+  loadRecipes() {
+    if (this.searchText !== 'any') {
+      this.recipeService
+        .queryText(this._searchText)
+        .subscribe(recipes => {
+          this.recipes = recipes;
+        });
+    } else {
+      this.recipeService
+        .queryUser(5)
+        .subscribe(recipes => {
+          this.recipes = recipes;
+        });
+    }
   }
 
+
   deleteRecipeInDB($event: RecipeDTO) {
-    const sub = this.recipeService
+    this.recipeService
       .delete($event.idRecipe)
       .subscribe(() => {
         this.deleteRecipe($event);
       });
-    this.subscriptions.push(sub);
   }
 
   deleteRecipe(recipe: RecipeDTO) {

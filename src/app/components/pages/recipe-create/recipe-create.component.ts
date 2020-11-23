@@ -10,7 +10,6 @@ import {StepService} from '@app/services/step.service';
 import {RecipeService} from '@app/services/recipe.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '@app/services/authentication.service';
-import {formatDate} from '@angular/common';
 import {Router} from '@angular/router';
 
 @Component({
@@ -110,24 +109,24 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
     this._recipe = value;
   }
 
-  private _stepsRecipe: StepList = [];
+  private _recipeSteps: StepList = [];
 
-  get stepsRecipe(): StepDTO[] {
-    return this._stepsRecipe;
+  get recipeSteps(): StepDTO[] {
+    return this._recipeSteps;
   }
 
-  set stepsRecipe(value: StepDTO[]) {
-    this._stepsRecipe = value;
+  set recipeSteps(value: StepDTO[]) {
+    this._recipeSteps = value;
   }
 
-  private _ingredientRecipe: IngredientList = [];
+  private _recipeIngredientsUsed: IngredientList = [];
 
-  get ingredientRecipe(): IngredientDTO[] {
-    return this._ingredientRecipe;
+  get recipeIngredientsUsed(): IngredientDTO[] {
+    return this._recipeIngredientsUsed;
   }
 
-  set ingredientRecipe(value: IngredientDTO[]) {
-    this._ingredientRecipe = value;
+  set recipeIngredientsUsed(value: IngredientDTO[]) {
+    this._recipeIngredientsUsed = value;
   }
 
   get authService(): AuthenticationService {
@@ -149,17 +148,17 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
     }
   }
 
-  addIngredients() {
-    this.ingredientRecipe.push({
+  addIngredient() {
+    this.recipeIngredientsUsed.push({
       nameIngredient: this._ingredientForm.get('nameIngredient').value,
       quantity: this._ingredientForm.get('quantity').value,
       unit: this._ingredientForm.get('unit').value,
-      idIngredient: this.idOfIngredient(this._ingredientForm.get('nameIngredient').value)
+      idIngredient: this.ingredientId(this._ingredientForm.get('nameIngredient').value)
     });
     this._ingredientForm.reset();
   }
 
-  idOfIngredient(name: string): number {
+  ingredientId(name: string): number {
     for (const ingredient of this.ingredients) {
       if (ingredient.nameIngredient === name) {
         return ingredient.idIngredient;
@@ -168,11 +167,11 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
   }
 
   removeIngredient(index: number) {
-    this.ingredientRecipe.splice(index, 1);
+    this.recipeIngredientsUsed.splice(index, 1);
   }
 
   addStep() {
-    this.stepsRecipe.push({
+    this.recipeSteps.push({
       idRecipe: -1,
       stepNb: this.stepCounter++,
       step: this._stepForm.get('step').value
@@ -181,10 +180,10 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
   }
 
   removeStep(index: number) {
-    this.stepsRecipe.splice(index, 1);
+    this.recipeSteps.splice(index, 1);
     this.stepCounter--;
     let i = 1;
-    for (const step of this.stepsRecipe) {
+    for (const step of this.recipeSteps) {
       step.stepNb = i;
       i++;
     }
@@ -209,53 +208,35 @@ export class RecipeCreateComponent implements OnInit, OnDestroy {
         recipe.idRecipe = recipeResult.idRecipe;
         this.setStepRecipeId(recipe.idRecipe);
         this.setIngredientRecipeId(recipe.idRecipe);
-        this.postIngredient(0);
-        this.router.navigate([`/recipe-details/${recipe.idRecipe}`]);
+        this.postSteps().then(() =>
+          this.postIngredientsUsed().then(() =>
+            this.router.navigate([`/recipe-details/${recipe.idRecipe}`])
+          ));
       });
   }
 
   setStepRecipeId(id: number) {
-    for (const step of this._stepsRecipe) {
+    for (const step of this._recipeSteps) {
       step.idRecipe = id;
     }
   }
 
   setIngredientRecipeId(id: number) {
-    for (const ingredient of this._ingredientRecipe) {
+    for (const ingredient of this._recipeIngredientsUsed) {
       ingredient.idRecipe = id;
     }
   }
 
-  postIngredient(index: number) {
-    if (index < this.ingredientRecipe.length) {
-      const sub = this.ingredientService
-        .postToRecipe(this.ingredientRecipe[index])
-        .subscribe(result => {
-          index++;
-          this.postIngredient(index);
-        });
-
-      this.subscriptions.push(sub);
-    } else {
-      this.postStep(0);
-    }
+  private async postSteps(): Promise<void> {
+    await this.recipeSteps.forEach(step => {
+      this.stepService.post(step).subscribe();
+    });
   }
 
-  postStep(index: number) {
-    if (index < this.stepsRecipe.length) {
-      const sub = this.stepService
-        .post(this.stepsRecipe[index])
-        .subscribe(result => {
-          index++;
-          this.postStep(index);
-        });
-
-      this.subscriptions.push(sub);
-    } else {
-      this._form.reset();
-      this.stepsRecipe = [];
-      this.ingredientRecipe = [];
-    }
+  private async postIngredientsUsed(): Promise<void> {
+    await this.recipeIngredientsUsed.forEach(ingredientUsed => {
+      this.ingredientService.postToRecipe(ingredientUsed).subscribe();
+    });
   }
 
   private loadIngredients(): void {

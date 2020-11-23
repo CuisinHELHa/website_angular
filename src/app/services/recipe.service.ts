@@ -31,8 +31,8 @@ export class RecipeService {
     return this.http.get<RecipeList>(environment.apiUrl + RecipeService.URL + 'id=' + id);
   }
 
-  queryUser(id: number): Observable<RecipeList> {
-    return this.http.get<RecipeList>(environment.apiUrl + RecipeService.URL + 'user=' + id);
+  queryUser(idUser: number): Observable<RecipeList> {
+    return this.http.get<RecipeList>(environment.apiUrl + RecipeService.URL + 'user=' + idUser);
   }
 
   post(ingredient: RecipeDTO): Observable<RecipeDTO> {

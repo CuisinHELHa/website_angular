@@ -21,11 +21,16 @@
     <div class="row">
       <div class="col">
         <h3 class="mb-2"><b>Results for "{{searchText}}"</b></h3>
-        <ng-container *ngFor="let recipe of filteredRecipes">
-          <div class="text-left pt-3 mb-2 border-top border-grey p-2">
-            <app-recipe-result (recipeDeleted)="deleteRecipeInDB($event)" [recipe]="recipe"></app-recipe-result>
-          </div>
+        <ng-container *ngIf="filteredRecipes && filteredRecipes.length; else noFilteredRecipe">
+          <ng-container *ngFor="let recipe of filteredRecipes">
+            <div class="text-left pt-3 mb-2 border-top border-grey p-2">
+              <app-recipe-result (recipeDeleted)="deleteRecipeInDB($event)" [recipe]="recipe"></app-recipe-result>
+            </div>
+          </ng-container>
         </ng-container>
+        <ng-template #noFilteredRecipe>
+          <h4 class="mt-5 mb-4">No recipe were found. Try something else, maybe <a routerLink="/recipe-search/any">'any'</a>?</h4>
+        </ng-template>
       </div>
     </div>
   </div>
