@@ -127,7 +127,7 @@ export class LoginFormComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.router.navigate([this._returnURL]);
+            // this.router.navigate([this._returnURL]);
             this.isLoading = false;
             this.error = null;
           },
@@ -137,10 +137,10 @@ export class LoginFormComponent implements OnInit {
           }
         );
 
-      // ON SIGNUP
+    // ON SIGNUP
     } else {
       // Creates the user using the form
-      const userCreated = this.createrUser();
+      const userCreated = this.buildUser();
 
       // Post the user to the API
       this.authService.signUp(userCreated)
@@ -151,12 +151,10 @@ export class LoginFormComponent implements OnInit {
             this.isLoading = false;
             this.userCreated = true;
             if (userCreated) {
-              console.log(userCreated);
               this.authService.login(userCreated.pseudo, userCreated.password, false).subscribe();
             }
           },
           error => {
-            console.log(error);
             this._error = error;
             this.isLoading = false;
           }
@@ -185,7 +183,7 @@ export class LoginFormComponent implements OnInit {
 
   /**
    * Buils "form" as the sign up form.
-   * Use the "passwordsMatching" method as a validator.
+   * Use the "matchPasswords" method as a validator.
    */
   buildSignupFG(): void {
     this._form = this.fb.group({
@@ -199,7 +197,7 @@ export class LoginFormComponent implements OnInit {
         lastName: this.fb.control('', [Validators.required, Validators.maxLength(50),
           Validators.pattern(this.NAME_PATTERN)]),
       },
-      {validator: this.passwordsMatching}
+      {validator: this.matchPasswords}
     );
 
     // Random filling if in dev.
@@ -220,7 +218,7 @@ export class LoginFormComponent implements OnInit {
    * Verify that "password" and "passwordConfirm" are matching for the given AbstractControl.
    * @param c
    */
-  passwordsMatching(c: AbstractControl): { invalid: boolean } {
+  matchPasswords(c: AbstractControl): { invalid: boolean } {
     if (c.get('password').value !== c.get('passwordConfirm').value) {
       return {invalid: true};
     }
@@ -284,7 +282,7 @@ export class LoginFormComponent implements OnInit {
   /**
    * Creates an UserDTO using the form fields.
    */
-  private createrUser(): UserDTO {
+  private buildUser(): UserDTO {
     return new CreateUserPipe().transform(
       this.fgCtrls.login.value,
       this.fgCtrls.password.value,
