@@ -58,6 +58,10 @@ input:focus, textarea:focus, select:focus {
   border-color: #262626 !important;
 }
 
+.transition-125ms {
+  transition-duration: 125ms;
+}
+
 .transition-250ms {
   transition-duration: 250ms;
 }

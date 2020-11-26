@@ -1,0 +1,11 @@
+#github-icon{
+  height: 3.3em;
+  padding: 0.06em;
+  border: 0!important;
+  outline: 0!important;
+}
+
+#github-icon:hover{
+  padding: 0px;
+  box-shadow: purple;
+}
