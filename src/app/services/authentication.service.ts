@@ -13,13 +13,13 @@ import {sha256} from 'js-sha256';
 export class AuthenticationService {
   public static readonly AUTH_API_PATH: string = '/api/users/authenticate';
   public static readonly SIGNUP_API_PATH: string = '/api/users';
-  public static readonly USER_KEY: string = 'currentUser';
-  public currentUser: Observable<UserDTO>;
+  public static readonly USER_KEY: string = 'currentUserObservable';
+  public currentUserObservable: Observable<UserDTO>;
   private currentUserSubject: BehaviorSubject<UserDTO>;
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem(AuthenticationService.USER_KEY)));
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentUserObservable = this.currentUserSubject.asObservable();
   }
 
   public get currentUserValue(): UserDTO {

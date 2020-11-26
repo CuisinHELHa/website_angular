@@ -136,6 +136,15 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
+  userHasReviewed(): boolean {
+    const user = this.authService.currentUserValue;
+    if (!user) {
+      return false;
+    }
+
+    return this.reviews.some(review => review.idUser === user.idUser);
+  }
+
   private loadRecipe() {
     this.recipeService
       .queryId(this.idRecipe)
