@@ -4,7 +4,7 @@
   </div>
 
 
-  <section class="card p-2 mb-3 bg-white border border-grey border-md shadow">
+  <section id="month-recipe" class="card p-2 mb-3 bg-white border border-grey border-md shadow transition-200ms">
     <ng-container *ngIf="frontRecipeObs | async as recipe; else recipeLoading;">
       <div [routerLink]="'/recipe-details/' + recipe.idRecipe" class="row no-gutters">
         <div class="col-sm-4">

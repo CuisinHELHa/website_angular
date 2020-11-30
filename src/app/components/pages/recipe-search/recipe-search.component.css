@@ -2,3 +2,7 @@
   background-image: url("../../../../assets/img/accueil.jpeg");
   background-size: cover;
 }
+
+.recipe-search-result:hover{
+  background-color: #f8f8f8;
+}

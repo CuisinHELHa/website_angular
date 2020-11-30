@@ -17,5 +17,9 @@
 }
 
 .bg-white{
-  background-color: rgba(252, 252, 252, 0.93) !important;
+  background-color: rgba(252, 252, 252, 0.92) !important;
+}
+
+#month-recipe:hover{
+  background-color: rgb(246, 246, 246) !important;
 }
