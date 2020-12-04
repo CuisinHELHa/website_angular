@@ -100,6 +100,9 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
       this.recipeService
         .queryText(this._searchText)
         .subscribe(recipes => {
+            if (recipes.length === 0) {
+              this.searchFailed = true;
+            }
             this.recipes = recipes;
           },
           error => this.searchFailed = true);
@@ -107,6 +110,9 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
       this.recipeService
         .queryUser(5)
         .subscribe(recipes => {
+            if (recipes.length === 0) {
+              this.searchFailed = true;
+            }
             this.recipes = recipes;
           },
           error => this.searchFailed = true);
