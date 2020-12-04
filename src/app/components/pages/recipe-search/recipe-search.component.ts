@@ -62,6 +62,16 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     this._filters = value;
   }
 
+  private _searchFailed: boolean;
+
+  get searchFailed(): boolean {
+    return this._searchFailed;
+  }
+
+  set searchFailed(value: boolean) {
+    this._searchFailed = value;
+  }
+
   ngOnInit() {
     const sub = this.route.paramMap.subscribe(params => {
       this._searchText = params.get('text');
@@ -90,14 +100,16 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
       this.recipeService
         .queryText(this._searchText)
         .subscribe(recipes => {
-          this.recipes = recipes;
-        });
+            this.recipes = recipes;
+          },
+          error => this.searchFailed = true);
     } else {
       this.recipeService
         .queryUser(5)
         .subscribe(recipes => {
-          this.recipes = recipes;
-        });
+            this.recipes = recipes;
+          },
+          error => this.searchFailed = true);
     }
   }
 

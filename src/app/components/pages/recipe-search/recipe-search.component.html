@@ -23,13 +23,18 @@
         <h3 class="mb-2"><b>Results for "{{searchText}}"</b></h3>
         <ng-container *ngIf="filteredRecipes && filteredRecipes.length; else noFilteredRecipe">
           <ng-container *ngFor="let recipe of filteredRecipes">
-            <div class="text-left py-3 px-2 border-top recipe-search-result transition-200ms">
+            <div class="text-left py-3 px-2 border-top recipe-search-result transition-20r0ms">
               <app-recipe-result (recipeDeleted)="deleteRecipeInDB($event)" [recipe]="recipe"></app-recipe-result>
             </div>
           </ng-container>
         </ng-container>
         <ng-template #noFilteredRecipe>
-          <h4 class="mt-5 mb-4">No recipe were found. Try something else, maybe <a routerLink="/recipe-search/any">'any'</a>?</h4>
+          <ng-container *ngIf="searchFailed; else searching">
+            <h4 class="mt-5 mb-4">No recipe were found. Try something else, maybe <a routerLink="/recipe-search/any">'any'</a>?</h4>
+          </ng-container>
+          <ng-template #searching>
+            <h4 class="mt-5 mb-4">Results loading, please wait.</h4>
+          </ng-template>
         </ng-template>
       </div>
     </div>
