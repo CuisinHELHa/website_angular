@@ -4,5 +4,5 @@
 }
 
 .recipe-search-result:hover{
-  background-color: #f8f8f8;
+  background-color: var(--light-grey);
 }

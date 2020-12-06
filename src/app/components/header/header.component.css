@@ -1,7 +1,7 @@
 #user-icon:hover {
-  transition-duration: 400ms;
+  transition-duration: var(--time-slow);
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-  color: #262626!important;
+  color: var(--main-black)!important;
 }
 
 #logo{

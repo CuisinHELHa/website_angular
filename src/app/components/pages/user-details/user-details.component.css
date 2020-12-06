@@ -1,14 +1,13 @@
-.userBG{
+.userBG {
   background-image: url("../../../../assets/img/userBG.jpg");
   background-size: cover;
-  min-height: 692px;
-}
-a{
-  color: black;
+  min-height: var(--body-height);
 }
 
-h2{
+a {
+  color: var(--main-black);
+}
+
+h2 {
   margin: 5px;
 }
-
-

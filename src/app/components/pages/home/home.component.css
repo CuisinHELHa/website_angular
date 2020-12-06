@@ -1,12 +1,13 @@
 .home-img {
   background-image: url("../../../../assets/img/accueil.jpeg");
   background-size: cover;
-  min-height: 692px;
+  min-height: var(--body-height);
 }
 
 .bg-white {
   max-width: 700px;
-  background: rgba(255, 255, 255, 0.60);
+  background: white;
+  opacity: 0.6;
   backdrop-filter: blur(3px);
 }
 
@@ -17,9 +18,10 @@
 }
 
 .bg-white{
-  background-color: rgba(252, 252, 252, 0.92) !important;
+  background-color: var(--main-white) !important;
+  opacity: 0.92;
 }
 
 #month-recipe:hover{
-  background-color: rgb(246, 246, 246) !important;
+  opacity: 1;
 }

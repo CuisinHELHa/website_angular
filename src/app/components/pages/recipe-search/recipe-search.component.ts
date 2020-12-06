@@ -12,7 +12,6 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./recipe-search.component.css']
 })
 export class RecipeSearchComponent implements OnInit, OnDestroy {
-
   filterSelected: RecipeType = RecipeType.ALL;
   private subscriptions: Subscription[] = [];
 
@@ -90,35 +89,18 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateFilteredRecipes() {
+  updateFilteredRecipes(): void {
     this._filteredRecipes = new RecipePipe()
       .transform(this._recipes, this.filterSelected);
   }
 
-  loadRecipes() {
+  loadRecipes(): void {
     if (this.searchText !== 'any') {
-      this.recipeService
-        .queryText(this._searchText)
-        .subscribe(recipes => {
-            if (recipes.length === 0) {
-              this.searchFailed = true;
-            }
-            this.recipes = recipes;
-          },
-          error => this.searchFailed = true);
+      this.fetchSearch();
     } else {
-      this.recipeService
-        .queryUser(5)
-        .subscribe(recipes => {
-            if (recipes.length === 0) {
-              this.searchFailed = true;
-            }
-            this.recipes = recipes;
-          },
-          error => this.searchFailed = true);
+      this.fetchAnyRecipes();
     }
   }
-
 
   deleteRecipeInDB($event: RecipeDTO) {
     this.recipeService
@@ -132,5 +114,28 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     const index = this.recipes.indexOf(recipe);
     this._recipes.splice(index, 1);
     this.updateFilteredRecipes();
+  }
+
+  private fetchSearch(): void {
+    this.recipeService
+      .queryText(this._searchText)
+      .subscribe(recipes => {
+          this.updateRecipes(recipes);
+        },
+        error => this.searchFailed = true);
+  }
+
+  private fetchAnyRecipes(): void {
+    this.recipeService
+      .queryUser(5)
+      .subscribe(recipes => {
+          this.updateRecipes(recipes);
+        },
+        error => this.searchFailed = true);
+  }
+
+  private updateRecipes(recipes: RecipeDTO[]): void {
+    this.searchFailed = recipes.length === 0;
+    this.recipes = recipes;
   }
 }
