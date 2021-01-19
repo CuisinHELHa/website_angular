@@ -1,7 +1,7 @@
-.userBG {
+.user-bg {
   background-image: url("../../../../assets/img/user-bg.jpg");
   background-size: cover;
-  min-height: var(--body-height);
+  min-height: 698px;
 }
 
 a {
