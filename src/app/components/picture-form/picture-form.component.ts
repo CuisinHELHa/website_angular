@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PictureService} from '@app/services/picture.service';
-import {PictureDTO} from '@app/DTOs/picture-dto';
 import {Picture} from '@app/components/picture-form/Picture';
 
 @Component({
@@ -14,7 +13,8 @@ export class PictureFormComponent implements OnInit {
   fileToUpload: File = null;
   idRecipe: string;
 
-  constructor(private pictureService: PictureService) { }
+  constructor(private pictureService: PictureService) {
+  }
 
   ngOnInit() {
   }
@@ -33,7 +33,7 @@ export class PictureFormComponent implements OnInit {
     let picture;
     picture = new Picture();
     picture.idRecipe = 1;
-    picture.picture = 'assets/picture/poulet.jpeg';
+    picture.picture = 'assets/img/poulet.jpeg';
     this.pictureService.post(picture).subscribe(
       data => {
         console.log('done');

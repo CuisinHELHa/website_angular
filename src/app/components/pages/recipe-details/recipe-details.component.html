@@ -1,5 +1,5 @@
 <div class="container-fluid col-lg-12 detail-recipe-img pt-3 pb-2">
-  <article class="container-fluid border col-lg-8 col-sm-12 text-center shadow bg-detail border border-grey border-lg ">
+  <article class="container-fluid shadow-lg col-lg-8 col-sm-12 text-center shadow bg-detail border border-grey border-md ">
     <section>
       <p class="text-right pt-2" style="font-size: medium">Posted on {{recipe.postDate | date}} by
         <b>{{recipe.pseudo}}</b>
@@ -19,11 +19,8 @@
         {{recipe.summary}}
       </p>
 
-      <figure>
-        <img class="rounded-md border border-dark mb-3" height="300" src="../../../../assets/picture/tarteCitron.jpg"
+        <img class="rounded-md shadow mb-3" height="300" src="../../../../assets/img/tarte-citron.jpg"
              width="300" alt="Recipe's picture">
-        <figcaption>Recipe's picture</figcaption>
-      </figure>
     </section>
 
     <section class="mb-3">

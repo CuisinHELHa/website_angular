@@ -1,14 +1,13 @@
-<article class="container-fluid col-lg-12 home-img p-3">
-  <div class="bg-dark-neutral fit-content px-3 py-2 mb-3 border-bottom border-lg shadow border-light rounded">
-    <h1 class="text-white align-middle d-inline">Recipe of the month</h1>
+<article class="container-fluid col-lg-11 home-img p-3 shadow my-3" id="home-article">
+  <div class="bg-red fit-content px-3 py-2 mb-3 border-bottom border-lg shadow-sm border-light rounded">
+    <h2 class="text-white align-middle d-inline">Recipe of the month</h2>
   </div>
 
-
-  <section id="month-recipe" class="card p-2 mb-3 bg-white border border-grey border-md shadow transition-250ms">
+  <section class="card p-2 mb-3 bg-white shadow transition-250ms" id="month-recipe">
     <ng-container *ngIf="frontRecipeObs | async as recipe; else recipeLoading;">
       <div [routerLink]="'/recipe-details/' + recipe.idRecipe" class="row no-gutters">
         <div class="col-sm-4">
-          <img alt="A tart" class="card-img" src="../../../../assets/picture/tarteCitron.jpg">
+          <img alt="A tart" class="card-img" src="../../../../assets/img/tarte-citron.jpg">
         </div>
         <div class="col-sm-8">
           <div class="card-body">
@@ -26,5 +25,4 @@
       </div>
     </ng-template>
   </section>
-
 </article>

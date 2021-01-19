@@ -1,5 +1,5 @@
 .userBG {
-  background-image: url("../../../../assets/img/userBG.jpg");
+  background-image: url("../../../../assets/img/user-bg.jpg");
   background-size: cover;
   min-height: var(--body-height);
 }
