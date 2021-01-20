@@ -6,3 +6,7 @@
 .recipe-search-result:hover{
   background-color: var(--light-grey);
 }
+
+#recipe-search-body{
+  min-height: 698px;
+}

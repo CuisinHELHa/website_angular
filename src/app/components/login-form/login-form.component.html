@@ -104,7 +104,7 @@
         <div class="col d-flex justify-content-between mt-4">
           <ng-container *ngIf="isSigningUp; else isLogingIn">
             <div class="order-1">
-              <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">
+              <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm bg-orange text-white mr-2">
                 <div [hidden]="!isLoading" class="mr-1 spinner-border spinner-border-sm"></div>
                 <h6 class="d-inline font-weight-bold">Confirm</h6>
               </button>
@@ -121,7 +121,7 @@
           <!--        WHEN LOGIN-->
           <ng-template #isLogingIn>
             <div class="order-1">
-              <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm btn-dark mr-2">
+              <button [disabled]="!isFormValid() || isLoading" class="btn btn-sm bg-orange text-white mr-2">
                 <div [hidden]="!isLoading" class="mr-1 spinner-border spinner-border-sm"></div>
                 <h6 class="d-inline font-weight-bold">Login</h6>
               </button>

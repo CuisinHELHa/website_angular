@@ -6,5 +6,12 @@
 .bg-detail{
   background: rgba(255,255,255,0.93);
   backdrop-filter: blur(3px);
+}
 
+li{
+  font-size: var(--sm);
+}
+
+li:hover{
+  padding-left:1.4em;
 }

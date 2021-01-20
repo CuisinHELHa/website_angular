@@ -8,6 +8,19 @@ a {
   color: var(--main-black);
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 h2 {
   margin: 5px;
 }
+
+li{
+  list-style: none;
+}
+
+li:hover{
+  padding-left:1.4em;
+}
+

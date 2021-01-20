@@ -24,11 +24,11 @@
     </section>
 
     <section class="mb-3">
-      <h5 class="font-weight-bold pt-2">Ingredients:</h5>
+      <h5 class="font-weight-bold pt-2 mb-3">Ingredients:</h5>
       <ng-container *ngIf="ingredients && ingredients.length; else noIngredients">
         <ul>
           <ng-container *ngFor="let ingredient of ingredients">
-            <li class="text-left">
+            <li class="text-left transition-regular">
               {{ingredient.nameIngredient}} {{ingredient.quantity}} {{ingredient.unit}}
             </li>
           </ng-container>
@@ -41,11 +41,11 @@
     </section>
 
     <section class="mb-3 pt-3 border-top border-grey">
-      <h5 class="font-weight-bold mt-1">Steps:</h5>
+      <h5 class="font-weight-bold mt-1 mb-3">Steps:</h5>
       <ng-container *ngIf="steps && steps.length; else noSteps">
         <ul>
           <ng-container *ngFor="let step of steps">
-            <li class="text-left mb-2">
+            <li class="text-left mb-2 transition-regular">
               {{step.step}}
             </li>
           </ng-container>

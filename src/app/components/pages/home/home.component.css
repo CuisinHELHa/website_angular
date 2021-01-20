@@ -1,7 +1,3 @@
-#home-article{
-
-}
-
 .home-img {
   background-image: url("../../../../assets/img/accueil.jpeg");
   background-size: cover;
@@ -23,7 +19,7 @@
 
 .bg-white{
   background-color: var(--main-white) !important;
-  opacity: 0.92;
+  opacity: 0.93;
 }
 
 #month-recipe:hover{

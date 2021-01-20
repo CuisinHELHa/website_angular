@@ -1,9 +1,9 @@
 <article class="container-fluid col-lg-11 home-img p-3 shadow my-3" id="home-article">
-  <div class="bg-red fit-content px-3 py-2 mb-3 border-bottom border-lg shadow-sm border-light rounded">
+  <div class="bg-orange fit-content px-3 py-2 mb-3 border-bottom border-lg shadow-sm border-light rounded">
     <h2 class="text-white align-middle d-inline">Recipe of the month</h2>
   </div>
 
-  <section class="card p-2 mb-3 bg-white shadow transition-250ms" id="month-recipe">
+  <section class="card p-2 mb-3 bg-white shadow transition-quick" id="month-recipe">
     <ng-container *ngIf="frontRecipeObs | async as recipe; else recipeLoading;">
       <div [routerLink]="'/recipe-details/' + recipe.idRecipe" class="row no-gutters">
         <div class="col-sm-4">

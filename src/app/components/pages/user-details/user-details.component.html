@@ -1,19 +1,21 @@
-<div class="container-fluid col-lg-12 user-bg p-2 pt-3">
+<div class="container-fluid col-lg-11 my-3 shadow-lg user-bg p-2 pt-3">
   <div class="container-fluid border border-md border-grey col-lg-7 col-sm-12 pt-3"
        style="min-height: 550px;background: rgba(255,255,255,0.80);backdrop-filter: blur(3px);">
-    <h2 class="ml-2 mb-2 text-center"><b>Your details</b></h2>
+    <h2 class="ml-2 mb-2 text-center text-dark"><b>Your details</b></h2>
 
     <div class="row">
       <div class="col">
-        <b>Name:</b> {{user.lastName}} "{{user.pseudo}}" {{user.firstName}}
+        <h5 class="d-inline"><b>Name:</b></h5>
+        <span class="ml-2 text-md">{{user.lastName}} "{{user.pseudo}}" {{user.firstName}}</span>
       </div>
     </div>
     <div class="row mb-2">
       <div class="col-4 my-auto">
-        <b>Email:</b> {{user.mail}}
+        <h5 class="d-inline"><b>Email:</b></h5>
+        <span class="ml-2 text-md">{{user.mail}}</span>
       </div>
       <div class="col-3 offset-5 text-right">
-        <button (click)="changingMail = !changingMail" class="btn btn-sm btn-dark">Update email</button>
+        <button (click)="changingMail = !changingMail" class="btn btn-sm text-white bg-orange">Update email</button>
       </div>
     </div>
     <div class="row">
@@ -38,11 +40,12 @@
 
     <div class="row">
       <div class="col-4 my-auto">
-        <b class="mt-2">Password:</b> **********
+        <h5 class="d-inline mt-2"><b>Password:</b></h5>
+        <span class="ml-2 text-md">**********</span>
       </div>
       <div class="col-3 offset-5 text-right">
         <button (click)="changingPassword = !changingPassword; passwordSuccess=false; passwordError=false;"
-                class="btn btn-sm btn-dark">
+                class="btn btn-sm text-white bg-orange">
           Update password
         </button>
       </div>
@@ -65,31 +68,34 @@
       </form>
     </div>
 
-    <h2 class="ml-2 mb-2 text-center"><b>Your recipes</b></h2>
+    <h2 class="ml-2 mb-2 mt-5 text-center text-dark"><b>Your recipes</b></h2>
     <h5 *ngIf="!recipes || !recipes.length" class="mt-2">You have not shared a recipe yet.</h5>
     <ul>
       <ng-container *ngFor="let recipe of recipes">
-        <li class="mb-2 border-grey border-bottom w-75">
+        <li class="mb-2 py-1 border-grey border-bottom w-75 transition-regular">
           <a [routerLink]="'/recipe-details/'+recipe.idRecipe">
-            <div>{{recipe.nameRecipe}} (
-              <app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate>
-              / 5)
-            </div>
+            <h5>
+              <b>{{recipe.nameRecipe}}
+                - <app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate> / 5
+              </b>
+            </h5>
           </a>
         </li>
       </ng-container>
     </ul>
 
-    <h2 class="ml-2 mb-2 text-center"><b>Comments you posted</b></h2>
+    <h2 class="ml-2 mb-2 mt-5 text-center text-dark"><b>Comments you've posted</b></h2>
     <h5 *ngIf="!reviews || !reviews.length" class="mt-2">You have not commented yet.</h5>
-    <div class="mx-2">
+    <ul class="mx-2">
       <ng-container *ngFor="let review of reviews">
-        <a [routerLink]="'/recipe-details/'+review.idRecipe">
-          <b>{{review.nameRecipe}} ({{review.rate}}/5)</b>
-          <p><i>"{{review.reviewMessage}}"</i></p>
-        </a>
+        <li class="mb-2 py-1 border-grey border-bottom w-75 transition-regular">
+          <a [routerLink]="'/recipe-details/'+review.idRecipe">
+            <h5><b>{{review.nameRecipe}} - {{review.rate}} / 5</b></h5>
+            <p class="ml-2 text-sm">"{{review.reviewMessage}}"</p>
+          </a>
+        </li>
       </ng-container>
-    </div>
+    </ul>
   </div>
 </div>
 
