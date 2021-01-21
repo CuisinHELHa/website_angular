@@ -5,13 +5,13 @@
 
     <div class="row">
       <div class="col">
-        <h5 class="d-inline"><b>Name:</b></h5>
+        <h5 class="d-inline" appSlideOnHover marginInPX="6" durationInMS="200"><b>Name:</b></h5>
         <span class="ml-2 text-md">{{user.lastName}} "{{user.pseudo}}" {{user.firstName}}</span>
       </div>
     </div>
     <div class="row mb-2">
       <div class="col-4 my-auto">
-        <h5 class="d-inline"><b>Email:</b></h5>
+        <h5 class="d-inline" appSlideOnHover marginInPX="6" durationInMS="200"><b>Email:</b></h5>
         <span class="ml-2 text-md">{{user.mail}}</span>
       </div>
       <div class="col-3 offset-5 text-right">
@@ -40,7 +40,7 @@
 
     <div class="row">
       <div class="col-4 my-auto">
-        <h5 class="d-inline mt-2"><b>Password:</b></h5>
+        <h5 class="d-inline mt-2" appSlideOnHover marginInPX="6" durationInMS="200"><b>Password:</b></h5>
         <span class="ml-2 text-md">**********</span>
       </div>
       <div class="col-3 offset-5 text-right">
@@ -72,7 +72,7 @@
     <h5 *ngIf="!recipes || !recipes.length" class="mt-2">You have not shared a recipe yet.</h5>
     <ul>
       <ng-container *ngFor="let recipe of recipes">
-        <li class="mb-2 py-1 border-grey border-bottom w-75 transition-regular">
+        <li class="mb-2 py-1 border-grey border-bottom w-75 transition-regular" appSlideOnHover>
           <a [routerLink]="'/recipe-details/'+recipe.idRecipe">
             <h5>
               <b>{{recipe.nameRecipe}}
@@ -88,7 +88,7 @@
     <h5 *ngIf="!reviews || !reviews.length" class="mt-2">You have not commented yet.</h5>
     <ul class="mx-2">
       <ng-container *ngFor="let review of reviews">
-        <li class="mb-2 py-1 border-grey border-bottom w-75 transition-regular">
+        <li class="mb-2 py-1 border-grey border-bottom w-75" appSlideOnHover>
           <a [routerLink]="'/recipe-details/'+review.idRecipe">
             <h5><b>{{review.nameRecipe}} - {{review.rate}} / 5</b></h5>
             <p class="ml-2 text-sm">"{{review.reviewMessage}}"</p>

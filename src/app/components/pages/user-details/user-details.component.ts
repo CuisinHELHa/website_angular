@@ -8,7 +8,6 @@ import {Subscription} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '@app/services/user.service';
 import {AuthenticationService} from '@app/services/authentication.service';
-import validate = WebAssembly.validate;
 
 @Component({
   selector: 'app-user-details',
