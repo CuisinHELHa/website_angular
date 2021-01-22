@@ -72,6 +72,14 @@ body {
   color: var(--gray-dark);
 }
 
+.text-black{
+  color: var(--main-black);
+}
+
+.text-light-black{
+  color: var(--light-black);
+}
+
 
 .text-xs{
   font-size: var(--xs);

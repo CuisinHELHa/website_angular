@@ -27,7 +27,9 @@ import {FooterComponent} from './components/footer/footer.component';
 
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr-BE';
-import { SlideOnHoverDirective } from './reactive-ui/slide-on-hover.directive';
+import {SlideOnHoverDirective} from './reactive-ui/slide-on-hover.directive';
+import {UserReviewsComponent} from './user/components/user-reviews/user-reviews.component';
+import {UserRecipesComponent} from './user/components/user-recipes/user-recipes.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -51,7 +53,9 @@ registerLocaleData(localeFr, 'fr');
     AuthenticatedInterfaceComponent,
     PictureFormComponent,
     FooterComponent,
-    SlideOnHoverDirective
+    SlideOnHoverDirective,
+    UserReviewsComponent,
+    UserRecipesComponent
   ],
   imports: [
     BrowserModule,

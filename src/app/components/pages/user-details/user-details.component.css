@@ -4,18 +4,6 @@
   min-height: 698px;
 }
 
-a {
-  color: var(--main-black);
-}
-
-a:hover{
-  text-decoration: none;
-}
-
 h2 {
   margin: 5px;
-}
-
-li{
-  list-style: none;
 }

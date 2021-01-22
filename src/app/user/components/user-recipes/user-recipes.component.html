@@ -1,0 +1,14 @@
+<h5 *ngIf="!recipes || !recipes.length" class="mt-2">You have not shared a recipe yet.</h5>
+<ul class="list-unstyled">
+  <ng-container *ngFor="let recipe of recipes">
+    <li class="mb-2 py-1 border-grey border-bottom w-75 transition-regular" appSlideOnHover>
+      <a [routerLink]="'/recipe-details/'+recipe.idRecipe" class="text-decoration-none text-black">
+        <h5>
+          <b>{{recipe.nameRecipe}}
+            - <app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate> / 5
+          </b>
+        </h5>
+      </a>
+    </li>
+  </ng-container>
+</ul>

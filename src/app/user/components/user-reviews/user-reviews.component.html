@@ -1,0 +1,11 @@
+<h5 *ngIf="!reviews || !reviews.length" class="mt-2">You have not commented yet.</h5>
+<ul class="mx-2 list-unstyled">
+  <ng-container *ngFor="let review of reviews">
+    <li class="mb-2 py-1 border-grey border-bottom w-75" appSlideOnHover>
+      <a [routerLink]="'/recipe-details/'+review.idRecipe" class="text-decoration-none text-black">
+        <h5><b>{{review.nameRecipe}} - {{review.rate}} / 5</b></h5>
+        <p class="ml-2 text-sm">"{{review.reviewMessage}}"</p>
+      </a>
+    </li>
+  </ng-container>
+</ul>

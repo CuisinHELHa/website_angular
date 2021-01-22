@@ -68,34 +68,12 @@
       </form>
     </div>
 
+
     <h2 class="ml-2 mb-2 mt-5 text-center text-dark"><b>Your recipes</b></h2>
-    <h5 *ngIf="!recipes || !recipes.length" class="mt-2">You have not shared a recipe yet.</h5>
-    <ul>
-      <ng-container *ngFor="let recipe of recipes">
-        <li class="mb-2 py-1 border-grey border-bottom w-75 transition-regular" appSlideOnHover>
-          <a [routerLink]="'/recipe-details/'+recipe.idRecipe">
-            <h5>
-              <b>{{recipe.nameRecipe}}
-                - <app-recipe-avg-rate [idRecipe]="recipe.idRecipe"></app-recipe-avg-rate> / 5
-              </b>
-            </h5>
-          </a>
-        </li>
-      </ng-container>
-    </ul>
+    <app-user-recipes [recipes]="recipes"></app-user-recipes>
 
     <h2 class="ml-2 mb-2 mt-5 text-center text-dark"><b>Comments you've posted</b></h2>
-    <h5 *ngIf="!reviews || !reviews.length" class="mt-2">You have not commented yet.</h5>
-    <ul class="mx-2">
-      <ng-container *ngFor="let review of reviews">
-        <li class="mb-2 py-1 border-grey border-bottom w-75" appSlideOnHover>
-          <a [routerLink]="'/recipe-details/'+review.idRecipe">
-            <h5><b>{{review.nameRecipe}} - {{review.rate}} / 5</b></h5>
-            <p class="ml-2 text-sm">"{{review.reviewMessage}}"</p>
-          </a>
-        </li>
-      </ng-container>
-    </ul>
+    <app-user-reviews [reviews]="reviews"></app-user-reviews>
   </div>
 </div>
 
